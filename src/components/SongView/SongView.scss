@@ -1,0 +1,195 @@
+@import '../../../public/variables.scss';
+
+.SongView {
+
+   width: 100%;
+   height: 100vh;
+
+   display: flex;
+
+   flex-direction: column;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+
+   background-color: $whiteColor; 
+
+   &__Song {
+
+      position: relative;
+
+      width: 660px;
+      height: auto;
+
+      display: flex;
+
+      flex-direction: row;
+      justify-content: space-between;
+
+      &-action {
+
+         position: relative;
+
+         width: 300px;
+         height: 100%;
+
+         z-index: 1;
+
+         &__view {
+            width: 100%;
+            height: 424px;
+
+            border: 15px $blackColor solid;
+
+            margin-bottom: 12px;
+
+            background-color: $whiteColor;
+            
+            padding: 5px;
+
+            #canvas{
+               width: 100%;
+               height: 100%;
+            }
+         }
+
+         &__buttons {
+
+            width: 100%;
+            height: auto;
+
+            display: flex;
+
+            flex-direction: row;
+         }
+
+         #play {
+            margin-right: 12px;
+         }
+
+         #stop {
+            //
+         }
+
+         &__btn {
+            width: 37px;
+            height: 37px;
+
+            border: 7px solid $blackColor;
+         }
+
+      }
+
+      &-data {
+
+         position: relative;
+
+         width: 300px;
+         height: 100%;
+
+         >h3 {
+
+            color: $blackColor;
+
+            width: 100%;
+            height: auto;
+
+            font-family: $textFont;
+
+            font-style: normal;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: normal;
+
+            margin-bottom: 33px;
+         }
+
+         >p {
+            color: $blackColor;
+
+            font-family: $textFont;
+
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: normal;
+            text-align: justify;
+
+            margin-bottom: 33px;
+
+            width: 100%;
+            height: auto;
+         }
+
+         >h4 {
+
+            color: $blackColor;
+
+            font-family: $textFont;
+
+            font-style: normal;
+            font-weight: normal;
+            font-size: 15px;
+            line-height: normal;
+
+            width: 100%;
+            height: auto;
+         }
+
+         &__bottom {
+
+            transform: translateX(-223px);
+
+            margin-top: 69px;
+            width: auto;
+            height: 281px;
+
+            display: flex;
+
+            flex-direction: row;
+            flex-shrink: 0;
+
+            flex-wrap: nowrap;
+
+         }
+
+         &__img {
+            width: 419px;
+            height: 281px;
+
+            background-color: lightgray;
+            flex-shrink: 0;
+
+            margin-right: 46px;
+         }
+
+         &__buttons {
+            flex-shrink: 0;
+
+            width: 58px;
+            height: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+         }
+
+         &__colors {
+            width: 58px;
+            height: 200px;
+
+            border: 8px solid $blackColor;
+
+            margin-bottom: 23px;
+         }
+
+         &__add {
+            width: 58px;
+            height: 58px;
+
+            border: 8px solid $blackColor;
+         }
+      }
+   }
+
+}
