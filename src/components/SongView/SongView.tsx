@@ -5,8 +5,6 @@ import song from '../../utils/Sketch/song'
 
 import P5Wrapper from '../../utils/P5Wrapper/P5Wrapper';
 
-//var P5Wrapper = require('../../utils/P5Wrapper/P5Wrapper');
-
 class SongView extends Component {
   render() {
     return (
@@ -17,7 +15,7 @@ class SongView extends Component {
 
             <div className="SongView__Song-action__view">
             
-              <P5Wrapper sketch={song} color= { 0 } />
+              <P5Wrapper sketch = {song} color = { 0 } />
 
               <div className="SongView__Song-action__title">The Song Name</div>
             </div>
@@ -31,7 +29,7 @@ class SongView extends Component {
 
           <div className="SongView__Song-data">
 
-          <h3>BAND NAME</h3>
+          <h3>Band Name</h3>
 
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam deleniti perspiciatis rerum ipsam nihil ducimus aliquam expedita veniam facilis...</p>
 
