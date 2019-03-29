@@ -17,7 +17,7 @@ class SongView extends Component {
 
             <div className="SongView__Song-action__view">
             
-            <P5Wrapper sketch={song}/>
+              <P5Wrapper sketch={song} color= { 0 } />
 
               <div className="SongView__Song-action__title">The Song Name</div>
             </div>
