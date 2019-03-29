@@ -11,6 +11,7 @@ class SongView extends Component {
 
             <div className="SongView__Song-action__view">
               <div id="canvas"></div>
+              <div className="SongView__Song-action__title">The Song Name</div>
             </div>
             
             <div className="SongView__Song-action__buttons">
