@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import './SongView.scss';
 
+import song from '../../utils/Sketch/song'
+
+import P5Wrapper from '../../utils/P5Wrapper/P5Wrapper';
+
+//var P5Wrapper = require('../../utils/P5Wrapper/P5Wrapper');
+
 class SongView extends Component {
   render() {
     return (
@@ -10,7 +16,9 @@ class SongView extends Component {
           <div className="SongView__Song-action">
 
             <div className="SongView__Song-action__view">
-              <div id="canvas"></div>
+            
+            <P5Wrapper sketch={song}/>
+
               <div className="SongView__Song-action__title">The Song Name</div>
             </div>
             
