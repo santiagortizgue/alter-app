@@ -35,7 +35,7 @@ interface HomeState{
       <div className="Home">
         {firebaseStore.musicArray.map((song: any) => {
             return (
-              <Link key={song.id} to={`/song/:${song.id}`}>
+              <Link key={song.id} to={`/song/${song.id}`}>
               <p key={song.id}>{song.name}</p>
               </Link>
             );

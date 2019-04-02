@@ -1,7 +1,7 @@
 import p5 from 'p5';
 import "p5/lib/addons/p5.sound";
 
-export default function song(p) {
+export default function visualizer(p) {
 
     let width = document.querySelector('#canvas').clientWidth;
     let height = document.querySelector('#canvas').clientHeight;
@@ -82,10 +82,19 @@ export default function song(p) {
                             //
                             break;
                         case 0:
-                            p.fill(25, 25, 25, op);
+                            p.fill(250, 87, 75, op);
                             break;
                         case 1:
-                            p.fill(230, 70, 90, op);
+                            p.fill(134, 92, 229, op);
+                            break;
+                        case 2:
+                            p.fill(69, 94, 229, op);
+                            break;
+                        case 3:
+                            p.fill(25, 25, 25, op);
+                            break;
+                        case 4:
+                            p.fill(242, 61, 91, op);
                             break;
                     }
                     p.rect(((x * (tamX + marX))), (height - (tamY)) - (y * (tamY + marY)), tamX,

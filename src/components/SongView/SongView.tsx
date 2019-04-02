@@ -1,11 +1,29 @@
 import React, { Component } from 'react';
 import './SongView.scss';
 
-import song from '../../utils/Sketch/song'
+import visualizer from '../../utils/Sketch/songVisualizer'
 
 import P5Wrapper from '../../utils/P5Wrapper/P5Wrapper';
+import { firebaseStore } from '../../stores/FBStore';
 
-class SongView extends Component {
+interface SongViewProps{
+  match?: any
+}
+
+class SongView extends Component<SongViewProps> {
+  constructor(props: any){
+    super(props);
+
+
+    
+    firebaseStore.readSong(this.getId());
+  }
+
+  getId() {
+    console.log(this.props.match.params.id);
+    return this.props.match.params.id;
+  }
+
   render() {
     return (
       <div className="SongView">
@@ -15,7 +33,7 @@ class SongView extends Component {
 
             <div className="SongView__Song-action__view">
             
-              <P5Wrapper sketch = {song} color = { 0 } />
+              <P5Wrapper sketch = {visualizer} color = { 0 } />
 
               <div className="SongView__Song-action__title">The Song Name</div>
             </div>
