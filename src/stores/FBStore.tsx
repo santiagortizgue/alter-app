@@ -7,6 +7,7 @@ class FBStore {
 
     @observable songActual: any = null;
 
+    @observable genreActual: string = "";
 
     /* This method read the data from realtime board of firebase, with the method on, read all the objects and update when anyone is edited */
 
@@ -35,15 +36,15 @@ class FBStore {
         });
     }
 
-    @action readSong(id: number){
+    @action readSong(id: number) {
         this.cleanSong();
 
         let ref = db.ref('songs');
 
-        ref.on("value", (querySnapshot:any) => {
-            querySnapshot.forEach((newSong:any) => {
+        ref.on("value", (querySnapshot: any) => {
+            querySnapshot.forEach((newSong: any) => {
 
-                if(newSong.val().id == id){
+                if (newSong.val().id == id) {
 
                     this.songActual = {
                         name: newSong.val().name,
@@ -55,40 +56,42 @@ class FBStore {
                         a_info: newSong.val().newSong,
                         autor: newSong.val().autor
                     }
+
+                    console.log("The Song found is: ", this.songActual.name);
+
+                    return;
                 }
             });
         });
 
-        /*
-        let ref = db.ref("songs").orderByChild("id").equalTo(id);
+    }
 
-        ref.on('value', (querySnapshot: any) => {
+    /* */
 
-            querySnapshot.forEach((newSong: any) => {
-                
-                console.log(newSong);
+    @action readGenreActual() {
+        this.cleanGenre();
 
+        if (this.songActual !== null) {
+
+            let ref = db.ref('genres');
+
+
+            this.songActual.genre.forEach((genreSong: any) => {
+
+                ref.on("value", (querySnapshot: any) => {
+
+                    querySnapshot.forEach((genreDB: any) => {
+                        if (genreSong === genreDB.val().id) {
+                            if(this.genreActual === ""){
+                                this.genreActual = genreDB.val().genre;
+                            }else{
+                             this.genreActual += ", "+genreDB.val().genre;
+                            }   
+                        }
+                    });
+                });
             });
-        });
-*/
-
-            
-        /*
-                let song = {
-                    name: newSong.val().name,
-                    id: newSong.val().id,
-                    album: newSong.val().album,
-                    year: newSong.val().year,
-                    genre: newSong.val().genre,
-                    colors: newSong.val().colors,
-                    a_info: newSong.val().newSong,
-                    autor: newSong.val().autor
-                }
-
-        this.songActual = song;
-
-        console.log('The song found FBStore: ', this.songActual);
-        */
+        }
     }
 
     /* this method reset the value of the variable */
@@ -99,6 +102,10 @@ class FBStore {
 
     @action cleanSong() {
         this.songActual = null;
+    }
+
+    @action cleanGenre() {
+        this.genreActual = "";
     }
 
 }

@@ -5,18 +5,15 @@ import visualizer from '../../utils/Sketch/songVisualizer'
 
 import P5Wrapper from '../../utils/P5Wrapper/P5Wrapper';
 import { firebaseStore } from '../../stores/FBStore';
+import { observer } from 'mobx-react';
 
 interface SongViewProps{
   match?: any
 }
 
-class SongView extends Component<SongViewProps> {
+@observer class SongView extends Component<SongViewProps> {
   constructor(props: any){
     super(props);
-
-
-    
-    firebaseStore.readSong(this.getId());
   }
 
   getId() {
@@ -25,8 +22,13 @@ class SongView extends Component<SongViewProps> {
 
   render() {
 
-    if(firebaseStore.songActual == null){
+    if(firebaseStore.songActual === null){
+      firebaseStore.readSong(this.getId());
       return <div className="Loading"><p >Loading Song...</p></div>;
+    }
+
+    if(firebaseStore.genreActual === ""){
+      firebaseStore.readGenreActual();
     }
 
     return (
@@ -39,7 +41,7 @@ class SongView extends Component<SongViewProps> {
             
               <P5Wrapper sketch = {visualizer} color = { 0 } />
 
-              <div className="SongView__Song-action__title">The Song Name</div>
+              <div className="SongView__Song-action__title">{firebaseStore.songActual.name}</div>
             </div>
             
             <div className="SongView__Song-action__buttons">
@@ -51,13 +53,13 @@ class SongView extends Component<SongViewProps> {
 
           <div className="SongView__Song-data">
 
-          <h3>Band Name</h3>
+          <h3>{firebaseStore.songActual.autor}</h3>
 
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam deleniti perspiciatis rerum ipsam nihil ducimus aliquam expedita veniam facilis...</p>
+          <p>{firebaseStore.songActual.a_info}</p>
 
-          <h4><strong>GENRE: </strong> GENRE, GENRE, GENRE</h4>
-          <h4><strong>DATE: </strong> 2000</h4>
-          <h4><strong>DURATION: </strong> 3:00</h4>
+          <h4><strong>GENRE: </strong>{firebaseStore.genreActual}</h4>
+          <h4><strong>DATE: </strong>{firebaseStore.songActual.year}</h4>
+          <h4><strong>ALBUM: </strong>{firebaseStore.songActual.album}</h4>
 
           <div className="SongView__Song-data__bottom">
 
