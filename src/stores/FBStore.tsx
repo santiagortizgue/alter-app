@@ -101,6 +101,8 @@ class FBStore {
 
         let ref = storage.ref();
 
+        /*
+
         ref.child('songs/0.mp3').getDownloadURL().then( (song: any) => {
             // `url` is the download URL for 'images/stars.jpg'
 
@@ -112,13 +114,13 @@ class FBStore {
             };
             xhr.open('GET', song);
             xhr.send();
-
-            console.log(song);
           
 
           }).catch(function(error) {
             // Handle any errors
           });
+
+          */
     }
 
     /* this method reset the value of the variable */
