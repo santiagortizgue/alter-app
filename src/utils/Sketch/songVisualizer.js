@@ -6,7 +6,7 @@ export default function visualizer(p) {
     let width = document.querySelector('#canvas').clientWidth;
     let height = document.querySelector('#canvas').clientHeight;
 
-    let color = 0;
+    let color = [];
 
     let id = 0;
 
@@ -20,7 +20,7 @@ export default function visualizer(p) {
 
     p.preload = function () {
         p.soundFormats('mp3', 'ogg');
-        s = p.loadSound('/songs/'+0+'.mp3');
+        s = p.loadSound('/songs/'+ id +'.mp3');
         fft = new p5.FFT();
     }
 
@@ -41,14 +41,21 @@ export default function visualizer(p) {
             }
         }
 
-        //s.loop();
+        s.loop();
 
         p.frameRate(60);
     };
 
     p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
         if (props.color) {
-            color = props.color;
+
+           color = [];
+
+           var colors = props.color.split(',');
+           color.push(parseInt(colors[0]));
+           color.push(parseInt(colors[1]));
+           color.push(parseInt(colors[2]));
+           console.log("Color actualizado: ", color);
         }
     };
 
@@ -73,36 +80,18 @@ export default function visualizer(p) {
         p.translate(-width / 2, -height / 2);
 
         for (let x = 0; x < audioSpect.length; x++) {
-            let i = 0;
+  
             for (let y = 0; y < audioSpect[0].length; y++) {
                 if (audioSpect[x][y]) {
-                    let op = 100 - (i * 5);
-                    switch (color) {
-                        default:
-                            //
-                            break;
-                        case 0:
-                            p.fill(250, 87, 75, op);
-                            break;
-                        case 1:
-                            p.fill(134, 92, 229, op);
-                            break;
-                        case 2:
-                            p.fill(69, 94, 229, op);
-                            break;
-                        case 3:
-                            p.fill(25, 25, 25, op);
-                            break;
-                        case 4:
-                            p.fill(242, 61, 91, op);
-                            break;
-                    }
+                    //let op = 100 - (i * 5);
+
+                    //let op = 200;
+
+                    p.fill(color[0], color[1], color[2]);
+                    
                     p.rect(((x * (tamX + marX))), (height - (tamY)) - (y * (tamY + marY)), tamX,
                         tamY);
                     p.noFill();
-                    p.fill(255);
-                    p.noFill();
-                    i++;
 
                     audioSpect[x][y] = false;
                 }

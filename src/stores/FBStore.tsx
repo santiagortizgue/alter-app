@@ -11,6 +11,10 @@ class FBStore {
 
     @observable songFile: any = null;
 
+    @observable colorsActual: any = null;
+
+    @observable colorSong: string | null = null;
+
     /* This method read the data from realtime board of firebase, with the method on, read all the objects and update when anyone is edited */
 
     @action readMusic() {
@@ -34,7 +38,7 @@ class FBStore {
 
                 this.musicArray.push(song);
             });
-            console.log('Next songs have been readed in FBStore: ', this.musicArray);
+            //console.log('Next songs have been readed in FBStore: ', this.musicArray);
         });
     }
 
@@ -61,6 +65,10 @@ class FBStore {
 
                     console.log("The Song found is: ", this.songActual.name);
 
+                    this.readGenreActual();
+                    this.readColors();
+                    this.readSongFile();
+
                     return;
                 }
             });
@@ -84,11 +92,11 @@ class FBStore {
 
                     querySnapshot.forEach((genreDB: any) => {
                         if (genreSong === genreDB.val().id) {
-                            if(this.genreActual === ""){
+                            if (this.genreActual === "") {
                                 this.genreActual = genreDB.val().genre;
-                            }else{
-                             this.genreActual += ", "+genreDB.val().genre;
-                            }   
+                            } else {
+                                this.genreActual += ", " + genreDB.val().genre;
+                            }
                         }
                     });
                 });
@@ -96,7 +104,7 @@ class FBStore {
         }
     }
 
-    @action readSongFile(){
+    @action readSongFile() {
         this.cleanSongFile();
 
         let ref = storage.ref();
@@ -123,6 +131,44 @@ class FBStore {
           */
     }
 
+    @action readColors() {
+        this.cleanColors();
+
+        if (this.songActual !== null) {
+
+            let ref = db.ref('colors');
+
+            this.songActual.colors.forEach((colorId: any) => {
+
+                this.colorsActual = [];
+
+                ref.on("value", (querySnapshot: any) => {
+
+                    querySnapshot.forEach((colorDB: any, length: number) => {
+                        if (colorId === colorDB.val().id) {
+
+                            let color = {
+                                id: colorDB.val().id,
+                                color: colorDB.val().color
+                            }
+
+                            this.colorsActual.push(color);
+                        }
+                    });
+                });
+            });
+
+            //make the color of the visualizer, the last color of the colors of the song
+            this.setColorSong("25,25,25");
+        }
+    }
+
+    /* setter methods */
+
+    @action setColorSong(color: string) {
+        this.colorSong = color;
+    }
+
     /* this method reset the value of the variable */
 
     @action cleanMusicArray() {
@@ -137,8 +183,16 @@ class FBStore {
         this.genreActual = "";
     }
 
-    @action cleanSongFile(){
+    @action cleanSongFile() {
         this.songFile = null;
+    }
+
+    @action cleanColors() {
+        this.colorsActual = null;
+    }
+
+    @action cleanColorSong() {
+        this.colorSong = null;
     }
 
 }

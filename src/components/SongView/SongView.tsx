@@ -20,17 +20,33 @@ interface SongViewProps{
     return this.props.match.params.id;
   }
 
+  componentWillUnmount(){
+    firebaseStore.cleanGenre();
+    firebaseStore.cleanColorSong();
+    firebaseStore.cleanColors();
+    firebaseStore.cleanSong();
+    firebaseStore.cleanSongFile();
+  }
+
   render() {
 
     if(firebaseStore.songActual === null){
       firebaseStore.readSong(this.getId());
-      firebaseStore.readSongFile();
       return <div className="Loading"><p >Loading Song...</p></div>;
     }
 
+    if(firebaseStore.genreActual === "" || firebaseStore.colorsActual === null){
+      return <div className="Loading"><p >Loading data...</p></div>;
+    }
+
+    /*
     if(firebaseStore.genreActual === ""){
       firebaseStore.readGenreActual();
     }
+
+    if(firebaseStore.colorsActual === null){
+      firebaseStore.readColors();
+    }*/
 
     return (
       <div className="SongView">
@@ -39,9 +55,9 @@ interface SongViewProps{
           <div className="SongView__Song-action">
 
             <div className="SongView__Song-action__view">
-            
-              <P5Wrapper sketch = {visualizer} color = { 0 } />
 
+              {(firebaseStore.colorSong)? <P5Wrapper sketch = {visualizer} color = { firebaseStore.colorSong } /> : ""}
+              
               <div className="SongView__Song-action__title">{firebaseStore.songActual.name}</div>
             </div>
             
@@ -69,7 +85,17 @@ interface SongViewProps{
           
             <div className="SongView__Song-data__buttons">
             
-            <div className="SongView__Song-data__colors"></div>
+            <div className="SongView__Song-data__colors">
+            {firebaseStore.colorsActual.map((color: any) => {
+              return <div key={color.id} style={{backgroundColor: `rgb(${color.color})`}}
+              className="SongView__Song-data__color"
+              onClick = { (e) => {
+                e.preventDefault();
+                firebaseStore.setColorSong(color.color);
+              }} >
+              </div>
+            })}
+            </div>
             <div className="SongView__Song-data__add"></div>
             
             </div>

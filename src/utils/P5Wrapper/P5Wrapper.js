@@ -10,7 +10,12 @@ export default class P5Wrapper extends React.Component {
   }
 
   shouldComponentUpdate(newprops) {
-    return false;
+    
+    if( this.canvas.myCustomRedrawAccordingToNewPropsHandler ) {
+      this.canvas.myCustomRedrawAccordingToNewPropsHandler(newprops);
+    }
+
+    return true;
   }
 
   componentWillUnmount() {
