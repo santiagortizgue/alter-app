@@ -9,11 +9,11 @@ class FBStore {
 
     @observable genreActual: string = "";
 
+    @observable genresActual: any = null;
+
     @observable songFile: any = null;
 
     @observable colorsActual: any = null;
-
-    @observable colorSong: string | null = null;
 
     /* This method read the data from realtime board of firebase, with the method on, read all the objects and update when anyone is edited */
 
@@ -79,24 +79,33 @@ class FBStore {
     /* */
 
     @action readGenreActual() {
+        this.cleanGenres();
         this.cleanGenre();
 
         if (this.songActual !== null) {
 
             let ref = db.ref('genres');
 
-
             this.songActual.genre.forEach((genreSong: any) => {
+                this.genresActual = [];
 
                 ref.on("value", (querySnapshot: any) => {
 
                     querySnapshot.forEach((genreDB: any) => {
                         if (genreSong === genreDB.val().id) {
-                            if (this.genreActual === "") {
+
+                            if(this.genreActual === ""){
                                 this.genreActual = genreDB.val().genre;
-                            } else {
-                                this.genreActual += ", " + genreDB.val().genre;
+                            }else{
+                                this.genreActual += ", "+genreDB.val().genre;
                             }
+
+                            let genre = {
+                                name: genreDB.val().genre,
+                                id: genreDB.val().id
+                            }
+
+                            this.genresActual.push(genre);
                         }
                     });
                 });
@@ -157,17 +166,10 @@ class FBStore {
                     });
                 });
             });
-
-            //make the color of the visualizer, the last color of the colors of the song
-            this.setColorSong("25,25,25");
         }
     }
 
     /* setter methods */
-
-    @action setColorSong(color: string) {
-        this.colorSong = color;
-    }
 
     /* this method reset the value of the variable */
 
@@ -183,16 +185,16 @@ class FBStore {
         this.genreActual = "";
     }
 
+    @action cleanGenres() {
+        this.genresActual = null;
+    }
+
     @action cleanSongFile() {
         this.songFile = null;
     }
 
     @action cleanColors() {
         this.colorsActual = null;
-    }
-
-    @action cleanColorSong() {
-        this.colorSong = null;
     }
 
 }

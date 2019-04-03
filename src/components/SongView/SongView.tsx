@@ -6,47 +6,77 @@ import visualizer from '../../utils/Sketch/songVisualizer'
 import P5Wrapper from '../../utils/P5Wrapper/P5Wrapper';
 import { firebaseStore } from '../../stores/FBStore';
 import { observer } from 'mobx-react';
+import { unwatchFile } from 'fs';
 
 interface SongViewProps{
   match?: any
 }
 
-@observer class SongView extends Component<SongViewProps> {
+interface SongViewState{
+  song?: any,
+  colors?: any,
+  color?: string|null,
+  genres?: any,
+  genreString?: string|null
+}
+
+@observer class SongView extends Component<SongViewProps, SongViewState> {
   constructor(props: any){
     super(props);
+
+    this.state = {
+      song: null,
+      colors: null,
+      color: "25,25,25",
+      genres: null,
+      genreString: ""
+    }
   }
 
   getId() {
     return this.props.match.params.id;
   }
 
+  componentDidMount(){
+
+    firebaseStore.readSong(this.getId());
+  }
+
   componentWillUnmount(){
     firebaseStore.cleanGenre();
-    firebaseStore.cleanColorSong();
+    firebaseStore.cleanGenres();
     firebaseStore.cleanColors();
     firebaseStore.cleanSong();
     firebaseStore.cleanSongFile();
+    console.log("Unmount Song - Component");
   }
 
   render() {
 
-    if(firebaseStore.songActual === null){
-      firebaseStore.readSong(this.getId());
+    if(this.state.song === null){
+      if(firebaseStore.songActual){
+        this.setState({song: firebaseStore.songActual}); 
+      }
       return <div className="Loading"><p >Loading Song...</p></div>;
     }
 
-    if(firebaseStore.genreActual === "" || firebaseStore.colorsActual === null){
-      return <div className="Loading"><p >Loading data...</p></div>;
+    if(this.state.genres === null){
+      if(firebaseStore.genresActual){
+        this.setState({
+          genres: firebaseStore.genresActual
+        });
+      }
+      return <div className="Loading"><p >Loading genres...</p></div>;
     }
 
-    /*
-    if(firebaseStore.genreActual === ""){
-      firebaseStore.readGenreActual();
-    }
+    if(this.state.colors === null){
 
-    if(firebaseStore.colorsActual === null){
-      firebaseStore.readColors();
-    }*/
+      if(firebaseStore.colorsActual){
+        this.setState({colors: firebaseStore.colorsActual});
+      }
+
+      return <div className="Loading"><p >Loading colors...</p></div>;
+    }
 
     return (
       <div className="SongView">
@@ -56,9 +86,9 @@ interface SongViewProps{
 
             <div className="SongView__Song-action__view">
 
-              {(firebaseStore.colorSong)? <P5Wrapper sketch = {visualizer} color = { firebaseStore.colorSong } /> : ""}
+              {(this.state.color)? <P5Wrapper sketch = {visualizer} color = { this.state.color } /> : ""}
               
-              <div className="SongView__Song-action__title">{firebaseStore.songActual.name}</div>
+              <div className="SongView__Song-action__title">{this.state.song.name}</div>
             </div>
             
             <div className="SongView__Song-action__buttons">
@@ -70,13 +100,13 @@ interface SongViewProps{
 
           <div className="SongView__Song-data">
 
-          <h3>{firebaseStore.songActual.autor}</h3>
+          <h3>{this.state.song.autor}</h3>
 
-          <p>{firebaseStore.songActual.a_info}</p>
+          <p>{this.state.song.a_info}</p>
 
-          <h4><strong>GENRE: </strong>{firebaseStore.genreActual}</h4>
-          <h4><strong>DATE: </strong>{firebaseStore.songActual.year}</h4>
-          <h4><strong>ALBUM: </strong>{firebaseStore.songActual.album}</h4>
+          <h4><strong>GENRES: </strong>{this.state.genreString}</h4>
+          <h4><strong>YEAR: </strong>{this.state.song.year}</h4>
+          <h4><strong>ALBUM: </strong>{this.state.song.album}</h4>
 
           <div className="SongView__Song-data__bottom">
 
@@ -86,12 +116,12 @@ interface SongViewProps{
             <div className="SongView__Song-data__buttons">
             
             <div className="SongView__Song-data__colors">
-            {firebaseStore.colorsActual.map((color: any) => {
+            {this.state.colors.map((color: any) => {
               return <div key={color.id} style={{backgroundColor: `rgb(${color.color})`}}
               className="SongView__Song-data__color"
               onClick = { (e) => {
                 e.preventDefault();
-                firebaseStore.setColorSong(color.color);
+                this.setState({color: color.color});
               }} >
               </div>
             })}
