@@ -38,6 +38,28 @@ class FBStore {
     @action readSong(id: number){
         this.cleanSong();
 
+        let ref = db.ref('songs');
+
+        ref.on("value", (querySnapshot:any) => {
+            querySnapshot.forEach((newSong:any) => {
+
+                if(newSong.val().id == id){
+
+                    this.songActual = {
+                        name: newSong.val().name,
+                        id: newSong.val().id,
+                        album: newSong.val().album,
+                        year: newSong.val().year,
+                        genre: newSong.val().genre,
+                        colors: newSong.val().colors,
+                        a_info: newSong.val().newSong,
+                        autor: newSong.val().autor
+                    }
+                }
+            });
+        });
+
+        /*
         let ref = db.ref("songs").orderByChild("id").equalTo(id);
 
         ref.on('value', (querySnapshot: any) => {
@@ -48,7 +70,7 @@ class FBStore {
 
             });
         });
-
+*/
 
             
         /*

@@ -20,11 +20,15 @@ class SongView extends Component<SongViewProps> {
   }
 
   getId() {
-    console.log(this.props.match.params.id);
     return this.props.match.params.id;
   }
 
   render() {
+
+    if(firebaseStore.songActual == null){
+      return <div className="Loading"><p >Loading Song...</p></div>;
+    }
+
     return (
       <div className="SongView">
 
