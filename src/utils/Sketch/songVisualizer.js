@@ -20,7 +20,7 @@ export default function visualizer(p) {
 
     p.preload = function () {
         p.soundFormats('mp3', 'ogg');
-        s = p.loadSound('/songs/' + id + '.mp3');
+        s = p.loadSound('https://firebasestorage.googleapis.com/v0/b/taller-app-a3390.appspot.com/o/songs%2F0.mp3?alt=media&token=a4904c41-ce19-4d64-a098-d58f586b6b88');
         fft = new p5.FFT();
     }
 
@@ -41,7 +41,7 @@ export default function visualizer(p) {
             }
         }
 
-        //s.loop();
+        s.loop();
 
         p.frameRate(60);
     };

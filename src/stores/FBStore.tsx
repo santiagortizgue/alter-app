@@ -1,5 +1,5 @@
 import { observable, action, computed, extendObservable } from 'mobx';
-import db from '../config/firebaseConfig';
+import db, { storage } from '../config/firebaseConfig';
 
 class FBStore {
 
@@ -8,6 +8,8 @@ class FBStore {
     @observable songActual: any = null;
 
     @observable genreActual: string = "";
+
+    @observable songFile: any = null;
 
     /* This method read the data from realtime board of firebase, with the method on, read all the objects and update when anyone is edited */
 
@@ -94,6 +96,31 @@ class FBStore {
         }
     }
 
+    @action readSongFile(){
+        this.cleanSongFile();
+
+        let ref = storage.ref();
+
+        ref.child('songs/0.mp3').getDownloadURL().then( (song: any) => {
+            // `url` is the download URL for 'images/stars.jpg'
+
+            // This can be downloaded directly:
+            var xhr = new XMLHttpRequest();
+            xhr.responseType = 'blob';
+            xhr.onload = (event: any) => {
+              var blob = xhr.response;
+            };
+            xhr.open('GET', song);
+            xhr.send();
+
+            console.log(song);
+          
+
+          }).catch(function(error) {
+            // Handle any errors
+          });
+    }
+
     /* this method reset the value of the variable */
 
     @action cleanMusicArray() {
@@ -106,6 +133,10 @@ class FBStore {
 
     @action cleanGenre() {
         this.genreActual = "";
+    }
+
+    @action cleanSongFile(){
+        this.songFile = null;
     }
 
 }

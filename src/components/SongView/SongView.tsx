@@ -24,6 +24,7 @@ interface SongViewProps{
 
     if(firebaseStore.songActual === null){
       firebaseStore.readSong(this.getId());
+      firebaseStore.readSongFile();
       return <div className="Loading"><p >Loading Song...</p></div>;
     }
 
