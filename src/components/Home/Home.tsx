@@ -1,46 +1,39 @@
 import React, { Component } from 'react';
 import './Home.scss';
-import Header from '../Header/Header';
-
-import { Link } from 'react-router-dom';
 
 import { observer } from 'mobx-react';
-import { firebaseStore } from '../../stores/FBStore';
 
-interface HomeState{
-  songs?:any;
+interface HomeProps {
 }
 
-@observer export class Home extends React.Component<HomeState> {
+interface HomeState {
+  songs?: any;
+}
+
+@observer export class Home extends Component<HomeProps, HomeState> {
 
   constructor(props: any) {
     super(props);
 
     this.state = {
-      songs: []
+      songs: null
     }
 
-    //
-    firebaseStore.readMusic();
+  }
 
-    /*
-    this.setState({
-      songs: firebaseStore.musicArray
-    });
-    */
+  componentDidMount() {
+  }
+
+  componentWillUnmount() {
   }
 
   render() {
+
     return (
       <div className="Home">
-        {firebaseStore.musicArray.map((song: any) => {
-            return (
-              <Link key={song.id} to={`/song/${song.id}`}>
-              <p key={song.id}>{song.name}</p>
-              </Link>
-            );
-          })
-        }
+
+        <p>This is the home</p>
+
       </div>
     );
   }

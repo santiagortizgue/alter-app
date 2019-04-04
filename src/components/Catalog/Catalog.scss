@@ -1,0 +1,82 @@
+@import '../../../public/variables.scss';
+
+.Catalog {
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+
+    &__music {
+        flex: 1 1 auto;
+        padding: 20px 5px;
+        height: 100%;
+
+        overflow: auto;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-content: flex-start;
+        align-items: flex-start;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        /* Background Color - Scroll */
+        &::-webkit-scrollbar-thumb {
+            background: transparentize($blackColor, .9);
+        }
+
+        /* Background Color : hover - Scroll */
+        &::-webkit-scrollbar-thumb:hover,
+        &::-webkit-scrollbar-thumb:active {
+            background: $blackColor;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: none;
+        }
+
+        &::-webkit-scrollbar-track:hover,
+        &::-webkit-scrollbar-track:active {
+            background: none;
+        }
+    }
+
+    .Filter {
+        //
+        flex-shrink: 0;
+    }
+
+    >.Loading {
+        width: 100%;
+
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+
+        p {
+            color: $blackColor;
+
+            font-family: $titleFont;
+
+            font-style: italic;
+            font-weight: 800;
+            font-size: 28px;
+            text-align: center;
+
+            text-transform: uppercase;
+        }
+    }
+}

@@ -8,8 +8,6 @@ export default function visualizer(p) {
 
     let color = [];
 
-    let id = 0;
-
     let audioSpect = [];
 
     let spectrum;
@@ -18,9 +16,12 @@ export default function visualizer(p) {
 
     let s;
 
+    let link = document.querySelector('#linkSong').innerHTML;
+
     p.preload = function () {
         p.soundFormats('mp3', 'ogg');
-        s = p.loadSound('/songs/'+ id +'.mp3');
+        
+        s = p.loadSound(link);
         fft = new p5.FFT();
     }
 

@@ -17,7 +17,9 @@ interface SongViewState{
   colors?: any,
   color?: string|null,
   genres?: any,
-  genreString?: string|null
+  genreString?: string|null,
+  songUrl?: string|null,
+  imgUrl?: string|null
 }
 
 @observer class SongView extends Component<SongViewProps, SongViewState> {
@@ -29,7 +31,9 @@ interface SongViewState{
       colors: null,
       color: "25,25,25",
       genres: null,
-      genreString: ""
+      genreString: "",
+      songUrl: null,
+      imgUrl: null
     }
   }
 
@@ -38,17 +42,16 @@ interface SongViewState{
   }
 
   componentDidMount(){
-
     firebaseStore.readSong(this.getId());
   }
 
   componentWillUnmount(){
+    firebaseStore.cleanSong();
     firebaseStore.cleanGenre();
     firebaseStore.cleanGenres();
     firebaseStore.cleanColors();
-    firebaseStore.cleanSong();
     firebaseStore.cleanSongFile();
-    console.log("Unmount Song - Component");
+    firebaseStore.cleanImgFile();
   }
 
   render() {
@@ -58,6 +61,24 @@ interface SongViewState{
         this.setState({song: firebaseStore.songActual}); 
       }
       return <div className="Loading"><p >Loading Song...</p></div>;
+    }
+
+    if(this.state.songUrl === null){
+
+      if(firebaseStore.songFile){
+        this.setState({songUrl: firebaseStore.songFile}); 
+      }
+
+      return <div className="Loading"><p >Loading Source...</p></div>;
+    }
+
+    if(this.state.imgUrl === null){
+
+      if(firebaseStore.imgFile){
+        this.setState({imgUrl: firebaseStore.imgFile}); 
+      }
+
+      return <div className="Loading"><p >Loading Source...</p></div>;
     }
 
     if(this.state.genres === null){
@@ -86,7 +107,7 @@ interface SongViewState{
 
             <div className="SongView__Song-action__view">
 
-              {(this.state.color)? <P5Wrapper sketch = {visualizer} color = { this.state.color } /> : ""}
+              {(this.state.color)? <P5Wrapper sketch = {visualizer} color = { this.state.color } link={this.state.songUrl} /> : ""}
               
               <div className="SongView__Song-action__title">{this.state.song.name}</div>
             </div>
@@ -110,8 +131,7 @@ interface SongViewState{
 
           <div className="SongView__Song-data__bottom">
 
-            <div className="SongView__Song-data__img">
-            </div>
+            <img src={firebaseStore.imgFile} className="SongView__Song-data__img"/>
           
             <div className="SongView__Song-data__buttons">
             

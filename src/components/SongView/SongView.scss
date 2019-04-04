@@ -1,279 +1,258 @@
 @import '../../../public/variables.scss';
 
-.Loading{
-   width: 100%;
-   height: 100vh;
-   display: flex;
-   flex-direction: column;
-   
-   justify-content: center;
-   align-content: center;
-   align-items: center;
-   
-   p{
-      color: $blackColor;
-      
-      font-family: $titleFont;
-      
-      font-style: italic;
-      font-weight: 800;
-      font-size: 28px;
-      text-align: center;
-      
-      text-transform: uppercase;
-   }
-}
-
 .SongView {
-   
+
    width: 100%;
    height: 100vh;
-   
+
    display: flex;
-   
+
    flex-direction: column;
    justify-content: center;
    align-content: center;
    align-items: center;
-   
-   background-color: $whiteColor; 
-   
+
+   background-color: $whiteColor;
+
    &__Song {
-      
+
       position: relative;
-      
+
       width: 660px;
       height: auto;
-      
+
       display: flex;
-      
+
       flex-direction: row;
       justify-content: space-between;
-      
+
       &-action {
-         
+
          position: relative;
-         
+
          width: 300px;
          height: 100%;
-         
+
          z-index: 1;
-         
+
          &__view {
-            
+
             position: relative;
-            
+
             width: 100%;
             height: 425px;
-            
+
             border: 15px $blackColor solid;
-            
+
             margin-bottom: 12px;
-            
+
             background-color: $whiteColor;
-            
+
             padding: 5px;
-            
-            #canvas{
+
+            #canvas {
                width: 100%;
                height: 100%;
-               
+
                display: flex;
-               
+
                flex-direction: column;
-               
+
                justify-content: center;
                align-content: center;
                align-items: center;
-               
+
                color: $blackColor;
-               
+
                font-family: $textFont;
                font-size: 20px;
                font-weight: 800;
             }
          }
-         
-         &__title{
+
+         &__title {
             position: absolute;
-            
+
             top: 35px;
             left: -215px;
-            
+
             width: 250px;
-            
+
             font-family: $titleFont;
             color: $mainColor;
-            
+
             font-style: italic;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 38px;
             line-height: 35px;
             text-align: right;
             text-transform: uppercase;
-            
+
          }
-         
+
          &__buttons {
-            
+
             width: 100%;
             height: auto;
-            
+
             display: flex;
-            
+
             flex-direction: row;
          }
-         
+
          #play {
             margin-right: 12px;
          }
-         
+
          #stop {
             //
          }
-         
+
          &__btn {
             width: 37px;
             height: 37px;
-            
+
             border: 7px solid $blackColor;
          }
-         
+
       }
-      
+
       &-data {
-         
+
          position: relative;
-         
+
          width: 300px;
          height: 100%;
-         
+
          >h3 {
-            
+
             color: $blackColor;
-            
+
             width: 100%;
             height: auto;
-            
+
             font-family: $textFont;
-            
+
             font-style: normal;
             font-weight: bold;
             font-size: 18px;
             line-height: normal;
-            
+
             margin-bottom: 33px;
-            
+
             text-transform: uppercase;
          }
-         
+
          >p {
             color: $blackColor;
-            
+
             font-family: $textFont;
-            
+
             font-style: normal;
             font-weight: normal;
             font-size: 14px;
             line-height: normal;
             text-align: justify;
-            
+
             margin-bottom: 33px;
-            
+
             width: 100%;
             height: auto;
          }
-         
+
          >h4 {
-            
+
             color: $blackColor;
-            
+
             font-family: $textFont;
-            
+
             font-style: normal;
             font-weight: normal;
             font-size: 15px;
             line-height: normal;
-            
+
             width: 100%;
             height: auto;
          }
-         
+
          &__bottom {
-            
+
             transform: translateX(-223px);
-            
+
             margin-top: 69px;
             width: auto;
-            height: 281px;
-            
+            height: 260px;
+
             display: flex;
-            
+
             flex-direction: row;
             flex-shrink: 0;
-            
+
             flex-wrap: nowrap;
-            
+
          }
-         
+
          &__img {
             width: 419px;
-            height: 281px;
-            
-            background-color: lightgray;
+            height: 100%;
+
+            filter: grayscale(100%);
+
             flex-shrink: 0;
-            
+
             margin-right: 46px;
          }
-         
+
          &__buttons {
             flex-shrink: 0;
-            
+
             width: 58px;
-            height: 100%;
-            
+            height: auto;
+
             display: flex;
-            
             flex-direction: column;
+            justify-content: space-between;
+            align-content: flex-end;
+            align-items: flex-end;
          }
-         
+
          &__colors {
             width: 58px;
             height: 200px;
-            
+
             border: 8px solid $blackColor;
-            
+
             margin-bottom: 23px;
             padding: 15px 0;
-            
+
             display: flex;
             flex-direction: column;
             flex-wrap: nowrap;
             justify-content: space-between;
             align-content: center;
             align-items: center;
-            
+
          }
-         
-         &__color{
+
+         &__color {
             width: 21px;
             height: 21px;
-            
+
             background-color: red;
             transition: .2s all ease-in-out;
-            
-            &:hover{
+
+            &:hover {
                border-radius: 15px;
             }
          }
-         
+
          &__add {
-            width: 58px;
-            height: 58px;
-            
-            border: 8px solid $blackColor;
+            width: 40px;
+            height: 40px;
+
+            border: 7px solid $blackColor;
          }
       }
    }
-   
+
 }

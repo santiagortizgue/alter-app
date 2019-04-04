@@ -1,0 +1,42 @@
+@import '../../../public/variables.scss';
+
+.About {
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    &-logo {
+        width: 60px;
+
+        margin-bottom: 20px;
+    }
+
+    &-text {
+        width: 220px;
+        height: auto;
+
+        font-family: $textFont;
+        color: $blackColor;
+        font-size: 13px;
+        font-weight: 400;
+
+        margin-bottom: 10px;
+        text-align: justify;
+        text-justify: inter-word;
+    }
+
+    &-brand {
+        font-family: $titleFont;
+        color: $blackColor;
+        font-size: 10px;
+        font-weight: 800;
+        font-style: italic;
+    }
+
+}
