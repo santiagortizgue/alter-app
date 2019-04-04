@@ -13,7 +13,7 @@ interface CatalogState {
   songs?: any
 }
 
-@observer export class Catalog extends Component<CatalogProps, CatalogState> {
+@observer class Catalog extends Component<CatalogProps, CatalogState> {
 
   constructor(props: any) {
     super(props);

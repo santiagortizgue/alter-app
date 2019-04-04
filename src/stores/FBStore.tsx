@@ -1,4 +1,4 @@
-import { observable, action, computed, extendObservable } from 'mobx';
+import { observable, action } from 'mobx';
 import db, { storage } from '../config/firebaseConfig';
 
 class FBStore {
@@ -40,9 +40,9 @@ class FBStore {
 
                     console.log("The Song found is: ", this.songActual.name);
 
-                    this.readGenreActual();
                     this.readColors();
-                    this.readSongFile(id);
+                    this.readGenreActual();
+                    this.readSongFile(newSong.val().id);
                     this.readImgFile(newSong.val().idImg);
 
                     return;
@@ -58,7 +58,7 @@ class FBStore {
         this.cleanGenres();
         this.cleanGenre();
 
-        if (this.songActual !== null) {
+        if (this.songActual && this.songActual.genre !== '') {
 
             let ref = db.ref('genres');
 
@@ -100,7 +100,7 @@ class FBStore {
 
             this.songFile = songUrl;
 
-          }).catch(function(error) {
+          }).catch(function(error: any) {
             // Handle any errors
           });
     }
@@ -115,7 +115,7 @@ class FBStore {
 
             this.imgFile = imgUrl;
 
-          }).catch(function(error) {
+          }).catch(function(error: any) {
             // Handle any errors
           });
     }
@@ -133,7 +133,7 @@ class FBStore {
 
                 ref.on("value", (querySnapshot: any) => {
 
-                    querySnapshot.forEach((colorDB: any, length: number) => {
+                    querySnapshot.forEach((colorDB: any) => {
                         if (colorId === colorDB.val().id) {
 
                             let color = {
@@ -179,6 +179,6 @@ class FBStore {
 
 }
 
+const firebaseStore = new FBStore();
 
-
-export const firebaseStore = new FBStore();
+export default firebaseStore;

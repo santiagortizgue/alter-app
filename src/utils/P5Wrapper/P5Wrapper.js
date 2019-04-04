@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import p5 from 'p5';
 
-export default class P5Wrapper extends React.Component {
+export default class P5Wrapper extends Component {
 
   componentDidMount() {
-    this.canvas = new p5(this.props.sketch, this.wrapper)
+    this.canvas = new p5(this.props.sketch, this.wrapper);
     if( this.canvas.myCustomRedrawAccordingToNewPropsHandler ) {
       this.canvas.myCustomRedrawAccordingToNewPropsHandler(this.props);
     }
@@ -21,7 +21,6 @@ export default class P5Wrapper extends React.Component {
 
   componentWillUnmount() {
     this.canvas.remove();
-    console.log("Wrapper Unmount");
   }
 
   render() {

@@ -10,7 +10,7 @@ interface AboutState {
 
 }
 
-@observer export class About extends Component<AboutProps, AboutState> {
+@observer class About extends Component<AboutProps, AboutState> {
 
     constructor(props: any) {
         super(props);

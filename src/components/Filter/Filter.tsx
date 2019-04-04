@@ -13,7 +13,7 @@ interface FilterState {
     fColor?: any
 }
 
-@observer export class Filter extends Component<FilterProps, FilterState> {
+@observer class Filter extends Component<FilterProps, FilterState> {
 
     constructor(props: any) {
         super(props);
@@ -73,7 +73,7 @@ interface FilterState {
                     <h2 className="Filter-title">Genre</h2>
                     <div className="Filter-genres">
                         {this.state.fGenre.map((genre: any) =>{
-                            return <h3 key={genre.id} onClick={(e:any)=>{
+                            return <h3 className="hvr-underline-from-right" key={genre.id} onClick={(e:any)=>{
                                 e.preventDefault();
                                 dbStore.filterByGenre(genre.id);
                             }
@@ -85,7 +85,7 @@ interface FilterState {
                     <h2 className="Filter-title">Band</h2>
                     <div className="Filter-bands">
                         {this.state.fBand.map((band: any) =>{
-                            return <h3 key={band.id} onClick={(e:any)=>{
+                            return <h3 className="hvr-underline-from-right"  key={band.id} onClick={(e:any)=>{
                                 e.preventDefault();
                                 dbStore.filterByBand(band.name);
                             }

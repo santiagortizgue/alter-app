@@ -3,43 +3,54 @@
 .Dash {
     width: $widthDash;
     height: 100%;
-
+    
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-content: center;
     align-items: center;
-
+    
     .Logo {
         fill: $blackColor;
         width: 96px;
-
+        
         margin-top: 36px;
-    }
+        
+        flex-shrink: 0;
+        
+        margin-bottom: 10px;
 
+    }
+    
     &__buttons {
         width: 82px;
         height: auto;
-
+        
         margin-bottom: 40%;
-
+        
         &-btn {
             height: 50px;
             width: 100%;
-
+            
             >h2 {
                 text-transform: uppercase;
-
+                
                 font-family: $titleFont;
                 font-style: italic;
                 font-weight: 800;
                 font-size: 14px;
                 line-height: normal;
-
+                
                 color: $blackColor;
-
+                
                 text-decoration: none;
+                
+                &:before{
+                    background-color: $blackColor;
+                }
+                
+                padding-bottom: 5px; 
             }
         }
     }

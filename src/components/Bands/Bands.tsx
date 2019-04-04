@@ -10,7 +10,7 @@ interface BandsState {
 
 }
 
-@observer export class Bands extends Component<BandsProps, BandsState> {
+@observer class Bands extends Component<BandsProps, BandsState> {
 
     constructor(props: any) {
         super(props);
@@ -38,7 +38,7 @@ interface BandsState {
                     <rect x="25.92" y="101.56" width="6.68" height="6.68" />
                 </svg>
                 <p className="Bands-text">
-                    This secion will have a tribute for the bands.</p>
+                    This section will have a tribute for the bands.</p>
                 <h3 className="Bands-brand">cooming soon...</h3>
             </div>
         );

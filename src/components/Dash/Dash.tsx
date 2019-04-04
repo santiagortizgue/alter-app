@@ -12,7 +12,7 @@ interface DashState {
 
 }
 
-@observer export class Dash extends Component<DashProps, DashState> {
+@observer class Dash extends Component<DashProps, DashState> {
 
     constructor(props: any) {
         super(props);
@@ -33,7 +33,7 @@ interface DashState {
         return (
             <div className="Dash">
 
-                <svg className="Logo" id="logo" viewBox="0 0 96 138">
+                <svg className="Logo " viewBox="0 0 96 138">
                     <path d="M96,138H0V0H96ZM8,130H88V8H8Z" />
                     <path d="M35,38.46H27.32L25.89,42H20.64l8-18.2h5.07L41.8,42H36.44Zm-1.5-3.79-2.34-5.83-2.34,5.83Z" />
                     <path d="M60,23.8H65.1V37.92h8.68V42H60Z" />
@@ -49,13 +49,13 @@ interface DashState {
                         <div className="Dash__buttons-btn "><h2 className="hvr-underline-from-left">Home</h2></div>
                     </Link>
                     <Link to={`/bands`}>
-                        <div className="Dash__buttons-btn"><h2>Bands</h2></div>
+                        <div className="Dash__buttons-btn"><h2 className="hvr-underline-from-left">Bands</h2></div>
                     </Link>
                     <Link to={`/db`}>
-                        <div className="Dash__buttons-btn"><h2>Catalog</h2></div>
+                        <div className="Dash__buttons-btn"><h2 className="hvr-underline-from-left">Catalog</h2></div>
                     </Link>
                     <Link to={`/about`}>
-                        <div className="Dash__buttons-btn"><h2>About</h2></div>
+                        <div className="Dash__buttons-btn"><h2 className="hvr-underline-from-left">About</h2></div>
                     </Link>
                 </div>
             </div>

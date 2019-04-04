@@ -3,8 +3,8 @@ import db, { storage } from '../config/firebaseConfig';
 
 class DBStore {
 
-    @observable musicArray: any = [];
-    @observable musicArrayBackup: any = [];
+    @observable musicArray: any = null;
+    @observable musicArrayBackup: any = null;
 
     @observable filterGenre: any = null;
     @observable filterBand: any = null;
@@ -18,6 +18,9 @@ class DBStore {
 
         let ref = db.ref("songs");//ruta        
         ref.on('value', (querySnapshot: any) => {
+            
+            this.musicArray = [];
+            this.musicArrayBackup = [];
 
             querySnapshot.forEach((newSong: any) => {
 
@@ -136,8 +139,8 @@ class DBStore {
     /* this method reset the value of the variable */
 
     @action cleanMusicArray() {
-        this.musicArray = [];
-        this.musicArrayBackup = [];
+        this.musicArray = null;
+        this.musicArrayBackup = null;
     }
 
     @action cleanFilterGenre() {
