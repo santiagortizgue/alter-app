@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './SongView.scss';
 
-import visualizer from '../../utils/Sketch/songVisualizer'
-
 import firebaseStore from '../../stores/FBStore';
 import { observer } from 'mobx-react';
 
 import P5Wrapper from '../../utils/P5Wrapper/P5Wrapper';
+
+import sketch from '../../utils/Sketch/songVisualizer';
 
 interface SongViewProps {
   match?: any
@@ -108,7 +108,7 @@ interface SongViewState {
 
             <div className="SongView__Song-action__view">
 
-              {(this.state.color) ? <P5Wrapper sketch={visualizer} color={this.state.color} link={this.state.songUrl} /> : ""}
+              {(this.state.color) ? <P5Wrapper sketch = { sketch } color={this.state.color} link={this.state.songUrl} /> : ""}
 
               <div className="SongView__Song-action__title">{this.state.song.name}</div>
             </div>
