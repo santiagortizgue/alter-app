@@ -46,7 +46,7 @@ interface DashState {
                 <div className="Dash__buttons">
 
                     <Link to={`/`}>
-                        <div className="Dash__buttons-btn"><h2>Home</h2></div>
+                        <div className="Dash__buttons-btn "><h2 className="hvr-underline-from-left">Home</h2></div>
                     </Link>
                     <Link to={`/bands`}>
                         <div className="Dash__buttons-btn"><h2>Bands</h2></div>
