@@ -3,9 +3,10 @@ import './SongView.scss';
 
 import visualizer from '../../utils/Sketch/songVisualizer'
 
-import P5Wrapper from '../../utils/P5Wrapper/P5Wrapper';
 import firebaseStore from '../../stores/FBStore';
 import { observer } from 'mobx-react';
+
+import P5Wrapper from '../../utils/P5Wrapper/P5Wrapper';
 
 interface SongViewProps {
   match?: any
@@ -155,7 +156,7 @@ interface SongViewState {
                     </div>
                   })}
                 </div>
-                
+
                 <div className="SongView__Song-data__add">
                   <svg className="addSvg" viewBox="0 0 100 100">
                     <path d="M62.71,37.29V11.85H37.29V37.29H11.85V62.71H37.29V88.15H62.71V62.71H88.15V37.29ZM80.15,54.71H54.71V80.15H45.29V54.71H19.85V45.29H45.29V19.85h9.42V45.29H80.15Z"/>

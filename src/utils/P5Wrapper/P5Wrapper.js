@@ -20,7 +20,13 @@ export default class P5Wrapper extends Component {
   }
 
   componentWillUnmount() {
+    /*
+      let canv = document.querySelector('#defaultCanvas0');
+      canv.remove();
+    */
+
     this.canvas.remove();
+    this.canvas = null;
   }
 
   render() {
