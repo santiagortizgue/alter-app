@@ -9,18 +9,17 @@ export default function visualizer(p) {
     let color = [];
 
     let audioSpect = [];
-
     let spectrum;
-
     let fft;
-
     let s;
+
+    let btn = false;
 
     let link = document.querySelector('#linkSong').innerHTML;
 
     p.preload = function () {
         p.soundFormats('mp3', 'ogg');
-        
+
         s = p.loadSound(link);
         fft = new p5.FFT();
     }
@@ -50,12 +49,12 @@ export default function visualizer(p) {
     p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
         if (props.color) {
 
-           color = [];
+            color = [];
 
-           var colors = props.color.split(',');
-           color.push(parseInt(colors[0]));
-           color.push(parseInt(colors[1]));
-           color.push(parseInt(colors[2]));
+            var colors = props.color.split(',');
+            color.push(parseInt(colors[0]));
+            color.push(parseInt(colors[1]));
+            color.push(parseInt(colors[2]));
         }
     };
 
@@ -80,7 +79,7 @@ export default function visualizer(p) {
         p.translate(-width / 2, -height / 2);
 
         for (let x = 0; x < audioSpect.length; x++) {
-  
+
             for (let y = 0; y < audioSpect[0].length; y++) {
                 if (audioSpect[x][y]) {
                     //let op = 100 - (i * 5);
@@ -88,7 +87,7 @@ export default function visualizer(p) {
                     //let op = 200;
 
                     p.fill(color[0], color[1], color[2]);
-                    
+
                     p.rect(((x * (tamX + marX))), (height - (tamY)) - (y * (tamY + marY)), tamX,
                         tamY);
                     p.noFill();
@@ -101,7 +100,22 @@ export default function visualizer(p) {
         p.rectMode(p.CENTER);
         p.pop();
         p.calculate();
+        p.setButtons();
     };
+
+    p.setButtons = function () {
+        if (btn === false) {
+            let play = document.querySelector('#play');
+            if (play) {
+                play.addEventListener('click', p.changePlay);
+            }
+            let stop = document.querySelector('#stop');
+            if (stop) {
+                stop.addEventListener('click', p.stop);
+                btn = true;
+            }
+        }
+    }
 
     p.calculate = function () {
         spectrum = fft.analyze();
@@ -147,7 +161,7 @@ export default function visualizer(p) {
             if (!s.isPlaying()) {
                 s.loop();
             } else {
-                s.loop();
+                s.pause();
             }
         }
     };

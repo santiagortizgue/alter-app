@@ -20,9 +20,6 @@ export default class P5Wrapper extends Component {
   }
 
   componentWillUnmount() {
-    this.canvas.remove();
-    this.canvas = null;
-
     let canv = document.querySelectorAll('.p5Canvas');
     if (canv) {
       for (let index = 0; index < canv.length; index++) {
@@ -30,6 +27,9 @@ export default class P5Wrapper extends Component {
         element.remove();
       }
     }
+
+    this.canvas.remove();
+    this.canvas = null;
   }
 
   render() {
