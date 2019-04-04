@@ -126,15 +126,14 @@ class FBStore {
         if (this.songActual !== null) {
 
             let ref = db.ref('colors');
+            this.colorsActual = [];
 
             this.songActual.colors.forEach((colorId: any) => {
-
-                this.colorsActual = [];
 
                 ref.on("value", (querySnapshot: any) => {
 
                     querySnapshot.forEach((colorDB: any) => {
-                        if (colorId === colorDB.val().id) {
+                        if (colorId == colorDB.val().id) {
 
                             let color = {
                                 id: colorDB.val().id,

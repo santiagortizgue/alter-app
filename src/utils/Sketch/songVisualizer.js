@@ -56,7 +56,6 @@ export default function visualizer(p) {
            color.push(parseInt(colors[0]));
            color.push(parseInt(colors[1]));
            color.push(parseInt(colors[2]));
-           console.log("Color actualizado: ", color);
         }
     };
 
