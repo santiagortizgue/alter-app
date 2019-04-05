@@ -28,7 +28,7 @@ interface AboutState {
         return (
             <div className="About">
 
-                <svg className="About-logo" id="logo" viewBox="0 0 96 138">
+                <svg className="About-logo" viewBox="0 0 96 138">
                     <path d="M96,138H0V0H96ZM8,130H88V8H8Z" />
                     <path d="M35,38.46H27.32L25.89,42H20.64l8-18.2h5.07L41.8,42H36.44Zm-1.5-3.79-2.34-5.83-2.34,5.83Z" />
                     <path d="M60,23.8H65.1V37.92h8.68V42H60Z" />
@@ -39,6 +39,8 @@ interface AboutState {
                 </svg>
                 <p className="About-text">
                     This web portal is part of a job for the ICESI University in Cali, Colombia. It is a FanPage made to pay homage to some outstanding artists in modern musical genres such as Rock and Metal.</p>
+                <p className="About-credits">
+                    The songs are not mine, all the credits to the authors and bands mentioned here.</p>
                 <h3 className="About-brand">by Santiago Ortiz Guevara</h3>
             </div>
         );

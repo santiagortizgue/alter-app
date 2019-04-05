@@ -37,12 +37,14 @@
 
          display: flex;
          flex-direction: column;
+         flex-wrap: nowrap;
+         justify-content: space-between;
+         align-content: flex-start;
+         align-items: flex-start;
 
          &__input{
             -webkit-appearance: none;
             vertical-align: middle;
-
-            margin-top: 12px;
             
             width: 86px;
             height: 37px;
@@ -90,8 +92,6 @@
             height: 425px;
 
             border: 15px $blackColor solid;
-
-            margin-bottom: 12px;
 
             background-color: $whiteColor;
 
