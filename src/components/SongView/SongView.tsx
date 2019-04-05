@@ -4,9 +4,7 @@ import './SongView.scss';
 import firebaseStore from '../../stores/FBStore';
 import { observer } from 'mobx-react';
 
-import P5Wrapper from '../../utils/P5Wrapper/P5Wrapper';
-
-import sketch from '../../utils/Sketch/songVisualizer';
+import P5Visualizer from '../../utils/P5Wrapper/P5Visualizer';
 
 interface SongViewProps {
   match?: any
@@ -19,7 +17,8 @@ interface SongViewState {
   genres?: any,
   genreString?: string | null,
   songUrl?: string | null,
-  imgUrl?: string | null
+  imgUrl?: string | null,
+  volume?: string
 }
 
 @observer class SongView extends Component<SongViewProps, SongViewState> {
@@ -33,7 +32,8 @@ interface SongViewState {
       genres: null,
       genreString: "",
       songUrl: null,
-      imgUrl: null
+      imgUrl: null,
+      volume: "50"
     }
   }
 
@@ -108,24 +108,29 @@ interface SongViewState {
 
             <div className="SongView__Song-action__view">
 
-              {(this.state.color) ? <P5Wrapper sketch = { sketch } color={this.state.color} link={this.state.songUrl} /> : ""}
+              {(this.state.color) ? <P5Visualizer vol={this.state.volume} color={this.state.color} link={this.state.songUrl} /> : ""}
 
               <div className="SongView__Song-action__title">{this.state.song.name}</div>
             </div>
 
             <div className="SongView__Song-action__buttons">
               <div className="SongView__Song-action__btn" id="play">
-                <svg className="playPauseSvg" viewBox="0 0 100 100">
-                  <path d="M20.36,19.85v60.3H8V19.85H20.36m8-8H0v76.3H28.36V11.85Z" />
-                  <path d="M41.91,25.7,84,50,41.91,74.3V25.7m-8-13.85v76.3L100,50,33.91,11.85Z" />
+                <svg className="playPauseSvg" viewBox="0 0 50 50">
+                <polygon points="15.89 42.45 46.11 25 15.89 7.55 15.89 42.45"/>
+                <rect x="3.89" y="7.22" width="9.78" height="35.56"/>
                 </svg>
               </div>
               <div className="SongView__Song-action__btn" id="stop">
-                <svg className="stopSvg" viewBox="0 0 100 100">
-                  <path d="M79.81,19.85v60.3H20.19V19.85H79.81m8-8H12.19v76.3H87.81V11.85Z" />
+                <svg className="stopSvg" viewBox="0 0 50 50">
+                  <rect x="5" y="5" width="40" height="40"/>
                 </svg>
               </div>
             </div>
+
+            <input type="range" defaultValue={this.state.volume} min="0" max="100" className="SongView__Song-action__input" onChange={(e:any) => {
+              e.preventDefault();
+              this.setState({volume: e.target.value});
+            }} />
 
           </div>
 
@@ -158,8 +163,8 @@ interface SongViewState {
                 </div>
 
                 <div className="SongView__Song-data__add">
-                  <svg className="addSvg" viewBox="0 0 100 100">
-                    <path d="M62.71,37.29V11.85H37.29V37.29H11.85V62.71H37.29V88.15H62.71V62.71H88.15V37.29ZM80.15,54.71H54.71V80.15H45.29V54.71H19.85V45.29H45.29V19.85h9.42V45.29H80.15Z"/>
+                  <svg className="addSvg" viewBox="0 0 50 50">
+                    <polygon points="32 18 32 5 18 5 18 18 5 18 5 32 18 32 18 45 32 45 32 32 45 32 45 18 32 18"/>
                   </svg>
                 </div>
 

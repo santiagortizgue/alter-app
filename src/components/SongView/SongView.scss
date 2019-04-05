@@ -3,7 +3,7 @@
 .SongView {
 
    width: 100%;
-   height: 100vh;
+   height: 100%;
 
    display: flex;
 
@@ -34,6 +34,53 @@
          height: 100%;
 
          z-index: 1;
+
+         display: flex;
+         flex-direction: column;
+
+         &__input{
+            -webkit-appearance: none;
+            vertical-align: middle;
+
+            margin-top: 12px;
+            
+            width: 86px;
+            height: 37px;
+
+            outline: none;
+            padding: 0 5px;
+            background: none;
+  
+            border: 7px solid $blackColor;
+
+
+            &::-webkit-slider-runnable-track {
+            -webkit-appearance: none;
+            vertical-align: middle;
+            background-color: $blackColor;
+               height: 5px;
+            }
+
+            &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            vertical-align: middle;
+               background-color: $blackColor;
+               height: 15px;
+               width: 15px;
+               margin-top: -5px;
+            }
+
+            &:active::-webkit-slider-thumb {
+               outline: none;
+            }
+
+            &::-webkit-slider-runnable-track {
+            -webkit-appearance: none;
+            vertical-align: middle;
+               background-color: $grayColor;
+            }
+           
+         }
 
          &__view {
 
@@ -113,7 +160,7 @@
 
                 fill: $blackColor;
 
-                padding: 2px;
+                padding: 3px;
             }
          }
 
@@ -125,7 +172,7 @@
 
                 fill: $blackColor;
 
-                padding: 2px;
+                padding: 3px;
             }
          }
 
@@ -279,7 +326,7 @@
 
                 fill: $blackColor;
 
-                padding: 2px;
+                padding: 3px;
             }
          }
       }

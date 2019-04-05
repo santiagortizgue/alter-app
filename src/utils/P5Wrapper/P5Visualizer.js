@@ -1,7 +1,11 @@
+import React, { Component } from 'react';
 import p5 from 'p5';
 import "p5/lib/addons/p5.sound";
 
-export default function visualizer(p) {
+export default class P5Visualizer extends Component {
+
+  componentDidMount() {
+    this.canvas = new p5((p) => {
 
     let width = document.querySelector('#canvas').clientWidth;
     let height = document.querySelector('#canvas').clientHeight;
@@ -15,7 +19,7 @@ export default function visualizer(p) {
 
     let btn = false;
 
-    let link = document.querySelector('#linkSong').innerHTML;
+    let link = `${this.props.link}`;
 
     p.preload = function () {
         p.soundFormats('mp3', 'ogg');
@@ -40,8 +44,6 @@ export default function visualizer(p) {
                 audioSpect[a][b] = false;
             }
         }
-
-        s.setVolume(0.1);
         s.loop();
 
         p.frameRate(60);
@@ -56,6 +58,13 @@ export default function visualizer(p) {
             color.push(parseInt(colors[0]));
             color.push(parseInt(colors[1]));
             color.push(parseInt(colors[2]));
+        }
+
+        if(props.vol){
+          let val = parseInt(props.vol) / 100;
+          if(s){
+            s.setVolume(val);
+          }
         }
     };
 
@@ -179,4 +188,35 @@ export default function visualizer(p) {
         p.resizeCanvas(width, height);
     };
 
-};
+    }, this.wrapper);
+    if (this.canvas.myCustomRedrawAccordingToNewPropsHandler) {
+      this.canvas.myCustomRedrawAccordingToNewPropsHandler(this.props);
+    }
+  }
+
+  shouldComponentUpdate(newprops) {
+
+    if (this.canvas.myCustomRedrawAccordingToNewPropsHandler) {
+      this.canvas.myCustomRedrawAccordingToNewPropsHandler(newprops);
+    }
+
+    return true;
+  }
+
+  componentWillUnmount() {
+    let canv = document.querySelectorAll('.p5Canvas');
+    if (canv) {
+      for (let index = 0; index < canv.length; index++) {
+        const element = canv[index];
+        element.remove();
+      }
+    }
+
+    this.canvas.remove();
+    this.canvas = null;
+  }
+
+  render() {
+    return <div id="canvas" ref={wrapper => this.wrapper = wrapper}></div>;
+  }
+}
