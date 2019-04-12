@@ -66,6 +66,7 @@ export default class P5Visualizer extends Component {
                 s.setVolume(val);
               }
             }
+
         };
     
         p.draw = function () {
@@ -204,13 +205,8 @@ export default class P5Visualizer extends Component {
   }
 
   componentWillUnmount() {
-    let myCanvas = document.querySelector('#canvas');
-    let canv = document.querySelector('#defaultCanvas0');
-    console.log(canv);
-    myCanvas.remove();
-    canv.remove();
     this.canvas.remove();
-    console.log(canv);
+    this.wrapper.remove();
   }
 
   render() {

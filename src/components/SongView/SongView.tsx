@@ -46,6 +46,7 @@ interface SongViewState {
   }
 
   componentWillUnmount() {
+
     firebaseStore.cleanGenre();
     firebaseStore.cleanGenres();
     firebaseStore.cleanColors();
@@ -108,7 +109,7 @@ interface SongViewState {
 
             <div className="SongView__Song-action__view">
 
-              {(this.state.color) ? <P5Visualizer vol={this.state.volume} color={this.state.color} link={this.state.songUrl} /> : ""}
+              {(this.state.color) ? <P5Visualizer vol={this.state.volume} color={this.state.color} link={this.state.songUrl}/> : ""}
 
               <div className="SongView__Song-action__title">{this.state.song.name}</div>
             </div>
