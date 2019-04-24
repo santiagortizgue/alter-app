@@ -70,6 +70,8 @@ export default class P5Visualizer extends Component {
         };
     
         p.draw = function () {
+
+            console.log('Holi');
     
             let marX = width / 42.3333;
             let marY = height / 45.3333;
@@ -205,6 +207,9 @@ export default class P5Visualizer extends Component {
   }
 
   componentWillUnmount() {
+
+    this.canvas.stop();
+
     this.canvas.remove();
     this.wrapper.remove();
   }

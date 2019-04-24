@@ -46,7 +46,6 @@ interface SongViewState {
   }
 
   componentWillUnmount() {
-
     firebaseStore.cleanGenre();
     firebaseStore.cleanGenres();
     firebaseStore.cleanColors();
