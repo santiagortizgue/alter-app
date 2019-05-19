@@ -3,6 +3,7 @@ import db, { storage } from '../config/firebaseConfig';
 
 class FBStore {
 
+
     @observable songActual: any = null;
 
     @observable genreActual: string = "";
@@ -19,35 +20,33 @@ class FBStore {
     @action readSong(id: number) {
         this.cleanSong();
 
-        let ref = db.ref('songs');
+        db.collection("songs").where('id', '==', id).get().then((querySnapshot: any) => {
 
-        ref.on("value", (querySnapshot: any) => {
-            querySnapshot.forEach((newSong: any) => {
+            querySnapshot.forEach((doc: any) => {
 
-                if (newSong.val().id == id) {
-
-                    this.songActual = {
-                        name: newSong.val().name,
-                        id: newSong.val().id,
-                        album: newSong.val().album,
-                        year: newSong.val().year,
-                        genre: newSong.val().genre,
-                        colors: newSong.val().colors,
-                        a_info: newSong.val().a_info,
-                        autor: newSong.val().autor,
-                        idImg: newSong.val().idImg
-                    }
-
-                    console.log("The Song found is: ", this.songActual.name);
-
-                    this.readColors();
-                    this.readGenreActual();
-                    this.readSongFile(newSong.val().id);
-                    this.readImgFile(newSong.val().idImg);
-
-                    return;
+                this.songActual = {
+                    name: doc.data().name,
+                    id: doc.data().id,
+                    album: doc.data().album,
+                    year: doc.data().year,
+                    genre: doc.data().genre,
+                    colors: doc.data().colors,
+                    a_info: doc.data().a_info,
+                    autor: doc.data().autor,
+                    idImg: doc.data().idImg
                 }
+
+                console.log("The Song found is: ", this.songActual.name);
+
+                this.readColors();
+                this.readGenreActual();
+                this.readSongFile(doc.data().id);
+                this.readImgFile(doc.data().idImg);
+
+                return;
             });
+        }).catch(function(error: any) {
+            console.log("Error getting documents: ", error);
         });
 
     }
@@ -60,30 +59,29 @@ class FBStore {
 
         if (this.songActual && this.songActual.genre !== '') {
 
-            let ref = db.ref('genres');
-
             this.songActual.genre.forEach((genreSong: any) => {
-                this.genresActual = [];
+                let id = parseInt(genreSong);
 
-                ref.on("value", (querySnapshot: any) => {
+                db.collection("genres").where('id', '==', id).get().then((querySnapshot: any) => {
+                    this.genresActual = [];
 
-                    querySnapshot.forEach((genreDB: any) => {
-                        if (genreSong === genreDB.val().id) {
+                    querySnapshot.forEach((doc: any) => {
 
-                            if(this.genreActual === ""){
-                                this.genreActual = genreDB.val().genre;
-                            }else{
-                                this.genreActual += ", "+genreDB.val().genre;
-                            }
-
-                            let genre = {
-                                name: genreDB.val().genre,
-                                id: genreDB.val().id
-                            }
-
-                            this.genresActual.push(genre);
+                        if (this.genreActual === "") {
+                            this.genreActual = doc.data().name;
+                        } else {
+                            this.genreActual += ", " + doc.data().name;
                         }
+
+                        let genre = {
+                            name: doc.data().name,
+                            id: doc.data().id
+                        }
+
+                        this.genresActual.push(genre);
                     });
+                }).catch(function(error: any) {
+                    console.log("Error getting documents: ", error);
                 });
             });
         }
@@ -94,15 +92,15 @@ class FBStore {
 
         let ref = storage.ref();
 
- 
-        ref.child(`songs/${id}.mp3`).getDownloadURL().then( (songUrl: any) => {
+
+        ref.child(`songs/${id}.mp3`).getDownloadURL().then((songUrl: any) => {
             // `url` is the download URL of your archive
 
             this.songFile = songUrl;
 
-          }).catch(function(error: any) {
+        }).catch(function (error: any) {
             // Handle any errors
-          });
+        });
     }
 
     @action readImgFile(id: number) {
@@ -110,14 +108,14 @@ class FBStore {
 
         let ref = storage.ref();
 
-        ref.child(`img/${id}.jpg`).getDownloadURL().then( (imgUrl: any) => {
+        ref.child(`img/${id}.jpg`).getDownloadURL().then((imgUrl: any) => {
             // `url` is the download URL of your archive
 
             this.imgFile = imgUrl;
 
-          }).catch(function(error: any) {
+        }).catch(function (error: any) {
             // Handle any errors
-          });
+        });
     }
 
     @action readColors() {
@@ -125,24 +123,24 @@ class FBStore {
 
         if (this.songActual !== null) {
 
-            let ref = db.ref('colors');
-            this.colorsActual = [];
-
             this.songActual.colors.forEach((colorId: any) => {
 
-                ref.on("value", (querySnapshot: any) => {
+                let id = parseInt(colorId);
+                this.colorsActual = [];
+
+                db.collection("colors").where("id", "==", id).get().then((querySnapshot: any) => {
 
                     querySnapshot.forEach((colorDB: any) => {
-                        if (colorId == colorDB.val().id) {
 
-                            let color = {
-                                id: colorDB.val().id,
-                                color: colorDB.val().color
-                            }
-
-                            this.colorsActual.push(color);
+                        let color = {
+                            id: colorDB.data().id,
+                            color: colorDB.data().color
                         }
+
+                        this.colorsActual.push(color);
                     });
+                }).catch(function(error: any) {
+                    console.log("Error getting documents: ", error);
                 });
             });
         }

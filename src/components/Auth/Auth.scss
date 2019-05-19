@@ -1,0 +1,207 @@
+@import '../../../public/variables.scss';
+
+.Auth {
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    .SignIn {
+        padding: 30px;
+        width: 350px;
+        height: 215px;
+
+        border: 10px solid $blackColor;
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+
+        position: relative;
+
+        &-container {
+            width: 100%;
+            height: 87px;
+
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-content: center;
+            align-items: center;
+        }
+
+        &-containerBtn {
+            width: 100%;
+
+            height: auto;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-content: center;
+            align-items: center;
+        }
+
+        &-input {
+            width: 100%;
+            height: 32px;
+            padding: 5px;
+
+            border: 4px solid $blackColor;
+
+            color: $grayColor;
+
+            font-family: $textFont;
+            font-style: italic;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        &-btn {
+            font-family: $titleFont;
+            font-style: italic;
+            font-weight: 800;
+            font-size: 14px;
+            display: flex;
+
+            color: $blackColor;
+
+            &:before {
+                background-color: $blackColor;
+            }
+
+            padding-bottom: 5px;
+        }
+
+        &-title {
+            position: absolute;
+
+            top: 35px;
+            left: -108px;
+
+            width: 124px;
+            padding: 5px;
+
+            font-family: $titleFont;
+            color: $blackColor;
+
+            font-style: italic;
+            font-weight: 900;
+            font-size: 44px;
+            line-height: 44px;
+            text-align: right;
+            text-transform: uppercase;
+
+            background-color: $whiteColor;
+
+        }
+    }
+
+    .SignUp {
+
+        padding: 30px;
+        width: 350px;
+        height: 275px;
+
+        border: 10px solid $blackColor;
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+
+        position: relative;
+
+        &-container {
+            width: 100%;
+            height: 142px;
+
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-content: center;
+            align-items: center;
+        }
+
+        &-containerBtn {
+            width: 100%;
+
+            height: auto;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-content: center;
+            align-items: center;
+        }
+
+        &-input {
+            width: 100%;
+            height: 32px;
+            padding: 5px;
+
+            border: 4px solid $blackColor;
+
+            color: $grayColor;
+
+            font-family: $textFont;
+            font-style: italic;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        &-btn {
+            font-family: $titleFont;
+            font-style: italic;
+            font-weight: 800;
+            font-size: 14px;
+            display: flex;
+
+            color: $blackColor;
+
+            &:before {
+                background-color: $blackColor;
+            }
+
+            padding-bottom: 5px;
+        }
+
+        &-title {
+            position: absolute;
+
+            top: 35px;
+            left: -108px;
+
+            width: 124px;
+            padding: 5px;
+
+            font-family: $titleFont;
+            color: $blackColor;
+
+            font-style: italic;
+            font-weight: 900;
+            font-size: 44px;
+            line-height: 44px;
+            text-align: right;
+            text-transform: uppercase;
+
+            background-color: $whiteColor;
+
+        }
+    }
+
+}

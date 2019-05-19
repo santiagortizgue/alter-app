@@ -8,24 +8,28 @@ import ErrorPage from '../ErrorPage/ErrorPage'
 import Dash from '../Dash/Dash';
 import Catalog from '../Catalog/Catalog';
 import About from '../About/About';
-import Bands from '../Bands/Bands';
+import Guilds from '../Guilds/Guilds';
+import Profile from '../Profile/Profile';
+import Auth from '../Auth/Auth';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
 
-      <BrowserRouter>
+        <BrowserRouter>
 
-        <Dash/>
+          <Dash />
 
           <Switch>
 
             <Route path="/" component={Home} exact />
             <Route path="/db" component={Catalog} exact />
             <Route path="/about" component={About} exact />
-            <Route path="/bands" component={Bands} exact />
+            <Route path="/guilds" component={Guilds} exact />
             <Route path="/song/:id" component={SongView} exact />
+            <Route path="/profile" component={Profile} exact />
+            <Route path="/auth" component={Auth} exact />
             <Route component={ErrorPage} />
 
           </Switch>

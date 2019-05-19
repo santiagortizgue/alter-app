@@ -48,15 +48,22 @@ interface DashState {
                     <Link to={`/`}>
                         <div className="Dash__buttons-btn "><h2 className="hvr-underline-from-left">Home</h2></div>
                     </Link>
-                    <Link to={`/bands`}>
-                        <div className="Dash__buttons-btn"><h2 className="hvr-underline-from-left">Bands</h2></div>
+                    <Link to={`/guilds`}>
+                        <div className="Dash__buttons-btn"><h2 className="hvr-underline-from-left">Guilds</h2></div>
                     </Link>
                     <Link to={`/db`}>
                         <div className="Dash__buttons-btn"><h2 className="hvr-underline-from-left">Catalog</h2></div>
                     </Link>
+                    <Link to={`/profile`}>
+                        <div className="Dash__buttons-btn"><h2 className="hvr-underline-from-left">Profile</h2></div>
+                    </Link>
                     <Link to={`/about`}>
                         <div className="Dash__buttons-btn"><h2 className="hvr-underline-from-left">About</h2></div>
                     </Link>
+                </div>
+
+                <div className="Dash__option">
+                        <div className="Dash__option-btn"><h2 className="hvr-underline-from-left">Sing Out</h2></div>
                 </div>
             </div>
         );

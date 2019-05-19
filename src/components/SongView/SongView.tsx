@@ -38,7 +38,7 @@ interface SongViewState {
   }
 
   getId() {
-    return this.props.match.params.id;
+    return parseInt(this.props.match.params.id);
   }
 
   componentDidMount() {

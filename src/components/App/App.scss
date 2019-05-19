@@ -35,7 +35,7 @@ a{
     flex: 1 1 auto;
   }
 
-  .Bands {
+  .Guilds {
     //
     flex-shrink: 0;
     flex: 1 1 auto;
@@ -55,6 +55,18 @@ a{
   }
 
   .Catalog {
+    //
+    flex-shrink: 0;
+    flex: 1 1 auto;
+  }
+
+  .Auth {
+    //
+    flex-shrink: 0;
+    flex: 1 1 auto;
+  }
+
+  .Profile {
     //
     flex-shrink: 0;
     flex: 1 1 auto;

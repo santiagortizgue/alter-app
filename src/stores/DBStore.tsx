@@ -2,7 +2,7 @@ import { observable, action, computed, extendObservable } from 'mobx';
 import db, { storage } from '../config/firebaseConfig';
 
 class DBStore {
-
+   
     @observable musicArray: any = null;
     @observable musicArrayBackup: any = null;
 
@@ -16,84 +16,85 @@ class DBStore {
     @action readMusic() {
         this.cleanMusicArray();
 
-        let ref = db.ref("songs");//ruta        
-        ref.on('value', (querySnapshot: any) => {
+        db.collection("songs").get().then((querySnapshot) => {
             
             this.musicArray = [];
             this.musicArrayBackup = [];
 
-            querySnapshot.forEach((newSong: any) => {
+            querySnapshot.forEach((doc) => {
 
                 let song = {
-                    name: newSong.val().name,
-                    id: newSong.val().id,
-                    album: newSong.val().album,
-                    year: newSong.val().year,
-                    genre: newSong.val().genre,
-                    colors: newSong.val().colors,
-                    a_info: newSong.val().a_info,
-                    autor: newSong.val().autor,
-                    idImg: newSong.val().idImg
+                    name: doc.data().name,
+                    id: doc.data().id,
+                    album: doc.data().album,
+                    year: doc.data().year,
+                    genre: doc.data().genre,
+                    colors: doc.data().colors,
+                    a_info: doc.data().a_info,
+                    autor: doc.data().autor,
+                    idImg: doc.data().idImg
                 }
 
                 this.musicArrayBackup.push(song);
                 this.musicArray.push(song);
             });
-            //console.log('Next songs have been readed in FBStore: ', this.musicArray);
+        }).catch(function(error: any) {
+            console.log("Error getting documents: ", error);
         });
     }
 
     @action readFilterGenre() {
         this.cleanFilterGenre();
 
-        let ref = db.ref("genres");//ruta        
-        ref.on('value', (querySnapshot: any) => {
+        db.collection("genres").get().then((querySnapshot) => {
             this.filterGenre = [];
-            querySnapshot.forEach((newGenre: any) => {
+            querySnapshot.forEach((doc) => {
 
                 let genre = {
-                    name: newGenre.val().genre,
-                    id: newGenre.val().id
+                    name: doc.data().name,
+                    id: doc.data().id
                 }
 
                 this.filterGenre.push(genre);
             });
+        }).catch(function(error: any) {
+            console.log("Error getting documents: ", error);
         });
     }
 
     @action readFilterBand() {
         this.cleanFilterBand();
 
-        let ref = db.ref("band");//ruta        
-        ref.on('value', (querySnapshot: any) => {
+        db.collection("bands").get().then((querySnapshot) => {
             this.filterBand = [];
-            querySnapshot.forEach((newBand: any) => {
-
+            querySnapshot.forEach((doc) => {
                 let band = {
-                    name: newBand.val().name,
-                    id: newBand.val().id
+                    name: doc.data().name,
+                    id: doc.data().id
                 }
 
                 this.filterBand.push(band);
             });
+        }).catch(function(error: any) {
+            console.log("Error getting documents: ", error);
         });
     }
 
     @action readFilterColor() {
         this.cleanFilterColor();
 
-        let ref = db.ref("colors");//ruta        
-        ref.on('value', (querySnapshot: any) => {
+        db.collection("colors").get().then((querySnapshot) => {
             this.filterColor = [];
-            querySnapshot.forEach((newColor: any) => {
-
+            querySnapshot.forEach((doc) => {
                 let color = {
-                    name: newColor.val().color,
-                    id: newColor.val().id
+                    name: doc.data().color,
+                    id: doc.data().id
                 }
 
                 this.filterColor.push(color);
             });
+        }).catch(function(error: any) {
+            console.log("Error getting documents: ", error);
         });
     }
 
@@ -154,7 +155,6 @@ class DBStore {
     @action cleanFilterColor() {
         this.filterColor = null;
     }
-
 
 }
 
