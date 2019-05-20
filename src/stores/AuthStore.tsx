@@ -27,7 +27,22 @@ class AuthStore {
     @observable user: any = null;
 
     @action createNewUser(name: string, email: string, password: string) {
-        auth.createUserWithEmailAndPassword(email, password).catch(function (error) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .then(function (docUser: any) {
+            //add user to db
+            
+            let u = docUser;
+
+            db.collection("cities").add(u)
+                .then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                })
+                .catch(function (error) {
+                    console.error("Error adding document: ", error);
+                });
+            //add user to db
+            
+        }).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
