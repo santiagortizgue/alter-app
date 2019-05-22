@@ -1,8 +1,14 @@
 import { observable, action } from 'mobx';
-import db, { storage } from '../config/firebaseConfig';
 
-class FBStore {
+export default class SongStore {
 
+    db: any = null;
+    storage: any = null;
+
+    constructor(db: any, storage: any){
+        this.db = db;
+        this.storage = storage;
+    }
 
     @observable songActual: any = null;
 
@@ -20,7 +26,7 @@ class FBStore {
     @action readSong(id: number) {
         this.cleanSong();
 
-        db.collection("songs").where('id', '==', id).get().then((querySnapshot: any) => {
+        this.db.collection("songs").where('id', '==', id).get().then((querySnapshot: any) => {
 
             querySnapshot.forEach((doc: any) => {
 
@@ -62,7 +68,7 @@ class FBStore {
             this.songActual.genre.forEach((genreSong: any) => {
                 let id = parseInt(genreSong);
 
-                db.collection("genres").where('id', '==', id).get().then((querySnapshot: any) => {
+                this.db.collection("genres").where('id', '==', id).get().then((querySnapshot: any) => {
                     this.genresActual = [];
 
                     querySnapshot.forEach((doc: any) => {
@@ -80,7 +86,7 @@ class FBStore {
 
                         this.genresActual.push(genre);
                     });
-                }).catch(function(error: any) {
+                }).catch((error: any) => {
                     console.log("Error getting documents: ", error);
                 });
             });
@@ -90,7 +96,7 @@ class FBStore {
     @action readSongFile(id: number) {
         this.cleanSongFile();
 
-        let ref = storage.ref();
+        let ref = this.storage.ref();
 
 
         ref.child(`songs/${id}.mp3`).getDownloadURL().then((songUrl: any) => {
@@ -106,14 +112,14 @@ class FBStore {
     @action readImgFile(id: number) {
         this.cleanImgFile();
 
-        let ref = storage.ref();
+        let ref = this.storage.ref();
 
         ref.child(`img/${id}.jpg`).getDownloadURL().then((imgUrl: any) => {
             // `url` is the download URL of your archive
 
             this.imgFile = imgUrl;
 
-        }).catch(function (error: any) {
+        }).catch( (error: any) => {
             // Handle any errors
         });
     }
@@ -128,7 +134,7 @@ class FBStore {
                 let id = parseInt(colorId);
                 this.colorsActual = [];
 
-                db.collection("colors").where("id", "==", id).get().then((querySnapshot: any) => {
+                this.db.collection("colors").where("id", "==", id).get().then((querySnapshot: any) => {
 
                     querySnapshot.forEach((colorDB: any) => {
 
@@ -175,7 +181,3 @@ class FBStore {
     }
 
 }
-
-const firebaseStore = new FBStore();
-
-export default firebaseStore;

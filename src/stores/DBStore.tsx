@@ -1,7 +1,12 @@
 import { observable, action, computed, extendObservable } from 'mobx';
-import db, { storage } from '../config/firebaseConfig';
 
-class DBStore {
+export default class DBStore {
+
+    db: any = null;
+
+    constructor(db: any){
+        this.db = db;
+    }
    
     @observable musicArray: any = null;
     @observable musicArrayBackup: any = null;
@@ -16,12 +21,12 @@ class DBStore {
     @action readMusic() {
         this.cleanMusicArray();
 
-        db.collection("songs").get().then((querySnapshot) => {
+        this.db.collection("songs").get().then((querySnapshot: any) => {
             
             this.musicArray = [];
             this.musicArrayBackup = [];
 
-            querySnapshot.forEach((doc) => {
+            querySnapshot.forEach((doc: any) => {
 
                 let song = {
                     name: doc.data().name,
@@ -46,9 +51,9 @@ class DBStore {
     @action readFilterGenre() {
         this.cleanFilterGenre();
 
-        db.collection("genres").get().then((querySnapshot) => {
+        this.db.collection("genres").get().then((querySnapshot: any) => {
             this.filterGenre = [];
-            querySnapshot.forEach((doc) => {
+            querySnapshot.forEach((doc: any) => {
 
                 let genre = {
                     name: doc.data().name,
@@ -65,9 +70,9 @@ class DBStore {
     @action readFilterBand() {
         this.cleanFilterBand();
 
-        db.collection("bands").get().then((querySnapshot) => {
+        this.db.collection("bands").get().then((querySnapshot: any) => {
             this.filterBand = [];
-            querySnapshot.forEach((doc) => {
+            querySnapshot.forEach((doc: any) => {
                 let band = {
                     name: doc.data().name,
                     id: doc.data().id
@@ -83,9 +88,9 @@ class DBStore {
     @action readFilterColor() {
         this.cleanFilterColor();
 
-        db.collection("colors").get().then((querySnapshot) => {
+        this.db.collection("colors").get().then((querySnapshot: any) => {
             this.filterColor = [];
-            querySnapshot.forEach((doc) => {
+            querySnapshot.forEach((doc: any) => {
                 let color = {
                     name: doc.data().color,
                     id: doc.data().id
@@ -157,7 +162,3 @@ class DBStore {
     }
 
 }
-
-const dbStore = new DBStore()
-
-export default dbStore;

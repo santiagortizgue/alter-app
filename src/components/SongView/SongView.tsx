@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './SongView.scss';
 
-import firebaseStore from '../../stores/FBStore';
+import stores from '../../stores/Stores';
 import { observer } from 'mobx-react';
 
 import P5Visualizer from '../../utils/P5Wrapper/P5Visualizer';
@@ -42,31 +42,31 @@ interface SongViewState {
   }
 
   componentDidMount() {
-    firebaseStore.readSong(this.getId());
+    stores.songStore.readSong(this.getId());
   }
 
   componentWillUnmount() {
-    firebaseStore.cleanGenre();
-    firebaseStore.cleanGenres();
-    firebaseStore.cleanColors();
-    firebaseStore.cleanSongFile();
-    firebaseStore.cleanImgFile();
-    firebaseStore.cleanSong();
+    stores.songStore.cleanGenre();
+    stores.songStore.cleanGenres();
+    stores.songStore.cleanColors();
+    stores.songStore.cleanSongFile();
+    stores.songStore.cleanImgFile();
+    stores.songStore.cleanSong();
   }
 
   render() {
 
     if (this.state.song === null) {
-      if (firebaseStore.songActual) {
-        this.setState({ song: firebaseStore.songActual });
+      if (stores.songStore.songActual) {
+        this.setState({ song: stores.songStore.songActual });
       }
       return <div className="Loading"><p >Loading Song...</p></div>;
     }
 
     if (this.state.songUrl === null) {
 
-      if (firebaseStore.songFile) {
-        this.setState({ songUrl: firebaseStore.songFile });
+      if (stores.songStore.songFile) {
+        this.setState({ songUrl: stores.songStore.songFile });
       }
 
       return <div className="Loading"><p >Loading Source...</p></div>;
@@ -74,18 +74,18 @@ interface SongViewState {
 
     if (this.state.imgUrl === null) {
 
-      if (firebaseStore.imgFile) {
-        this.setState({ imgUrl: firebaseStore.imgFile });
+      if (stores.songStore.imgFile) {
+        this.setState({ imgUrl: stores.songStore.imgFile });
       }
 
       return <div className="Loading"><p >Loading Source...</p></div>;
     }
 
     if (this.state.genres === null) {
-      if (firebaseStore.genresActual) {
+      if (stores.songStore.genresActual) {
         this.setState({
-          genres: firebaseStore.genresActual,
-          genreString: firebaseStore.genreActual
+          genres: stores.songStore.genresActual,
+          genreString: stores.songStore.genreActual
         });
       }
       return <div className="Loading"><p >Loading genres...</p></div>;
@@ -93,8 +93,8 @@ interface SongViewState {
 
     if (this.state.colors === null) {
 
-      if (firebaseStore.colorsActual) {
-        this.setState({ colors: firebaseStore.colorsActual });
+      if (stores.songStore.colorsActual) {
+        this.setState({ colors: stores.songStore.colorsActual });
       }
 
       return <div className="Loading"><p >Loading colors...</p></div>;
@@ -146,7 +146,7 @@ interface SongViewState {
 
             <div className="SongView__Song-data__bottom">
 
-              <img src={firebaseStore.imgFile} className="SongView__Song-data__img" />
+              <img src={stores.songStore.imgFile} className="SongView__Song-data__img" />
 
               <div className="SongView__Song-data__buttons">
 

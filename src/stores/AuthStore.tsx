@@ -1,57 +1,58 @@
 import { observable, action, computed, extendObservable } from 'mobx';
-import db, { auth } from '../config/firebaseConfig';
 
-class AuthStore {
+export default class AuthStore {
+
+    db: any = null;
+    auth: any = null;
+
+    constructor(db: any, auth: any) {
+        this.db = db;
+        this.auth = auth;
 
     /*
-    var user = firebase.auth().currentUser;
+        var user = firebase.auth().currentUser;
 
-    if (user) {
-        // User is signed in.
-    } else {
-        // No user is signed in.
+        if (user) {
+            // User is signed in.
+        } else {
+            // No user is signed in.
+        }
+
+        }
+    */
+
     }
 
-    //update
 
-    user.updateProfile({
-        displayName: "Jane Q. User",
-        photoURL: "https://example.com/jane-q-user/profile.jpg"
-    }).then(function() {
-        // Update successful.
-    }).catch(function(error) {
-        // An error happened.
-    });
-    */
 
     @observable user: any = null;
 
     @action createNewUser(name: string, email: string, password: string) {
-        auth.createUserWithEmailAndPassword(email, password)
-            .then(function (docUser: any) {
-            //add user to db
-            
-            let u = docUser;
+        this.auth.createUserWithEmailAndPassword(email, password)
+            .then((docUser: any) => {
+                //add user to db
 
-            db.collection("cities").add(u)
-                .then(function (docRef) {
-                    console.log("Document written with ID: ", docRef.id);
-                })
-                .catch(function (error) {
-                    console.error("Error adding document: ", error);
-                });
-            //add user to db
-            
-        }).catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-        });
+                let u = docUser;
+
+                this.db.collection("cities").add(u)
+                    .then((docRef: any) => {
+                        console.log("Document written with ID: ", docRef.id);
+                    })
+                    .catch(function (error: any) {
+                        console.error("Error adding document: ", error);
+                    });
+                //add user to db
+
+            }).catch((error: any) => {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+            });
     }
 
     @action signIn(email: string, password: string) {
-        auth.signInWithEmailAndPassword(email, password).catch(function (error) {
+        this.auth.signInWithEmailAndPassword(email, password).catch((error: any) => {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -60,15 +61,11 @@ class AuthStore {
     }
 
     @action signOut() {
-        auth.signOut().then(function () {
+        this.auth.signOut().then(() => {
             // Sign-out successful.
-        }).catch(function (error) {
+        }).catch(function (error: any) {
             // An error happened.
         });
     }
 
 }
-
-const authStore = new AuthStore();
-
-export default authStore;

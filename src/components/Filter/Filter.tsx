@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Filter.scss';
 
 import { observer } from 'mobx-react';
-import dbStore from '../../stores/DBStore';
+import stores from '../../stores/Stores';
 
 interface FilterProps {
 }
@@ -27,41 +27,41 @@ interface FilterState {
     }
 
     componentDidMount() {
-        dbStore.readFilterGenre();
-        dbStore.readFilterBand();
-        dbStore.readFilterColor();
+        stores.dbStore.readFilterGenre();
+        stores.dbStore.readFilterBand();
+        stores.dbStore.readFilterColor();
     }
 
     componentWillUnmount() {
-        dbStore.cleanFilterGenre();
-        dbStore.cleanFilterBand();
-        dbStore.cleanFilterColor();
+        stores.dbStore.cleanFilterGenre();
+        stores.dbStore.cleanFilterBand();
+        stores.dbStore.cleanFilterColor();
     }
 
     render() {
 
         if (this.state.fGenre === null) {
-            if (dbStore.filterGenre) {
+            if (stores.dbStore.filterGenre) {
                 this.setState({
-                    fGenre: dbStore.filterGenre
+                    fGenre: stores.dbStore.filterGenre
                 });
             }
             return <div className="Filter"><div className="Loading"><p>Loading Filter...</p></div></div>;
         }
 
         if (this.state.fBand === null) {
-            if (dbStore.filterBand) {
+            if (stores.dbStore.filterBand) {
                 this.setState({
-                    fBand: dbStore.filterBand
+                    fBand: stores.dbStore.filterBand
                 });
             }
             return <div className="Filter"><div className="Loading"><p>Loading Filter...</p></div></div>;
         }
 
         if (this.state.fColor === null) {
-            if (dbStore.filterColor) {
+            if (stores.dbStore.filterColor) {
                 this.setState({
-                    fColor: dbStore.filterColor
+                    fColor: stores.dbStore.filterColor
                 });
             }
             return <div className="Filter"><div className="Loading"><p>Loading Filter...</p></div></div>;
@@ -75,7 +75,7 @@ interface FilterState {
                         {this.state.fGenre.map((genre: any) =>{
                             return <h3 className="hvr-underline-from-right" key={genre.id} onClick={(e:any)=>{
                                 e.preventDefault();
-                                dbStore.filterByGenre(genre.id);
+                                stores.dbStore.filterByGenre(genre.id);
                             }
                             }>{genre.name}</h3>;
                         })}
@@ -87,7 +87,7 @@ interface FilterState {
                         {this.state.fBand.map((band: any) =>{
                             return <h3 className="hvr-underline-from-right"  key={band.id} onClick={(e:any)=>{
                                 e.preventDefault();
-                                dbStore.filterByBand(band.name);
+                                stores.dbStore.filterByBand(band.name);
                             }
                             }>{band.name}</h3>;
                         })}
@@ -99,7 +99,7 @@ interface FilterState {
                         {this.state.fColor.map((color: any) =>{
                             return <div key={color.id} style={{backgroundColor: `rgb(${color.name})`}} onClick={(e:any)=>{
                                 e.preventDefault();
-                                dbStore.filterByColor(color.id);
+                                stores.dbStore.filterByColor(color.id);
                             }
                             }></div>;
                         })}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Catalog.scss';
 
 import { observer } from 'mobx-react';
-import dbStore from '../../stores/DBStore';
+import stores from '../../stores/Stores';
 import Filter from '../Filter/Filter';
 import SongCard from '../SongCard/SongCard';
 
@@ -25,19 +25,19 @@ interface CatalogState {
   }
 
   componentDidMount() {
-    dbStore.readMusic();
+    stores.dbStore.readMusic();
   }
 
   componentWillUnmount() {
-    dbStore.cleanMusicArray();
+    stores.dbStore.cleanMusicArray();
   }
 
   render() {
 
     if (this.state.songs === null) {
-      if (dbStore.musicArray) {
+      if (stores.dbStore.musicArray) {
         this.setState({
-          songs: dbStore.musicArray
+          songs: stores.dbStore.musicArray
         });
       }
       return <div className="Catalog"><div className="Loading"><p>Loading Music...</p></div></div>;
@@ -47,7 +47,7 @@ interface CatalogState {
       <div className="Catalog">
 
         <div className="Catalog__music">
-          {dbStore.musicArray.map((song: any) => {
+          {stores.dbStore.musicArray.map((song: any) => {
             return (
               <SongCard key={song.id} song={song}/>
             )
