@@ -12,8 +12,19 @@ import Guilds from '../Guilds/Guilds';
 import Profile from '../Profile/Profile';
 import Auth from '../Auth/Auth';
 
-class App extends Component {
+interface AppProps {
+  history?: any
+}
+
+interface AppState {
+
+}
+
+
+class App extends Component<AppProps, AppState> {
+
   render() {
+
     return (
       <div className="App">
 
@@ -24,12 +35,12 @@ class App extends Component {
           <Switch>
 
             <Route path="/" component={Home} exact />
-            <Route path="/db" component={Catalog} exact />
+            <Route path="/auth" component={Auth} exact />
+            <Route path="/catalog" component={Catalog} exact />
             <Route path="/about" component={About} exact />
             <Route path="/guilds" component={Guilds} exact />
             <Route path="/song/:id" component={SongView} exact />
             <Route path="/profile" component={Profile} exact />
-            <Route path="/auth" component={Auth} exact />
             <Route component={ErrorPage} />
 
           </Switch>

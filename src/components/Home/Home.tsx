@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import './Home.scss';
 
 import { observer } from 'mobx-react';
+import store from '../../stores/Stores';
 
 interface HomeProps {
+  match?: any,
+  history?: any
 }
 
 interface HomeState {
@@ -22,6 +25,9 @@ interface HomeState {
   }
 
   componentDidMount() {
+    if(!store.authStore.user){
+      this.props.history.push('/auth');
+    }
   }
 
   componentWillUnmount() {

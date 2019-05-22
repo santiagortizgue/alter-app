@@ -9,37 +9,47 @@ export default class AuthStore {
         this.db = db;
         this.auth = auth;
 
-    /*
-        var user = firebase.auth().currentUser;
-
-        if (user) {
-            // User is signed in.
-        } else {
-            // No user is signed in.
-        }
-
-        }
-    */
+        this.auth.onAuthStateChanged( (user: any) => {
+            if (user) {
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var isAnonymous = user.isAnonymous;
+                var uid = user.uid;
+                var providerData = user.providerData;
+                // ...
+                this.user = user;
+            } else {
+                // User is signed out.
+                // ...
+                this.user = null;
+            }
+        });
 
     }
-
-
 
     @observable user: any = null;
 
     @action createNewUser(name: string, email: string, password: string) {
         this.auth.createUserWithEmailAndPassword(email, password)
-            .then((docUser: any) => {
+            .then((data: any) => {
                 //add user to db
 
-                let u = docUser;
+                let u = {
+                    uid: data.user.uid,
+                    email: data.user.email,
+                    name
+                };
 
-                this.db.collection("cities").add(u)
-                    .then((docRef: any) => {
-                        console.log("Document written with ID: ", docRef.id);
+                //adding user info to db
+                this.db.collection("users").doc(data.user.uid).set(u)
+                    .then(() => {
+                        console.log("Document successfully written!");
                     })
-                    .catch(function (error: any) {
-                        console.error("Error adding document: ", error);
+                    .catch((error: any) => {
+                        console.error("Error writing document: ", error);
                     });
                 //add user to db
 
@@ -48,6 +58,7 @@ export default class AuthStore {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 // ...
+                console.log(errorMessage);
             });
     }
 

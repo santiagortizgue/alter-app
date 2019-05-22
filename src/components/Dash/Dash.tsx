@@ -51,7 +51,7 @@ interface DashState {
                     <Link to={`/guilds`}>
                         <div className="Dash__buttons-btn"><h2 className="hvr-underline-from-left">Guilds</h2></div>
                     </Link>
-                    <Link to={`/db`}>
+                    <Link to={`/catalog`}>
                         <div className="Dash__buttons-btn"><h2 className="hvr-underline-from-left">Catalog</h2></div>
                     </Link>
                     <Link to={`/profile`}>

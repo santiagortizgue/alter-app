@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import './Auth.scss';
 
 import { observer } from 'mobx-react';
+import stores from '../../stores/Stores';
 
 interface AuthProps {
 }
 
 interface AuthState {
-  form?: number
+  form?: number,
+  name?: string,
+  email?: string,
+  password?: string
 }
 
 @observer class Auth extends Component<AuthProps, AuthState> {
@@ -16,7 +20,10 @@ interface AuthState {
     super(props);
 
     this.state = {
-      form: 0
+      form: 0,
+      name: "",
+      email: "",
+      password: ""
     }
 
   }
@@ -37,7 +44,7 @@ interface AuthState {
             <input placeholder="Password" className="SignIn-input" type="password" />
           </div>
           <div className="SignIn-containerBtn">
-            <h3 onClick={ (e: any) => {
+            <h3 onClick={(e: any) => {
               e.preventDefault();
               this.setState({
                 form: 1
@@ -49,20 +56,25 @@ interface AuthState {
         break;
       case 1:
         return <div className="SignUp">
-        <h1 className="SignUp-title">Sign Up</h1>
+          <h1 className="SignUp-title">Sign Up</h1>
           <div className="SignUp-container">
-            <input placeholder="Name" className="SignUp-input" type="text" />
-            <input placeholder="Email" className="SignUp-input" type="email" />
-            <input placeholder="Password" className="SignUp-input" type="password" />
+            <input onChange={(e: any) => this.setState({name: e.target.value}) } placeholder="Name" className="SignUp-input" type="text" />
+            <input onChange={(e: any) => this.setState({email: e.target.value}) } placeholder="Email" className="SignUp-input" type="email" />
+            <input onChange={(e: any) => this.setState({password: e.target.value}) } placeholder="Password" className="SignUp-input" type="password" />
           </div>
           <div className="SignUp-containerBtn">
-            <h3 onClick={ (e: any) => {
+            <h3 onClick={(e: any) => {
               e.preventDefault();
               this.setState({
                 form: 0
               });
             }} className="SignUp-btn hvr-underline-from-left" >SIGN IN</h3>
-            <h3 className="SignUp-btn hvr-underline-from-right" >ACCEPT</h3>
+            <h3 onClick={(e: any) => {
+              e.preventDefault();
+              if (this.state.name && this.state.name !== "" && this.state.email && this.state.email !== "" && this.state.password && this.state.password !== "") {
+                stores.authStore.createNewUser(this.state.name, this.state.email, this.state.password);
+              }
+            }} className="SignUp-btn hvr-underline-from-right" >ACCEPT</h3>
           </div>
         </div>;
         break;
