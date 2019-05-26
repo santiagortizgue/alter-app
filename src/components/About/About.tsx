@@ -26,7 +26,7 @@ interface AboutState {
     render() {
 
         return (
-            <div className="About">
+            <section className="About">
 
                 <svg className="About-logo" viewBox="0 0 96 138">
                     <path d="M96,138H0V0H96ZM8,130H88V8H8Z" />
@@ -42,7 +42,7 @@ interface AboutState {
                 <p className="About-credits">
                     The songs are not mine, all the credits to the authors and bands mentioned here.</p>
                 <h3 className="About-brand">by Santiago Ortiz Guevara</h3>
-            </div>
+            </section>
         );
     }
 }

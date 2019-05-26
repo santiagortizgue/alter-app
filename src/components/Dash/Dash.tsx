@@ -31,7 +31,7 @@ interface DashState {
     render() {
 
         return (
-            <div className="Dash">
+            <section className="Dash">
 
                 <svg className="Logo " viewBox="0 0 96 138">
                     <path d="M96,138H0V0H96ZM8,130H88V8H8Z" />
@@ -65,7 +65,7 @@ interface DashState {
                 <div className="Dash__option">
                         <div className="Dash__option-btn"><h2 className="hvr-underline-from-left">Sing Out</h2></div>
                 </div>
-            </div>
+            </section>
         );
     }
 }

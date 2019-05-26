@@ -30,10 +30,10 @@ interface ProfileState {
   render() {
 
     return (
-      <div className="Profile">
+      <section className="Profile">
 
               
-            </div>
+      </section>
     );
   }
 }

@@ -101,7 +101,7 @@ interface SongViewState {
     }
 
     return (
-      <div className="SongView">
+      <section className="SongView">
 
         <div className="SongView__Song">
           <div className="SongView__Song-action">
@@ -176,7 +176,7 @@ interface SongViewState {
 
         </div>
 
-      </div>
+      </section>
     );
   }
 }

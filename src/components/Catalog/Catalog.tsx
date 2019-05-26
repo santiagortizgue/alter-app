@@ -44,9 +44,9 @@ interface CatalogState {
     }
     
     return (
-      <div className="Catalog">
+      <section className="Catalog">
 
-        <div className="Catalog__music">
+        <div className="Catalog__music scroll">
           {stores.dbStore.musicArray.map((song: any) => {
             return (
               <SongCard key={song.id} song={song}/>
@@ -58,7 +58,7 @@ interface CatalogState {
         <Filter />
 
 
-      </div>
+      </section>
     );
   }
 }

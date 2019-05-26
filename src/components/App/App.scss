@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
@@ -35,6 +35,12 @@ a{
     flex: 1 1 auto;
   }
 
+  .Game {
+    //
+    flex-shrink: 0;
+    flex: 1 1 auto;
+  }
+
   .Guilds {
     //
     flex-shrink: 0;
@@ -47,7 +53,7 @@ a{
     flex: 1 1 auto;
   }
 
-  .About{
+  .About {
     //
     flex-shrink: 0;
     flex: 1 1 auto;
@@ -78,29 +84,58 @@ a{
     flex: 1 1 auto;
   }
 
-  >.Loading{
+  >.Loading {
     flex: 1 1 auto;
 
     height: 100%;
     display: flex;
     flex-direction: column;
-    
+
     justify-content: center;
     align-content: center;
     align-items: center;
-    
-    p{
-       color: $blackColor;
-       
-       font-family: $titleFont;
-       
-       font-style: italic;
-       font-weight: 800;
-       font-size: 28px;
-       text-align: center;
-       
-       text-transform: uppercase;
+
+    p {
+      color: $blackColor;
+
+      font-family: $titleFont;
+
+      font-style: italic;
+      font-weight: 800;
+      font-size: 28px;
+      text-align: center;
+
+      text-transform: uppercase;
     }
   }
- 
+
+}
+
+.scroll {
+
+  overflow: auto;
+  
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Background Color - Scroll */
+  &::-webkit-scrollbar-thumb {
+    background: transparentize($blackColor, .9);
+  }
+
+  /* Background Color : hover - Scroll */
+  &::-webkit-scrollbar-thumb:hover,
+  &::-webkit-scrollbar-thumb:active {
+    background: $blackColor;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  &::-webkit-scrollbar-track:hover,
+  &::-webkit-scrollbar-track:active {
+    background: none;
+  }
 }

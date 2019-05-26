@@ -27,7 +27,7 @@ interface GuildState {
     render() {
 
         return (
-            <div className="Guilds">
+            <section className="Guilds">
 
                 <svg className="Guilds-logo" id="logo" viewBox="0 0 96 138">
                     <path d="M96,138H0V0H96ZM8,130H88V8H8Z" />
@@ -41,7 +41,7 @@ interface GuildState {
                 <p className="Guilds-text">
                     This section will have a tribute for the bands.</p>
                 <h3 className="Guilds-brand">cooming soon...</h3>
-            </div>
+            </section>
         );
     }
 }

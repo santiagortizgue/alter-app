@@ -68,7 +68,7 @@ interface FilterState {
         }
 
         return (
-            <div className="Filter">
+            <section className="Filter">
                 <div className="Filter__genre">
                     <h2 className="Filter-title">Genre</h2>
                     <div className="Filter-genres">
@@ -105,7 +105,7 @@ interface FilterState {
                         })}
                     </div>
                 </div>
-            </div>
+            </section>
         );
     }
 }

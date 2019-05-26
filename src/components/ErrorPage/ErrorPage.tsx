@@ -4,9 +4,9 @@ import './ErrorPage.scss';
 class ErrorPage extends Component {
   render() {
     return (
-      <div className="ErrorPage">
+      <section className="ErrorPage">
         <h3>Página no Encontrada</h3>
-      </div>
+      </section>
     );
   }
 }

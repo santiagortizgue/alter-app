@@ -11,6 +11,7 @@ import About from '../About/About';
 import Guilds from '../Guilds/Guilds';
 import Profile from '../Profile/Profile';
 import Auth from '../Auth/Auth';
+import Game from '../Game/Game';
 
 interface AppProps {
   history?: any
@@ -41,6 +42,7 @@ class App extends Component<AppProps, AppState> {
             <Route path="/guilds" component={Guilds} exact />
             <Route path="/song/:id" component={SongView} exact />
             <Route path="/profile" component={Profile} exact />
+            <Route path="/game/:id" component={Game} exact />
             <Route component={ErrorPage} />
 
           </Switch>

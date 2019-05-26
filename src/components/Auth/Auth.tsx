@@ -10,6 +10,7 @@ interface AuthProps {
 interface AuthState {
   form?: number,
   name?: string,
+  nickname?: string,
   email?: string,
   password?: string
 }
@@ -58,6 +59,7 @@ interface AuthState {
         return <div className="SignUp">
           <h1 className="SignUp-title">Sign Up</h1>
           <div className="SignUp-container">
+            <input onChange={(e: any) => this.setState({nickname: e.target.value}) } placeholder="Nickname" className="SignUp-input" type="text" />
             <input onChange={(e: any) => this.setState({name: e.target.value}) } placeholder="Name" className="SignUp-input" type="text" />
             <input onChange={(e: any) => this.setState({email: e.target.value}) } placeholder="Email" className="SignUp-input" type="email" />
             <input onChange={(e: any) => this.setState({password: e.target.value}) } placeholder="Password" className="SignUp-input" type="password" />
@@ -85,11 +87,11 @@ interface AuthState {
   render() {
 
     return (
-      <div className="Auth">
+      <section className="Auth">
 
         {this.getFormContext()}
 
-      </div>
+      </section>
     );
   }
 }
