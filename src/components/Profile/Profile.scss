@@ -1,0 +1,20 @@
+@import '../../../public/variables.scss';
+
+.Profile {
+    //
+
+    height: 100%;
+
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    background-color: $whiteColor;
+
+    &-info {}
+
+    &-guild {}
+}

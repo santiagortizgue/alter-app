@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './Dash.scss';
 
 import { Link } from 'react-router-dom';
-
 import { observer } from 'mobx-react';
+
+import stores from '../../stores/Stores';
 
 interface DashProps {
 }
@@ -63,7 +64,10 @@ interface DashState {
                 </div>
 
                 <div className="Dash__option">
-                        <div className="Dash__option-btn"><h2 className="hvr-underline-from-left">Sing Out</h2></div>
+                    <div onClick={(e: any) => { 
+                        e.preventDefault(); 
+                        stores.authStore.signOut();
+                    }} className="Dash__option-btn"><h2 className="hvr-underline-from-left">Sing Out</h2></div>
                 </div>
             </section>
         );

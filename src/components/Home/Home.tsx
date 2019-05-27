@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './Home.scss';
 
 import { observer } from 'mobx-react';
-import store from '../../stores/Stores';
+
+import stores from '../../stores/Stores';
 
 interface HomeProps {
   match?: any,

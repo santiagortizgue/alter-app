@@ -13,6 +13,8 @@ import Profile from '../Profile/Profile';
 import Auth from '../Auth/Auth';
 import Game from '../Game/Game';
 
+import stores from '../../stores/Stores';
+
 interface AppProps {
   history?: any
 }
@@ -23,6 +25,10 @@ interface AppState {
 
 
 class App extends Component<AppProps, AppState> {
+  constructor(props: any){
+    super(props);
+
+  }
 
   render() {
 
@@ -37,12 +43,12 @@ class App extends Component<AppProps, AppState> {
 
             <Route path="/" component={Home} exact />
             <Route path="/auth" component={Auth} exact />
-            <Route path="/catalog" component={Catalog} exact />
-            <Route path="/about" component={About} exact />
             <Route path="/guilds" component={Guilds} exact />
+            <Route path="/catalog" component={Catalog} exact />
             <Route path="/song/:id" component={SongView} exact />
-            <Route path="/profile" component={Profile} exact />
             <Route path="/game/:id" component={Game} exact />
+            <Route path="/profile" component={Profile} exact />
+            <Route path="/about" component={About} exact />
             <Route component={ErrorPage} />
 
           </Switch>

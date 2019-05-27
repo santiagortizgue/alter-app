@@ -32,6 +32,9 @@ interface ProfileState {
     return (
       <section className="Profile">
 
+        <div className="Profile-info"></div>
+        
+        <div className="Profile-guild"></div>
               
       </section>
     );

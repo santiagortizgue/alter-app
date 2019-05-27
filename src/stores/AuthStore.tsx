@@ -9,22 +9,40 @@ export default class AuthStore {
         this.db = db;
         this.auth = auth;
 
-        this.auth.onAuthStateChanged( (user: any) => {
+        this.auth.onAuthStateChanged((user: any) => {
             if (user) {
-                // User is signed in.
-                var displayName = user.displayName;
-                var email = user.email;
-                var emailVerified = user.emailVerified;
-                var photoURL = user.photoURL;
-                var isAnonymous = user.isAnonymous;
-                var uid = user.uid;
-                var providerData = user.providerData;
-                // ...
-                this.user = user;
+
+                // search user in db
+                this.db.collection("users").doc(user.uid).get().then((doc: any) => {
+                    if (doc.exists) {
+
+                        // User is signed in.
+                        let u = {
+                            displayName: doc.data().displayName,
+                            email: user.email,
+                            uid: user.uid,
+                            guild: doc.data().guild,
+                            games: doc.data().games
+                        }
+
+                        // ...
+
+                        this.user = u;
+                        console.log("User in db: ", this.user);
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("No such user in db!");
+                    }
+                }).catch((error: any) => {
+                    console.log("Error getting user in db:", error);
+                });
+                // search user un db
+
             } else {
                 // User is signed out.
                 // ...
                 this.user = null;
+                console.log("Sign-out successful!");
             }
         });
 
@@ -32,7 +50,7 @@ export default class AuthStore {
 
     @observable user: any = null;
 
-    @action createNewUser(name: string, email: string, password: string) {
+    @action createNewUser(displayName: string, email: string, password: string) {
         this.auth.createUserWithEmailAndPassword(email, password)
             .then((data: any) => {
                 //add user to db
@@ -40,7 +58,9 @@ export default class AuthStore {
                 let u = {
                     uid: data.user.uid,
                     email: data.user.email,
-                    name
+                    guild: null,
+                    games: 0,
+                    displayName,
                 };
 
                 //adding user info to db
@@ -74,7 +94,8 @@ export default class AuthStore {
     @action signOut() {
         this.auth.signOut().then(() => {
             // Sign-out successful.
-        }).catch(function (error: any) {
+            //console.log("Sign-out successful!");
+        }).catch((error: any) => {
             // An error happened.
         });
     }
