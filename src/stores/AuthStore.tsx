@@ -59,7 +59,7 @@ export default class AuthStore {
                 let u = {
                     uid: data.user.uid,
                     email: data.user.email,
-                    guild: null,
+                    guild: getRandomInt(0, 3),
                     games: 0,
                     displayName,
                     victories: 0
@@ -116,3 +116,8 @@ export default class AuthStore {
     }
 
 }
+
+
+function getRandomInt(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }

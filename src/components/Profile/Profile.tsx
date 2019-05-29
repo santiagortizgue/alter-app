@@ -29,7 +29,7 @@ interface ProfileState {
   }
 
   componentWillUnmount() {
-    stores.guildStore.cleanGuilds();
+    stores.guildStore.stopGuilds();
   }
 
   render() {
@@ -101,7 +101,7 @@ interface ProfileState {
             
                 //classes(class, class) write multiple classes
             
-                if (stores.authStore.user.guild != null && (parseInt(stores.authStore.user.guild) === parseInt(guild.id))) {
+                if (stores.authStore.user.guild == guild.id) {
                   return (<h3 key={guild.id}
                     className={classes("Profile-guild", selectedStyle)}>{guild.name}</h3>)
                 } else {
