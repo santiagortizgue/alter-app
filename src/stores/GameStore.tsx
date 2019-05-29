@@ -82,11 +82,11 @@ export default class GameStore {
 
     //write methods
 
-    @action writeComment(data: string, user: string){
+    @action writeComment(data: string, uid: string){
 
         let newCom = {
             data,
-            user,
+            uid,
             timestamp: new Date().getTime()
         }
 

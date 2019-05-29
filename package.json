@@ -22,7 +22,8 @@
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
-    "typescript": "3.3.4000"
+    "typescript": "3.3.4000",
+    "typestyle": "^2.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

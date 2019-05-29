@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { style, classes } from "typestyle";
+
 import './Game.scss';
 
 import stores from '../../stores/Stores';
@@ -26,10 +28,12 @@ interface GameState {
     }
 
     componentDidMount() {
+        stores.guildStore.readGuilds();
         stores.gameStore.findGame(this.getId());
     }
 
     componentWillUnmount() {
+        stores.guildStore.cleanGuilds();
         stores.gameStore.cleanGame();
     }
 
@@ -75,7 +79,7 @@ interface GameState {
 
                         <div className="Game-comments scroll">
                             {stores.gameStore.comments.map((doc: any) => {
-                                return (<Comment key={doc.id} data={doc.data} user={doc.user} />)
+                                return (<Comment key={doc.id} data={doc} />)
                             })}
                         </div>
 
@@ -100,8 +104,8 @@ export default Game;
 const Comment = function (props: any) {
     return (
         <div className="Game-comment">
-            <h5> {props.user} </h5>
-            <p> {props.data} </p>
+            <h5> {props.data.uid} </h5>
+            <p> {props.data.data} </p>
         </div>
     );
 }

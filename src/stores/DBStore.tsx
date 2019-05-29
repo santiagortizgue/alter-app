@@ -8,8 +8,8 @@ export default class DBStore {
         this.db = db;
     }
    
-    @observable musicArray: any = null;
-    @observable musicArrayBackup: any = null;
+    @observable musicArray: any = [];
+    @observable musicArrayBackup: any = [];
 
     @observable filterGenre: any = null;
     @observable filterBand: any = null;
@@ -145,8 +145,8 @@ export default class DBStore {
     /* this method reset the value of the variable */
 
     @action cleanMusicArray() {
-        this.musicArray = null;
-        this.musicArrayBackup = null;
+        this.musicArray = [];
+        this.musicArrayBackup = [];
     }
 
     @action cleanFilterGenre() {

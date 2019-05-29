@@ -35,7 +35,7 @@ interface CatalogState {
   render() {
 
     if (this.state.songs === null) {
-      if (stores.dbStore.musicArray) {
+      if (stores.dbStore.musicArray.length != 0) {
         this.setState({
           songs: stores.dbStore.musicArray
         });

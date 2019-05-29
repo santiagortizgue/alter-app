@@ -55,6 +55,10 @@ interface AuthState {
               e.preventDefault();
               if (this.state.email && this.state.email !== "" && this.state.password && this.state.password !== "") {
                 stores.authStore.signIn(this.state.email, this.state.password);
+                  this.setState({
+                    email: "",
+                    password: ""
+                  });
               }
             }} className="SignIn-btn hvr-underline-from-right" >ACCEPT</h3>
           </div>
@@ -79,6 +83,11 @@ interface AuthState {
               e.preventDefault();
               if (this.state.displayName && this.state.displayName !== "" && this.state.email && this.state.email !== "" && this.state.password && this.state.password !== "") {
                 stores.authStore.createNewUser(this.state.displayName, this.state.email, this.state.password);
+                this.setState({
+                  email: "",
+                  password: "",
+                  displayName: ""
+                });
               }
             }} className="SignUp-btn hvr-underline-from-right" >ACCEPT</h3>
           </div>

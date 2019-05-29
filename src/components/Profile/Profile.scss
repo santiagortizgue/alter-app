@@ -14,7 +14,247 @@
 
     background-color: $whiteColor;
 
-    &-info {}
+    &-cont {
+        width: 344px;
+        height: 538px;
 
-    &-guild {}
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+    }
+
+    &-info {
+        width: 100%;
+        height: 257px;
+
+        border: 10px solid $blackColor;
+        padding: 30px;
+
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+
+        position: relative;
+    }
+
+    &-input {
+        width: 100%;
+        height: 54px;
+
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+
+        >h3 {
+            width: 100%;
+
+            font-family: $textFont;
+            ;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 20px;
+            display: flex;
+            align-items: center;
+
+            color: $blackColor;
+        }
+
+        >input {
+            width: 100%;
+            height: 32px;
+            padding: 5px;
+
+            border: 4px solid $blackColor;
+            color: $darkGrayColor;
+
+            font-family: $textFont;
+            font-style: italic;
+            font-weight: 600;
+            font-size: 12px;
+        }
+    }
+
+    &-gameInfo {
+        width: 100%;
+        height: 54px;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-content: center;
+        align-items: flex-start;
+    }
+
+    &-gameLeft {
+        width: 72px;
+        height: 54px;
+
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        align-content: center;
+
+        >h3 {
+            font-family: $textFont;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 20px;
+            display: flex;
+            align-items: center;
+
+            color: $blackColor;
+        }
+
+        >input {
+            width: 100%;
+            height: 32px;
+            padding: 5px;
+
+            border: 4px solid $blackColor;
+            color: $darkGrayColor;
+
+            font-family: $textFont;
+            font-style: italic;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+    }
+
+    &-gameRight {
+        width: 72px;
+        height: 54px;
+
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+        align-items: flex-end;
+
+        >h3 {
+            font-family: $textFont;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 20px;
+            display: flex;
+            align-items: center;
+
+            color: $blackColor;
+        }
+
+        >input {
+            width: 100%;
+            height: 32px;
+            padding: 5px;
+
+            border: 4px solid $blackColor;
+            color: $darkGrayColor;
+
+            font-family: $textFont;
+            font-style: italic;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+    }
+
+    &-guilds {
+        width: 100%;
+        height: 255px;
+
+        border: 10px solid $blackColor;
+        padding: 30px;
+
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+
+        position: relative;
+    }
+
+    &-contGuild {
+        width: 100%;
+        height: 128px;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-content: space-between;
+        align-items: flex-start;
+    }
+
+    &-guild {
+        border: 7px solid $blackColor;
+
+        width: 113px;
+        height: 50px;
+
+        color: $blackColor;
+
+        font-family: $textFont;
+        font-weight: 700;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        align-content: center;
+        justify-content: center;
+
+        transition: ease-in-out all .1s;
+    }
+
+    &-update {
+        font-family: $titleFont;
+        font-style: italic;
+        font-weight: 800;
+        font-size: 14px;
+        display: flex;
+
+        color: $blackColor;
+        padding-bottom: 5px;
+
+        &:before {
+            background-color: $blackColor !important;
+        }
+    }
+
+    &-title {
+        position: absolute;
+
+        top: 35px;
+        left: -135px;
+
+        width: 157px;
+        padding: 5px;
+
+        font-family: $titleFont;
+        color: $blackColor;
+
+        font-style: italic;
+        font-weight: 900;
+        font-size: 44px;
+        line-height: 44px;
+        text-align: right;
+        text-transform: uppercase;
+
+        background-color: $whiteColor;
+
+    }
 }

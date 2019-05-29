@@ -46,7 +46,7 @@
                 text-decoration: none;
                 
                 &:before{
-                    background-color: $blackColor;
+                    background-color: $blackColor !important;
                 }
                 
                 padding-bottom: 5px; 
@@ -76,7 +76,7 @@
                 text-decoration: none;
                 
                 &:before{
-                    background-color: $darkGrayColor;
+                    background-color: $darkGrayColor  !important;
                 }
                 
                 padding-bottom: 5px; 

@@ -22,7 +22,8 @@ export default class AuthStore {
                             email: user.email,
                             uid: user.uid,
                             guild: doc.data().guild,
-                            games: doc.data().games
+                            games: doc.data().games,
+                            victories: doc.data().victories,
                         }
 
                         // ...
@@ -61,6 +62,7 @@ export default class AuthStore {
                     guild: null,
                     games: 0,
                     displayName,
+                    victories: 0
                 };
 
                 //adding user info to db
@@ -89,6 +91,19 @@ export default class AuthStore {
             var errorMessage = error.message;
             // ...
         });
+    }
+
+    @action updateTeam(id: number) {
+
+        this.user.guild = id;
+
+        // search user in db
+        this.db.collection("users").doc(this.user.uid).set(this.user).then((doc: any) => {
+            console.log("User's Guild updated to: " + this.user.guild);
+        }).catch((error: any) => {
+            console.log("Error getting user in db:", error);
+        });
+        // search user un db
     }
 
     @action signOut() {
