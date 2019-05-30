@@ -10,17 +10,12 @@ interface CatalogProps {
 }
 
 interface CatalogState {
-  songs?: any
 }
 
 @observer class Catalog extends Component<CatalogProps, CatalogState> {
 
   constructor(props: any) {
     super(props);
-
-    this.state = {
-      songs: null
-    }
 
   }
 
@@ -34,25 +29,17 @@ interface CatalogState {
 
   render() {
 
-    if (this.state.songs === null) {
-      if (stores.dbStore.musicArray.length != 0) {
-        this.setState({
-          songs: stores.dbStore.musicArray
-        });
-      }
+    if (stores.dbStore.musicArray.length == 0) {
       return <div className="Catalog"><div className="Loading"><p>Loading Music...</p></div></div>;
     }
-    
+
     return (
       <section className="Catalog">
 
         <div className="Catalog__music scroll">
           {stores.dbStore.musicArray.map((song: any) => {
-            return (
-              <SongCard key={song.id} song={song}/>
-            )
-          })
-          }
+            return (<SongCard key={song.id} song={song} />)
+          })}
         </div>
 
         <Filter />
