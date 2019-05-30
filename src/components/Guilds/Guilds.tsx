@@ -9,6 +9,7 @@ interface GuildProps {
 }
 
 interface GuildState {
+    context?: number
 }
 
 @observer class Guilds extends Component<GuildProps, GuildState> {
@@ -16,6 +17,9 @@ interface GuildState {
     constructor(props: any) {
         super(props);
 
+        this.state = {
+            context: 0,
+        }
     }
 
     componentDidMount() {
@@ -24,6 +28,66 @@ interface GuildState {
 
     componentWillUnmount() {
         stores.guildStore.stopGuilds();
+    }
+
+    getGuildContext() {
+        switch (this.state.context) {
+            case 0:
+
+                return (
+                    <div className="Guilds-own">
+
+
+
+                        <div className="Guilds-section">
+
+                            <div><h3>Your Matches</h3></div>
+                            <div><h4 onClick={(e: any) => {
+                                e.preventDefault();
+                                this.setState({ context: 1 });
+                            }} className="hvr-underline-from-left">Other Matches</h4></div>
+
+                        </div>
+
+                         <div className="Guilds-cont">
+                            <div className="Guilds-matches">
+
+                            </div>
+
+                            <div className="Guilds-options">
+
+                            </div>
+                        </div>
+                    </div>
+                )
+                break;
+
+            case 1:
+                return (
+                    <div className="Guilds-others">
+
+                        <div className="Guilds-section">
+                            <div><h3>Other Matches</h3></div>
+                            <div><h4 onClick={(e: any) => {
+                                e.preventDefault();
+                                this.setState({ context: 0 });
+                            }} className="hvr-underline-from-left">Your Matches</h4></div>
+                        </div>
+
+                        <div className="Guilds-cont">
+                            <div className="Guilds-matches">
+
+                            </div>
+
+                            <div className="Guilds-options">
+
+                            </div>
+                        </div>
+
+                    </div>
+                )
+                break;
+        }
     }
 
     render() {
@@ -50,24 +114,9 @@ interface GuildState {
                     })}
                 </div>
 
-                <div className="Guilds-own">
-                    <h3>Your Games</h3>
 
-                    <div className="Guilds-contGames">
+                {this.getGuildContext()}
 
-
-
-                    </div>
-                </div>
-
-                <div className="Guilds-others">
-
-                    <h3>Other Games</h3>
-
-                    <div className="Guilds-contOthers">
-                    </div>
-
-                </div>
 
             </section>
         );

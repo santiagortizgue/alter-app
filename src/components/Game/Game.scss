@@ -77,34 +77,8 @@
         align-items: center;
     }
 
-    &-comment{
-        width: 100%;
-        height: auto;
-
-        padding: 5px 0;
-
-        flex-shrink: 0;
-
-        >h5{
-            text-align: justify;
-            height: auto;
-            width: 100%;
-            color: $blackColor;
-            font-size: 12px;
-            font-family: $titleFont;
-            font-weight: 800;
-            font-style: italic;
-        }
-
-        >p{
-            text-align: justify;
-            height: auto;
-            width: 100%;
-            color: $blackColor;
-            font-size: 14px;
-            font-family: $textFont;
-            font-weight: 500;
-        }
+    .Comment{
+        //
     }
 
     #inputComment {

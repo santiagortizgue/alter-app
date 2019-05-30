@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
+import './Comment.scss';
 
 import stores from '../../stores/Stores';
 
@@ -36,13 +37,13 @@ interface CommentState {
     render() {
 
         if (this.state.autor == null) {
-            return (<div className="Game-comment">
+            return (<div className="Comment">
                 <h5> Loading... </h5>
             </div>);
         }
 
         return (
-            <div className="Game-comment">
+            <div className="Comment">
                 <h5 style={{ color: `rgb(${this.state.autor.color })` }}> {this.state.autor.displayName} </h5>
                 <p> {this.props.doc.data} </p>
             </div>

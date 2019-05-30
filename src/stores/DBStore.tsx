@@ -21,7 +21,8 @@ export default class DBStore {
     @action readMusic() {
         this.cleanMusicArray();
 
-        this.db.collection("songs").get().then((querySnapshot: any) => {
+        //order by name
+        this.db.collection("songs").orderBy("name", "asc").get().then((querySnapshot: any) => {
             
             this.musicArray = [];
             this.musicArrayBackup = [];
