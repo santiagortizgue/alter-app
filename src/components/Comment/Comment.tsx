@@ -27,7 +27,8 @@ interface CommentState {
         stores.commentStore.findCommentAutor(this.props.doc.uid, this.getAutor);
     }
 
-    componentWillMount(){
+    componentWillUnmount(){
+        stores.commentStore.cleanListernerCommentAutor(this.props.doc.uid);
     }
 
     getAutor(a: any): void{

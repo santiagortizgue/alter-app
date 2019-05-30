@@ -33,5 +33,13 @@ export default class CommentStore {
             
         });
     }
+
+    @action cleanListernerCommentAutor(uid: string){
+
+        let unsubscribe = this.db.collection("users").doc(uid)
+        .onSnapshot(function () {});
+
+        unsubscribe();
+    }
     
 }

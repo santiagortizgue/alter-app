@@ -4,12 +4,15 @@ import './Guilds.scss';
 
 import { observer } from 'mobx-react';
 import stores from '../../stores/Stores';
+import GameCard from '../GameCard/GameCard';
 
 interface GuildProps {
 }
 
 interface GuildState {
-    context?: number
+    context?: number,
+    ourGames?: any[],
+    otherGames?: any[]
 }
 
 @observer class Guilds extends Component<GuildProps, GuildState> {
@@ -19,15 +22,28 @@ interface GuildState {
 
         this.state = {
             context: 0,
+            ourGames: [],
+            otherGames: []
         }
+
+        this.setGames = this.setGames.bind(this);
     }
 
     componentDidMount() {
         stores.guildStore.readGuilds();
+        stores.gameStore.findAllGame(stores.authStore.user.uid, this.setGames);
     }
 
     componentWillUnmount() {
+        stores.gameStore.cleanListenerGames();
         stores.guildStore.stopGuilds();
+    }
+
+    setGames(ourGames: any[], otherGames: any[]) {
+        this.setState({
+            ourGames: ourGames,
+            otherGames: otherGames,
+        });
     }
 
     getGuildContext() {
@@ -36,8 +52,6 @@ interface GuildState {
 
                 return (
                     <div className="Guilds-own">
-
-
 
                         <div className="Guilds-section">
 
@@ -49,13 +63,15 @@ interface GuildState {
 
                         </div>
 
-                         <div className="Guilds-cont">
+                        <div className="Guilds-cont">
                             <div className="Guilds-matches">
-
+                                {this.state.ourGames && this.state.ourGames.map((game: any) => {
+                                    return <GameCard key={game.idGame} game={game} />;
+                                })}
                             </div>
 
                             <div className="Guilds-options">
-
+                                    <input  type="text"/>
                             </div>
                         </div>
                     </div>
@@ -76,7 +92,9 @@ interface GuildState {
 
                         <div className="Guilds-cont">
                             <div className="Guilds-matches">
-
+                                {this.state.otherGames && this.state.otherGames.map((game: any) => {
+                                    return <GameCard key={game.idGame} game={game} />;
+                                })}
                             </div>
 
                             <div className="Guilds-options">

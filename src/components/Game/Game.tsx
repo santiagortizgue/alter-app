@@ -35,6 +35,7 @@ interface GameState {
     }
 
     componentWillUnmount() {
+        stores.gameStore.cleanListenerComments(this.getId());
         stores.guildStore.cleanGuilds();
         stores.gameStore.cleanGame();
     }

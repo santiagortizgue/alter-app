@@ -1,0 +1,44 @@
+@import '../../../public/variables.scss';
+
+.GameCard{
+    width: 100px;
+    height: 100px;
+
+    padding: 5px;
+
+    flex-shrink: 0;
+
+    border: 7px solid $blackColor;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    transition: ease-in-out all .1s;
+
+    &:hover{
+        border: 5px solid $grayColor;
+    }
+
+    >h5{
+        text-align: center;
+        color: $darkGrayColor;
+        font-family: $titleFont;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 15px;
+        text-align: center;
+    }
+
+    >p{
+        text-align: center;
+        color: $grayColor;
+        font-family: $titleFont;
+        font-style: italic;
+        font-weight: bold;
+        font-size: 13px;
+        text-align: center;
+    }
+}

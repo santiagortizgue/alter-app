@@ -18,27 +18,24 @@ export default class GameStore {
 
     @action findGame(idGame: string) {
 
-        this.db.collection("games").where("idGame", "==", idGame).get().then((querySnapshot: any) => {
+        this.db.collection("games").doc(idGame).get().then((doc: any) => {
             this.cleanGame();
 
-            querySnapshot.forEach((doc: any) => {
+            let g = doc.data();
 
-                let g = doc.data();
+            this.game = g;
 
-                this.game = g;
+            this.findComments(idGame);
+            //this.findPlayers(idGame);
 
-                this.findComments(idGame);
-                //this.findPlayers(idGame);
-            });
         }).catch((error: any) => {
-            console.log("Error getting documents: ", error);
+            console.log("Error getting game: ", error);
         });
-
     }
 
     @action findComments(idGame: string) {
 
-        this.db.collection("games").doc(idGame).collection("comments").orderBy("timestamp", "asc").onSnapshot((querySnapshot: any) => {
+        this.db.collection("games").doc(idGame).collection("comments").orderBy("timestamp", "desc").onSnapshot((querySnapshot: any) => {
             this.cleanComments();
 
             querySnapshot.forEach((doc: any) => {
@@ -76,11 +73,45 @@ export default class GameStore {
         });
     }
 
+    @action findAllGame(autor: string, setGames: (ourGames: any[], otherGames: any[]) => void) {
+
+        let oGames: any[] = [];
+        let otGames: any[] = [];
+
+        this.db.collection("games").onSnapshot((querySnapshot: any) => {
+
+            querySnapshot.forEach((doc: any) => {
+            
+            let g = doc.data();
+
+            if(g.autor === autor){
+                oGames.push(g);
+            }else{
+                otGames.push(g);
+            }
+
+            });
+            setGames(oGames, otGames);
+        });
+    }
+
+    @action findGameCard(uid: string, setAutor: (autor: any) => void) {
+
+        this.db.collection("users").doc(uid).onSnapshot((doc: any) => {
+
+            let autor = {
+                displayName: doc.data().displayName
+            }
+            
+            setAutor(autor);
+        });
+    }
+
     //read methods
 
     //write methods
 
-    @action writeComment(data: string, uid: string){
+    @action writeComment(data: string, uid: string) {
 
         let newCom = {
             data,
@@ -89,12 +120,12 @@ export default class GameStore {
         }
 
         this.db.collection("games").doc(this.game.idGame).collection("comments").add(newCom)
-        .then(function(docRef: any) {
-            console.log("Document written with ID: ", docRef.id);
-        })
-        .catch(function(error: any) {
-            console.error("Error adding document: ", error);
-        });
+            .then(function (docRef: any) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function (error: any) {
+                console.error("Error adding document: ", error);
+            });
     }
 
     //write methods
@@ -105,6 +136,27 @@ export default class GameStore {
 
     @action cleanComments() {
         this.comments = [];
+    }
+
+    @action cleanListenerComments(idGame: string) {
+        this.comments = [];
+
+        let unsubscribe = this.db.collection("games").doc(idGame).collection("comments").orderBy("timestamp", "desc").onSnapshot(function (){});
+
+        unsubscribe();
+    }
+
+    @action cleanListenerGames(){
+
+        let unsubscribe = this.db.collection("games").onSnapshot(function () {});
+
+        unsubscribe();
+    }
+
+    @action cleanListenerGameCard(uid: string){
+        let unsubscribe = this.db.collection("users").doc(uid).onSnapshot(function () {});
+
+        unsubscribe();
     }
 
     @action cleanPlayerA() {
