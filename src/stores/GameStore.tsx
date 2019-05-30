@@ -25,8 +25,6 @@ export default class GameStore {
 
                 let g = doc.data();
 
-                console.log(g);
-
                 this.game = g;
 
                 this.findComments(idGame);
@@ -47,7 +45,7 @@ export default class GameStore {
 
                 let c = {
                     data: doc.data().data,
-                    user: doc.data().user,
+                    uid: doc.data().uid,
                     id: doc.id,
                     timestamp: doc.data().timestamp
                 }

@@ -41,7 +41,7 @@ interface GuildState {
                             borderColor: `rgb(${guild.color})`,
                         });
 
-                        return (<div className="Guilds-each">
+                        return (<div key={guild.id} className="Guilds-each">
                             <h3 className={classes(guildStyle)} >{guild.points}</h3>
                             <h5>{guild.name}</h5>
                         </div>)

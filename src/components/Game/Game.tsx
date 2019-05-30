@@ -6,6 +6,8 @@ import './Game.scss';
 import stores from '../../stores/Stores';
 import { observer } from 'mobx-react';
 
+import Comment from '../Comment/Comment';
+
 interface GameProps {
     match?: any
 }
@@ -79,13 +81,13 @@ interface GameState {
 
                         <div className="Game-comments scroll">
                             {stores.gameStore.comments.map((doc: any) => {
-                                return (<Comment key={doc.id} data={doc} />)
+                                return (<Comment key={doc.id} doc={doc} />)
                             })}
                         </div>
 
-                        <input type="text" onKeyPress={ (e: any) => {
-                            if(e.which == 13 || e.keyCode == 13){
-                                stores.gameStore.writeComment(e.target.value, "Autor");
+                        <input type="text" onKeyPress={(e: any) => {
+                            if (e.which == 13 || e.keyCode == 13) {
+                                stores.gameStore.writeComment(e.target.value, stores.authStore.user.uid);
                                 e.target.value = "";
                             }
                         }} placeholder="Your comment..." id="inputComment" />
@@ -101,11 +103,3 @@ interface GameState {
 
 export default Game;
 
-const Comment = function (props: any) {
-    return (
-        <div className="Game-comment">
-            <h5> {props.data.uid} </h5>
-            <p> {props.data.data} </p>
-        </div>
-    );
-}
