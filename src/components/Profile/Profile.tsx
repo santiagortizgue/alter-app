@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { style, classes } from "typestyle";
 
-
 import './Profile.scss';
 
 import { observer } from 'mobx-react';
@@ -9,6 +8,7 @@ import { observer } from 'mobx-react';
 import stores from '../../stores/Stores';
 
 interface ProfileProps {
+  history?: any
 }
 
 interface ProfileState {
@@ -21,7 +21,7 @@ interface ProfileState {
 
     this.state = {
     }
-
+    
   }
 
   componentDidMount() {

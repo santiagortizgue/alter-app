@@ -41,8 +41,8 @@ interface AuthState {
         return <div className="SignIn">
           <h1 className="SignIn-title">Sign In</h1>
           <div className="SignIn-container">
-            <input onChange={(e: any) => this.setState({email: e.target.value}) } placeholder="Email" className="SignIn-input" type="email" />
-            <input onChange={(e: any) => this.setState({password: e.target.value}) } placeholder="Password" className="SignIn-input" type="password" />
+            <input onChange={(e: any) => this.setState({ email: e.target.value })} placeholder="Email" className="SignIn-input" type="email" />
+            <input onChange={(e: any) => this.setState({ password: e.target.value })} placeholder="Password" className="SignIn-input" type="password" />
           </div>
           <div className="SignIn-containerBtn">
             <h3 onClick={(e: any) => {
@@ -55,10 +55,10 @@ interface AuthState {
               e.preventDefault();
               if (this.state.email && this.state.email !== "" && this.state.password && this.state.password !== "") {
                 stores.authStore.signIn(this.state.email, this.state.password);
-                  this.setState({
-                    email: "",
-                    password: ""
-                  });
+                this.setState({
+                  email: "",
+                  password: ""
+                });
               }
             }} className="SignIn-btn hvr-underline-from-right" >ACCEPT</h3>
           </div>
@@ -68,9 +68,9 @@ interface AuthState {
         return <div className="SignUp">
           <h1 className="SignUp-title">Sign Up</h1>
           <div className="SignUp-container">
-            <input onChange={(e: any) => this.setState({displayName: e.target.value}) } placeholder="Nickname" className="SignUp-input" type="text" />
-            <input onChange={(e: any) => this.setState({email: e.target.value}) } placeholder="Email" className="SignUp-input" type="email" />
-            <input onChange={(e: any) => this.setState({password: e.target.value}) } placeholder="Password" className="SignUp-input" type="password" />
+            <input onChange={(e: any) => this.setState({ displayName: e.target.value })} placeholder="Nickname" className="SignUp-input" type="text" />
+            <input onChange={(e: any) => this.setState({ email: e.target.value })} placeholder="Email" className="SignUp-input" type="email" />
+            <input onChange={(e: any) => this.setState({ password: e.target.value })} placeholder="Password" className="SignUp-input" type="password" />
           </div>
           <div className="SignUp-containerBtn">
             <h3 onClick={(e: any) => {

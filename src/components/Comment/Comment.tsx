@@ -1,35 +1,41 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
-import CommentStore from '../../stores/CommentStore';
-
-let commentStore: CommentStore;
+import stores from '../../stores/Stores';
 
 interface CommentProps {
     doc?: any
 }
 
 interface CommentState {
+    autor?: any
 }
 
 @observer export default class Comment extends Component<CommentProps, CommentState> {
     constructor(props: any) {
         super(props);
 
-        commentStore = new CommentStore(getRandomInt(0, 10));
+        this.state = {
+            autor: null,
+        }
+
+        this.getAutor = this.getAutor.bind(this);
     }
 
     componentDidMount() {
-        commentStore.findCommentAutor(this.props.doc.uid);
+        stores.commentStore.findCommentAutor(this.props.doc.uid, this.getAutor);
     }
 
     componentWillMount(){
-        commentStore.cleanAutor();
+    }
+
+    getAutor(a: any): void{
+        this.setState({autor: a});
     }
 
     render() {
 
-        if (commentStore.autor == null || !commentStore.autor.color ) {
+        if (this.state.autor == null) {
             return (<div className="Game-comment">
                 <h5> Loading... </h5>
             </div>);
@@ -37,14 +43,9 @@ interface CommentState {
 
         return (
             <div className="Game-comment">
-                <h5 style={{ color: `rgb(${commentStore.autor.color })` }}> {commentStore.autor.displayName} </h5>
+                <h5 style={{ color: `rgb(${this.state.autor.color })` }}> {this.state.autor.displayName} </h5>
                 <p> {this.props.doc.data} </p>
             </div>
         );
     }
 }
-
-
-function getRandomInt(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }

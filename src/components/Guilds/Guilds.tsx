@@ -9,7 +9,6 @@ interface GuildProps {
 }
 
 interface GuildState {
-
 }
 
 @observer class Guilds extends Component<GuildProps, GuildState> {
@@ -17,7 +16,6 @@ interface GuildState {
     constructor(props: any) {
         super(props);
 
-        //props.history.push('/auth');
     }
 
     componentDidMount() {
@@ -36,13 +34,17 @@ interface GuildState {
                 <div className="Guilds-score">
                     {stores.guildStore.guilds.map((guild: any) => {
 
-                        let guildStyle = style({
-                            color: `rgb(${guild.color})`,
-                            borderColor: `rgb(${guild.color})`,
+                        let hoverStyle = style({
+                            $nest: {
+                                '&:hover': {
+                                    color: `rgb(${guild.color})`,
+                                    borderColor: `rgb(${guild.color})`,
+                                }
+                            }
                         });
 
                         return (<div key={guild.id} className="Guilds-each">
-                            <h3 className={classes(guildStyle)} >{guild.points}</h3>
+                            <h3 className={classes(hoverStyle)} >{guild.points}</h3>
                             <h5>{guild.name}</h5>
                         </div>)
                     })}

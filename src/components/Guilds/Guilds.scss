@@ -36,9 +36,7 @@
         justify-content: space-between;
         align-content: center;
         align-items: center;
-        
-        
-        
+                
         >h3{
             
             width: 100%;
@@ -56,6 +54,8 @@
             text-align: center;
             align-content: center;
             justify-content: center;
+
+            transition: ease-in-out all .2s;
         }
         
         >h5{
@@ -66,9 +66,7 @@
             line-height: 19px;
             text-align: center;
             
-            color: $blackColor;
-            
-            opacity: 0.6;
+            color: $grayColor;
         }
     }
     

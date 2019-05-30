@@ -3,22 +3,26 @@ import db from '../config/firebaseConfig';
 
 export default class CommentStore {
 
-    number:any = null;
+    db: any = null;
 
-    constructor(number: number){
-        this.number = number;
+    constructor(db: any){
+        this.db = db;
     }
     
-    @observable autor: any = null;
-    
-    @action findCommentAutor(uid: string) {
-        db.collection("users").doc(uid)
+    @action findCommentAutor(uid: string, getAutor: (a: any) => void) {
+
+        let autor: any = null;
+
+        this.db.collection("users").doc(uid)
         .onSnapshot((doc: any) => {
-            this.autor = doc.data();
+            autor = doc.data();
             
-            db.collection("guilds").doc(this.autor.guild).get().then((guild: any) => {
+            this.db.collection("guilds").doc(autor.guild).get().then((guild: any) => {
                 if (guild.exists) {
-                    this.autor.color = guild.data().color;
+                    autor.color = guild.data().color;
+
+                    getAutor(autor);
+
                 } else {
                     // doc.data() will be undefined in this case
                     console.log("No such Guild in Comment!");
@@ -28,10 +32,6 @@ export default class CommentStore {
             });
             
         });
-    }
-    
-    @action cleanAutor() {
-        this.autor = null;
     }
     
 }

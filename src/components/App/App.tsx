@@ -20,7 +20,7 @@ interface AppProps {
 }
 
 interface AppState {
-
+  userState?: boolean
 }
 
 
@@ -28,6 +28,23 @@ class App extends Component<AppProps, AppState> {
   constructor(props: any){
     super(props);
 
+    this.state = {
+      userState: false,
+    }
+
+    this.setUserState = this.setUserState.bind(this);
+  }
+
+  componentDidMount(){
+    stores.authStore.userStateListener(this.setUserState);
+  }
+
+  componentWillUnmount(){
+
+  }
+
+  setUserState(state: boolean): void{
+    this.setState({userState: state});
   }
 
   render() {
@@ -38,6 +55,8 @@ class App extends Component<AppProps, AppState> {
         <BrowserRouter>
 
           <Dash />
+
+          { this.state.userState ? 
 
           <Switch>
 
@@ -52,6 +71,8 @@ class App extends Component<AppProps, AppState> {
             <Route component={ErrorPage} />
 
           </Switch>
+
+          : <Auth /> }
 
         </BrowserRouter>
       </div>

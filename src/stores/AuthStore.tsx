@@ -8,45 +8,6 @@ export default class AuthStore {
     constructor(db: any, auth: any) {
         this.db = db;
         this.auth = auth;
-
-        this.auth.onAuthStateChanged((user: any) => {
-            if (user) {
-
-                // search user in db
-                this.db.collection("users").doc(user.uid).get().then((doc: any) => {
-                    if (doc.exists) {
-
-                        // User is signed in.
-                        let u = {
-                            displayName: doc.data().displayName,
-                            email: user.email,
-                            uid: user.uid,
-                            guild: doc.data().guild,
-                            games: doc.data().games,
-                            victories: doc.data().victories,
-                        }
-
-                        // ...
-
-                        this.user = u;
-                        console.log("User in db: ", this.user);
-                    } else {
-                        // doc.data() will be undefined in this case
-                        console.log("No such user in db!");
-                    }
-                }).catch((error: any) => {
-                    console.log("Error getting user in db:", error);
-                });
-                // search user un db
-
-            } else {
-                // User is signed out.
-                // ...
-                this.user = null;
-                console.log("Sign-out successful!");
-            }
-        });
-
     }
 
     @observable user: any = null;
@@ -112,6 +73,49 @@ export default class AuthStore {
             //console.log("Sign-out successful!");
         }).catch((error: any) => {
             // An error happened.
+        });
+    }
+
+    @action userStateListener(setUserOutListener: (state: boolean) => void){
+        this.auth.onAuthStateChanged((user: any) => {
+            if (user) {
+
+                // search user in db
+                this.db.collection("users").doc(user.uid).get().then((doc: any) => {
+                    if (doc.exists) {
+
+                        // User is signed in.
+                        let u = {
+                            displayName: doc.data().displayName,
+                            email: user.email,
+                            uid: user.uid,
+                            guild: doc.data().guild,
+                            games: doc.data().games,
+                            victories: doc.data().victories,
+                        }
+
+                        // ...
+
+                        this.user = u;
+                        console.log("User conected, in db: ", this.user);
+                        setUserOutListener(true);
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("No such user in db!");
+                    }
+                }).catch((error: any) => {
+                    console.log("Error getting user in db:", error);
+                });
+                // search user un db
+
+            } else {
+                // User is signed out.
+                // ...
+                this.user = null;
+                console.log("User is signed out!");
+
+                setUserOutListener(false);
+            }
         });
     }
 
