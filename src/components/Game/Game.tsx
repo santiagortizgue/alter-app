@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { style, classes } from "typestyle";
+import Lottie from 'react-lottie';
+
+import animationData from './settings.json'
 
 import './Game.scss';
 
@@ -15,7 +18,7 @@ interface GameProps {
 interface GameState {
     game?: any,
     comments?: any[],
-    listenerComments?: ()=>void
+    listenerComments?: () => void
 }
 
 @observer class Game extends Component<GameProps, GameState> {
@@ -25,7 +28,7 @@ interface GameState {
         this.state = {
             game: null,
             comments: [],
-            listenerComments: ()=>{}
+            listenerComments: () => { }
         }
     }
 
@@ -47,6 +50,15 @@ interface GameState {
 
     render() {
 
+        const defaultOptions = {
+            loop: true,
+            autoplay: true, 
+            animationData: animationData,
+            rendererSettings: {
+              preserveAspectRatio: 'xMidYMid slice'
+            }
+          };
+
         if (!this.state.game) {
             if (stores.gameStore.game) {
                 this.setState({
@@ -63,7 +75,11 @@ interface GameState {
 
                     <div className="Game-left">
 
-                        
+                        <Lottie options={defaultOptions}
+                            height={300}
+                            width={300} />
+
+                        <h4>Developing...</h4>
 
                     </div>
 
