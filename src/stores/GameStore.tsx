@@ -14,6 +14,8 @@ export default class GameStore {
     @observable playerA: any = null;
     @observable playerB: any = null;
 
+    @observable listenerComments: any = null;
+
     //read methods
 
     @action findGame(idGame: string) {
@@ -25,9 +27,6 @@ export default class GameStore {
 
             this.game = g;
 
-            this.findComments(idGame);
-            //this.findPlayers(idGame);
-
         }).catch((error: any) => {
             console.log("Error getting game: ", error);
         });
@@ -35,7 +34,7 @@ export default class GameStore {
 
     @action findComments(idGame: string) {
 
-        this.db.collection("games").doc(idGame).collection("comments").orderBy("timestamp", "desc").onSnapshot((querySnapshot: any) => {
+        this.listenerComments = this.db.collection("games").doc(idGame).collection("comments").orderBy("timestamp", "desc").onSnapshot((querySnapshot: any) => {
             this.cleanComments();
 
             querySnapshot.forEach((doc: any) => {
@@ -52,36 +51,15 @@ export default class GameStore {
         });
     }
 
-    @action findPlayers(idGame: string) {
-        this.db.collection("games").doc(idGame).collection("players").onSnapshot((snapshot: any) => {
-            this.cleanPlayerA();
-            this.cleanPlayerB();
-            snapshot.docChanges().forEach((change: any) => {
-                if (change.type === "added") {
-                    this.cleanComments();
-                    console.log("Players: ", change.doc.data());
-                }
-                if (change.type === "modified") {
-                    this.cleanComments();
-                    console.log("Modified Players: ", change.doc.data());
-                }
-                if (change.type === "removed") {
-                    this.cleanComments();
-                    console.log("Removed Players: ", change.doc.data());
-                }
-            });
-        });
-    }
+    @action findGameCard(uid: string, setAutor: (autor: any, listener: any) => void) {
 
-    @action findGameCard(uid: string, setAutor: (autor: any) => void) {
-
-        this.db.collection("users").doc(uid).onSnapshot((doc: any) => {
+        let listenerAutor = this.db.collection("users").doc(uid).onSnapshot((doc: any) => {
 
             let autor = {
                 displayName: doc.data().displayName
             }
-            
-            setAutor(autor);
+
+            setAutor(autor, listenerAutor);
         });
     }
 
@@ -116,18 +94,16 @@ export default class GameStore {
         this.comments = [];
     }
 
-    @action cleanListenerComments(idGame: string) {
+    @action cleanListenerComments(listenerComments: any) {
         this.comments = [];
 
-        let unsubscribe = this.db.collection("games").doc(idGame).collection("comments").orderBy("timestamp", "desc").onSnapshot(function (){});
-
-        unsubscribe();
+        if (this.listenerComments) {
+            this.listenerComments();
+        }
     }
 
-    @action cleanListenerGameCard(uid: string){
-        let unsubscribe = this.db.collection("users").doc(uid).onSnapshot(function () {});
-
-        unsubscribe();
+    @action cleanListenerGameCard(listenerAutor: any) {
+        listenerAutor();
     }
 
     @action cleanPlayerA() {

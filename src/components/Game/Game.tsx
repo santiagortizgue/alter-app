@@ -13,7 +13,9 @@ interface GameProps {
 }
 
 interface GameState {
-    game?: any
+    game?: any,
+    comments?: any[],
+    listenerComments?: ()=>void
 }
 
 @observer class Game extends Component<GameProps, GameState> {
@@ -21,7 +23,9 @@ interface GameState {
         super(props);
 
         this.state = {
-            game: null
+            game: null,
+            comments: [],
+            listenerComments: ()=>{}
         }
     }
 
@@ -32,10 +36,11 @@ interface GameState {
     componentDidMount() {
         stores.guildStore.readGuilds();
         stores.gameStore.findGame(this.getId());
+        stores.gameStore.findComments(this.getId());
     }
 
     componentWillUnmount() {
-        stores.gameStore.cleanListenerComments(this.getId());
+        stores.gameStore.cleanListenerComments(this.state.listenerComments);
         stores.guildStore.cleanGuilds();
         stores.gameStore.cleanGame();
     }

@@ -11,6 +11,7 @@ import About from '../About/About';
 import Guilds from '../Guilds/Guilds';
 import Profile from '../Profile/Profile';
 import Auth from '../Auth/Auth';
+import CreateGame from '../CreateGame/CreateGame';
 import Game from '../Game/Game';
 
 import stores from '../../stores/Stores';
@@ -63,6 +64,7 @@ class App extends Component<AppProps, AppState> {
             <Route path="/" component={Home} exact />
             <Route path="/auth" component={Auth} exact />
             <Route path="/guilds" component={Guilds} exact />
+            <Route path="/newmatch" component={CreateGame} exact />
             <Route path="/catalog" component={Catalog} exact />
             <Route path="/song/:id" component={SongView} exact />
             <Route path="/game/:id" component={Game} exact />

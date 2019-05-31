@@ -9,11 +9,11 @@ export default class CommentStore {
         this.db = db;
     }
     
-    @action findCommentAutor(uid: string, getAutor: (a: any) => void) {
+    @action findCommentAutor(uid: string, getAutor: (a: any, listener: any) => void) {
 
         let autor: any = null;
 
-        this.db.collection("users").doc(uid)
+        let listenerAutor = this.db.collection("users").doc(uid)
         .onSnapshot((doc: any) => {
             autor = doc.data();
             
@@ -21,7 +21,7 @@ export default class CommentStore {
                 if (guild.exists) {
                     autor.color = guild.data().color;
 
-                    getAutor(autor);
+                    getAutor(autor, listenerAutor);
 
                 } else {
                     // doc.data() will be undefined in this case
@@ -30,16 +30,11 @@ export default class CommentStore {
             }).catch((error: any) => {
                 console.log("Error getting Guild in Comment:", error);
             });
-            
         });
     }
 
-    @action cleanListernerCommentAutor(uid: string){
-
-        let unsubscribe = this.db.collection("users").doc(uid)
-        .onSnapshot(function () {});
-
-        unsubscribe();
+    @action cleanListernerCommentAutor(listenerAutor: any){
+        listenerAutor();
     }
     
 }

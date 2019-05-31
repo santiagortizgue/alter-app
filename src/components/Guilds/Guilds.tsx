@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { style, classes } from "typestyle";
+import { Link } from 'react-router-dom';
+
 import './Guilds.scss';
 
 import { observer } from 'mobx-react';
@@ -35,6 +37,18 @@ interface GuildState {
         stores.guildStore.stopGuilds();
     }
 
+    onDragOver = (e: any) => {
+        e.preventDefault();
+    }
+
+    onDrop = (e: any) => {
+        e.preventDefault();
+
+        let id = e.dataTransfer.getData("id");
+
+        
+    }
+
     getGuildContext() {
         switch (this.state.context) {
             case 0:
@@ -53,16 +67,18 @@ interface GuildState {
                         </div>
 
                         <div className="Guilds-cont">
-                            <div className="Guilds-matches">
+                            <div className="Guilds-matches scroll">
                                 {stores.gamesStore.ourGames && stores.gamesStore.ourGames.map((game: any) => {
                                     return <GameCard key={game.idGame} game={game} />;
                                 })}
                             </div>
 
                             <div className="Guilds-options">
-                                    <input className="Guilds-search" placeholder="Search by name" type="text"/>
+                                <input className="Guilds-search" placeholder="Search by name" type="text" />
+                                <Link to="/newmatch">
                                     <div className="Guilds-create"><h4>Create Match</h4></div>
-                                    <div className="Guilds-delete"><h4>Delete Match</h4></div>
+                                </Link>
+                                <div onDragOver={(e: any) => this.onDragOver(e)} onDrop={(e: any) => this.onDrop(e)} className="Guilds-delete"><h4>Delete Match</h4></div>
                             </div>
                         </div>
                     </div>
@@ -82,14 +98,14 @@ interface GuildState {
                         </div>
 
                         <div className="Guilds-cont">
-                            <div className="Guilds-matches">
+                            <div className="Guilds-matches scroll">
                                 {stores.gamesStore.otherGames && stores.gamesStore.otherGames.map((game: any) => {
                                     return <GameCard key={game.idGame} game={game} />;
                                 })}
                             </div>
 
                             <div className="Guilds-options">
-                                    <input className="Guilds-search" placeholder="Search by name" type="text"/>
+                                <input className="Guilds-search" placeholder="Search by name" type="text" />
                             </div>
                         </div>
 
@@ -123,9 +139,7 @@ interface GuildState {
                     })}
                 </div>
 
-
                 {this.getGuildContext()}
-
 
             </section>
         );
