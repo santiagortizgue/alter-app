@@ -34,6 +34,8 @@ class App extends Component<AppProps, AppState> {
     }
 
     this.setUserState = this.setUserState.bind(this);
+
+    //console.log();
   }
 
   componentDidMount(){
@@ -53,7 +55,7 @@ class App extends Component<AppProps, AppState> {
     return (
       <div className="App">
 
-        <BrowserRouter>
+        <BrowserRouter basename="/alter-app-build">
 
           <Dash />
 
