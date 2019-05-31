@@ -51,11 +51,11 @@ export default class GamesStore {
 
     /* write methods */
 
-    @action createGame(uid: string, name: string, redirectGame: (id: string) => void) {
+    @action createGame(user: any, name: string, redirectGame: (id: string) => void) {
         // Add a new document with a generated id.
         this.db.collection("games").add({
             name,
-            autor: uid,
+            autor: user.uid,
             state: "new",
             timestamp: new Date().getTime(),
         })

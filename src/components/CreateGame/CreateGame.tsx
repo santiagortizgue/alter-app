@@ -29,19 +29,26 @@ interface CreateGameState {
     }
 
     componentDidMount() {
+        stores.guildStore.readGuilds();
     }
 
     componentWillUnmount() {
+        stores.guildStore.stopGuilds();
+        stores.guildStore.cleanGuilds();
     }
 
     redirectGame(id: string): void{
+        //add points to the guild of game created
+        stores.guildStore.addPointToGuild(stores.authStore.user);
+
+        //go to the new game
         this.props.history.push(`/game/${id}`);
     }
 
     handleKeyPressCreate = (event: any) => {
         if(event.key == 'Enter'){
             if (this.state.name && this.state.name !== "") {
-                stores.gamesStore.createGame(stores.authStore.user.uid, this.state.name, this.redirectGame);
+                stores.gamesStore.createGame(stores.authStore.user, this.state.name, this.redirectGame);
             }
         }
       }

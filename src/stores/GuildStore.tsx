@@ -10,7 +10,7 @@ export default class GuildStore {
         this.db = db;
     }
 
-    @observable guilds: any = [];
+    @observable guilds: any[] = [];
 
     @action readGuilds() {
         this.cleanGuilds();
@@ -44,6 +44,20 @@ export default class GuildStore {
 
     @action cleanGuilds() {
         this.guilds = [];
+    }
+
+    @action addPointToGuild(user: any){
+        let id = user.guild;
+
+        let object = this.guilds.find((gu: any) => gu.id == id);
+        
+        let newPoints = parseInt(object.points + 1);
+
+        this.db.collection("guilds").doc(id+"").update({
+            points: newPoints
+        }).catch((e: any) => {
+            console.error("Error setting guild points: ", e);
+        });
     }
 
 }

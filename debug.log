@@ -46,3 +46,6 @@
 [0531/011033.080:ERROR:crash_report_database_win.cc(569)] CreateDirectory C:\Program Files (x86)\Jarhair\Reports\Dump: El sistema no puede encontrar la ruta especificada. (0x3)
 [0531/011033.084:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: Ha terminado la canalización. (0x6D)
 [0531/011033.085:ERROR:crash_report_database_win.cc(569)] CreateDirectory C:\Program Files (x86)\Jarhair\Reports\Dump: El sistema no puede encontrar la ruta especificada. (0x3)
+[0531/094819.301:ERROR:crash_report_database_win.cc(569)] CreateDirectory C:\Program Files (x86)\Jarhair\Reports\Dump: El sistema no puede encontrar la ruta especificada. (0x3)
+[0531/094819.319:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: Ha terminado la canalización. (0x6D)
+[0531/094819.319:ERROR:crash_report_database_win.cc(569)] CreateDirectory C:\Program Files (x86)\Jarhair\Reports\Dump: El sistema no puede encontrar la ruta especificada. (0x3)
