@@ -161,6 +161,14 @@
 
                 padding: 3px;
             }
+
+            &:hover{
+               border: 6px solid $darkGrayColor;
+
+               svg{
+                  fill: $darkGrayColor;
+               }
+            }
          }
 
          #stop {
@@ -173,6 +181,14 @@
 
                 padding: 3px;
             }
+
+            &:hover{
+               border: 6px solid $darkGrayColor;
+
+               svg{
+                  fill: $darkGrayColor;
+               }
+            }
          }
 
          &__btn {
@@ -180,6 +196,9 @@
             height: 37px;
 
             border: 7px solid $blackColor;
+
+            transition: .2s ease-in-out all;
+
          }
 
       }

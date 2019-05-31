@@ -55,7 +55,7 @@ class App extends Component<AppProps, AppState> {
     return (
       <div className="App">
 
-        <BrowserRouter basename="">
+        <BrowserRouter basename="/alter-app">
 
           <Dash />
 
