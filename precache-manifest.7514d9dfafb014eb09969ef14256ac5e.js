@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/alter-app/static/css/2.a4260f37.chunk.css"
   },
   {
-    "revision": "a58441a05eb8510f3b6f3e31a12d5fff",
+    "revision": "b7077f295699aa6372281c70cdd5efaf",
     "url": "/alter-app/index.html"
   }
 ];
