@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/alter-app/static/js/runtime~main.91867c51.js"
   },
   {
-    "revision": "33671de2ca80af6d14d9",
-    "url": "/alter-app/static/js/main.59bb3d7b.chunk.js"
+    "revision": "1a2311aeedeea3754de3",
+    "url": "/alter-app/static/js/main.de2ab425.chunk.js"
   },
   {
     "revision": "2eca8472fb95fee3fc31",
     "url": "/alter-app/static/js/2.d16f1d23.chunk.js"
   },
   {
-    "revision": "33671de2ca80af6d14d9",
+    "revision": "1a2311aeedeea3754de3",
     "url": "/alter-app/static/css/main.7647f4c0.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/alter-app/static/css/2.a4260f37.chunk.css"
   },
   {
-    "revision": "e563387239e3927b0485b8eacb3eaaa1",
+    "revision": "412ab4a46a2326285a8d4e56e6653b0d",
     "url": "/alter-app/index.html"
   }
 ];
