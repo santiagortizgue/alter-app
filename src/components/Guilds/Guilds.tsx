@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { style, classes } from "typestyle";
 import { Link } from 'react-router-dom';
 
+import Tooltip from 'react-tooltip-lite';
+
 import './Guilds.scss';
 
 import { observer } from 'mobx-react';
@@ -113,7 +115,9 @@ interface GuildState {
                                 <Link to="/newmatch">
                                     <div className="Guilds-create"><h4>Create Match</h4></div>
                                 </Link>
-                                <div onDrop={(e: any) => this.onDrop(e)} onDragOver={(e: any) => this.onDragOver(e)} onDragLeave={(e:any)=> this.onDragLeave(e)} className={classes(this.state.styleDelete,"Guilds-delete")}><h4>Delete Match</h4></div>
+                                <Tooltip direction="left" hoverDelay={0} content="Drop elements to delete">
+                                    <div onDrop={(e: any) => this.onDrop(e)} onDragOver={(e: any) => this.onDragOver(e)} onDragLeave={(e: any) => this.onDragLeave(e)} className={classes(this.state.styleDelete, "Guilds-delete")}><h4>Delete Match</h4></div>
+                                </Tooltip>
                             </div>
                         </div>
                     </div>
@@ -167,10 +171,11 @@ interface GuildState {
                             }
                         });
 
-                        return (<div key={guild.id} className="Guilds-each">
-                            <h3 className={classes(hoverStyle)} >{guild.points}</h3>
-                            <h5>{guild.name}</h5>
-                        </div>)
+                        return (
+                            <div key={guild.id} className="Guilds-each">
+                                <h3 className={classes(hoverStyle)} >{guild.points}</h3>
+                                <h5>{guild.name}</h5>
+                            </div>)
                     })}
                 </div>
 

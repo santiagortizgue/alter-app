@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { style, classes } from "typestyle";
 
+import Tooltip from 'react-tooltip-lite';
+
 import './Profile.scss';
 
 import { observer } from 'mobx-react';
@@ -21,7 +23,7 @@ interface ProfileState {
 
     this.state = {
     }
-    
+
   }
 
   componentDidMount() {
@@ -81,7 +83,10 @@ interface ProfileState {
           </div>
 
           <div className="Profile-guilds">
-            <h1 className="Profile-title">GUILD</h1>
+
+            <h1 className="Profile-title">
+              <Tooltip hoverDelay={0} content="Select your guild">
+                GUILD</Tooltip></h1>
 
             <div className="Profile-contGuild">
 
@@ -93,14 +98,14 @@ interface ProfileState {
                     }
                   }
                 });
-              
+
                 let selectedStyle = style({
                   color: `rgb(${guild.color})`,
                   borderColor: `rgb(${guild.color})`,
                 });
-            
+
                 //classes(class, class) write multiple classes
-            
+
                 if (stores.authStore.user.guild == guild.id) {
                   return (<h3 key={guild.id}
                     className={classes("Profile-guild", selectedStyle)}>{guild.name}</h3>)
@@ -115,7 +120,7 @@ interface ProfileState {
                   >{guild.name}</h3>)
                 }
               })}
-              
+
             </div>
 
             <h3 onClick={(e: any) => {

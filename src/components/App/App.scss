@@ -117,10 +117,25 @@ a {
 
 }
 
+
+.react-tooltip-lite {
+  background: $grayColor;
+  color: $blackColor;
+
+  font-family: $textFont;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+}
+
+.react-tooltip-lite-arrow {
+  border-color: $grayColor;
+}
+
 .scroll {
 
   overflow: auto;
-  
+
   &::-webkit-scrollbar {
     width: 8px;
   }
