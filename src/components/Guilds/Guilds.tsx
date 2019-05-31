@@ -13,6 +13,7 @@ interface GuildProps {
 
 interface GuildState {
     context?: number,
+    styleDelete?: any
 }
 
 @observer class Guilds extends Component<GuildProps, GuildState> {
@@ -22,6 +23,7 @@ interface GuildState {
 
         this.state = {
             context: 0,
+            styleDelete: {}
         }
 
     }
@@ -39,6 +41,28 @@ interface GuildState {
 
     onDragOver = (e: any) => {
         e.preventDefault();
+
+        let s = style({
+            borderWidth: 5,
+            borderColor: "rgb(250,87,75)"
+        });
+
+        this.setState({
+            styleDelete: s
+        });
+    }
+
+    onDragLeave = (e: any) => {
+        e.preventDefault();
+
+        let s = style({
+            borderWidth: 8,
+            borderColor: "rgb(25, 25, 25)"
+        });
+
+        this.setState({
+            styleDelete: s
+        });
     }
 
     onDrop = (e: any) => {
@@ -46,7 +70,18 @@ interface GuildState {
 
         let id = e.dataTransfer.getData("id");
 
-        
+        //console.log("Dropping", id);
+
+        stores.gamesStore.deleteGame(id);
+
+        let s = style({
+            borderWidth: 8,
+            borderColor: "rgb(25, 25, 25)"
+        });
+
+        this.setState({
+            styleDelete: s
+        });
     }
 
     getGuildContext() {
@@ -78,7 +113,7 @@ interface GuildState {
                                 <Link to="/newmatch">
                                     <div className="Guilds-create"><h4>Create Match</h4></div>
                                 </Link>
-                                <div onDragOver={(e: any) => this.onDragOver(e)} onDrop={(e: any) => this.onDrop(e)} className="Guilds-delete"><h4>Delete Match</h4></div>
+                                <div onDrop={(e: any) => this.onDrop(e)} onDragOver={(e: any) => this.onDragOver(e)} onDragLeave={(e:any)=> this.onDragLeave(e)} className={classes(this.state.styleDelete,"Guilds-delete")}><h4>Delete Match</h4></div>
                             </div>
                         </div>
                     </div>

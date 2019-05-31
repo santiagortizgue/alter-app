@@ -200,7 +200,7 @@
         width: 120px;
         height: 120px;
 
-        border: 7px solid $blackColor;
+        border: 8px solid $blackColor;
 
         display: flex;
         flex-direction: column;
@@ -234,7 +234,7 @@
         width: 120px;
         height: 120px;
 
-        border: 7px solid $blackColor;
+        border: 8px solid $blackColor;
 
         display: flex;
         flex-direction: column;
@@ -242,11 +242,7 @@
         align-content: center;
         align-items: center;
     
-        transition: ease-in-out all .1s;
-    
-        &:hover{
-            border: 5px solid $orangeColor;
-        }
+        transition: ease-in-out all .2s;
 
         >h4{
             width: 80%;

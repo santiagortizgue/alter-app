@@ -43,9 +43,8 @@ interface GameCardState {
     }
 
     onDragStart = (e: any, id: string) => {
-        e.preventDefault();
-
         e.dataTransfer.setData("id", id);
+        //console.log("Dragging", id);
     }
 
     render() {
@@ -59,7 +58,7 @@ interface GameCardState {
 
         return (
             <Link to={`/game/${this.props.game.idGame}`}>
-                <div draggable onDragStart={(e: any)=> this.onDragStart(e, this.props.game.id)} className="GameCard">
+                <div draggable onDragStart={(e: any)=> this.onDragStart(e, this.props.game.idGame)} className="GameCard">
                     <h5 > {this.props.game.name} </h5>
                     <p> {this.state.autor.displayName} </p>
                 </div>

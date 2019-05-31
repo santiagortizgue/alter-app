@@ -63,9 +63,7 @@ interface GameState {
 
                     <div className="Game-left">
 
-                        <div id="canvasGame">
-
-                        </div>
+                        
 
                     </div>
 
