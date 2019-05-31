@@ -47,7 +47,7 @@ interface CreateGameState {
     handleKeyPressCreate = (event: any) => {
         if (event.key == 'Enter') {
             if (this.state.name && this.state.name !== "") {
-                stores.gamesStore.createGame(stores.authStore.user, this.state.name, this.redirectGame);
+                stores.gamesStore.createGame(stores.authStore.user.uid, this.state.name, this.redirectGame);
             }
         }
     }

@@ -41,7 +41,7 @@ export default class AuthStore {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 // ...
-                console.log(errorMessage);
+                console.log("Cant sign up", errorMessage);
             });
     }
 
@@ -50,6 +50,7 @@ export default class AuthStore {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
+            console.log("Cant sign in", errorMessage);
             // ...
         });
     }
