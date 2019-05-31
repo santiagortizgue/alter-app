@@ -1,5 +1,5 @@
 {
-  "main.css": "/alter-app/static/css/main.803566b3.chunk.css",
+  "main.css": "/alter-app/static/css/main.c4c10a47.chunk.css",
   "main.js": "/alter-app/static/js/main.dd82292b.chunk.js",
   "main.js.map": "/alter-app/static/js/main.dd82292b.chunk.js.map",
   "runtime~main.js": "/alter-app/static/js/runtime~main.91867c51.js",
@@ -8,8 +8,8 @@
   "static/js/2.27b6519d.chunk.js": "/alter-app/static/js/2.27b6519d.chunk.js",
   "static/js/2.27b6519d.chunk.js.map": "/alter-app/static/js/2.27b6519d.chunk.js.map",
   "index.html": "/alter-app/index.html",
-  "precache-manifest.696de4c20c6eee6cf9ff5b86aa2aad84.js": "/alter-app/precache-manifest.696de4c20c6eee6cf9ff5b86aa2aad84.js",
+  "precache-manifest.82e67faf71f82c25e14b965bda604f52.js": "/alter-app/precache-manifest.82e67faf71f82c25e14b965bda604f52.js",
   "service-worker.js": "/alter-app/service-worker.js",
   "static/css/2.a4260f37.chunk.css.map": "/alter-app/static/css/2.a4260f37.chunk.css.map",
-  "static/css/main.803566b3.chunk.css.map": "/alter-app/static/css/main.803566b3.chunk.css.map"
+  "static/css/main.c4c10a47.chunk.css.map": "/alter-app/static/css/main.c4c10a47.chunk.css.map"
 }
