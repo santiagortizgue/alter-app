@@ -34,7 +34,6 @@ class App extends Component<AppProps, AppState> {
     }
 
     this.setUserState = this.setUserState.bind(this);
-
     //console.log();
   }
 
