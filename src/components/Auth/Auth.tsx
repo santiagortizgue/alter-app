@@ -35,14 +35,40 @@ interface AuthState {
   componentWillUnmount() {
   }
 
+  handleKeyPressSignIn = (event: any) => {
+    if(event.key == 'Enter'){
+      if (this.state.email && this.state.email !== "" && this.state.password && this.state.password !== "") {
+        stores.authStore.signIn(this.state.email, this.state.password);
+        this.setState({
+          email: "",
+          password: ""
+        });
+      }
+    }
+  }
+
+  handleKeyPressRegister = (event: any) => {
+    if(event.key == 'Enter'){
+      if (this.state.displayName && this.state.displayName !== "" && this.state.email && this.state.email !== "" && this.state.password && this.state.password !== "") {
+        stores.authStore.createNewUser(this.state.displayName, this.state.email, this.state.password);
+        this.setState({
+          email: "",
+          password: "",
+          displayName: ""
+        });
+      }
+    }
+  }
+
   getFormContext() {
     switch (this.state.form) {
       case 0:
         return <div className="SignIn">
           <h1 className="SignIn-title">Sign In</h1>
           <div className="SignIn-container">
-            <input onChange={(e: any) => this.setState({ email: e.target.value })} placeholder="Email" className="SignIn-input" type="email" />
-            <input onChange={(e: any) => this.setState({ password: e.target.value })} placeholder="Password" className="SignIn-input" type="password" />
+            <input onKeyPress={this.handleKeyPressSignIn} onChange={(e: any) => this.setState({ displayName: e.target.value })} placeholder="Nickname" className="SignIn-input" type="hidden" />
+            <input onKeyPress={this.handleKeyPressSignIn} onChange={(e: any) => this.setState({ email: e.target.value })} placeholder="Email" className="SignIn-input" type="email" />
+            <input onKeyPress={this.handleKeyPressSignIn} onChange={(e: any) => this.setState({ password: e.target.value })} placeholder="Password" className="SignIn-input" type="password" />
           </div>
           <div className="SignIn-containerBtn">
             <h3 onClick={(e: any) => {
@@ -68,9 +94,9 @@ interface AuthState {
         return <div className="SignUp">
           <h1 className="SignUp-title">Sign Up</h1>
           <div className="SignUp-container">
-            <input onChange={(e: any) => this.setState({ displayName: e.target.value })} placeholder="Nickname" className="SignUp-input" type="text" />
-            <input onChange={(e: any) => this.setState({ email: e.target.value })} placeholder="Email" className="SignUp-input" type="email" />
-            <input onChange={(e: any) => this.setState({ password: e.target.value })} placeholder="Password" className="SignUp-input" type="password" />
+            <input onKeyPress={this.handleKeyPressRegister} onChange={(e: any) => this.setState({ displayName: e.target.value })} placeholder="Nickname" className="SignUp-input" type="text" />
+            <input onKeyPress={this.handleKeyPressRegister} onChange={(e: any) => this.setState({ email: e.target.value })} placeholder="Email" className="SignUp-input" type="email" />
+            <input onKeyPress={this.handleKeyPressRegister} onChange={(e: any) => this.setState({ password: e.target.value })} placeholder="Password" className="SignUp-input" type="password" />
           </div>
           <div className="SignUp-containerBtn">
             <h3 onClick={(e: any) => {

@@ -75,7 +75,7 @@ export default class GameStore {
             timestamp: new Date().getTime()
         }
 
-        this.db.collection("games").doc(this.game.idGame).collection("comments").add(newCom)
+        this.db.collection("games").doc(this.game.idGame+"").collection("comments").add(newCom)
             .then(function (docRef: any) {
                 console.log("Document written with ID: ", docRef.id);
             })

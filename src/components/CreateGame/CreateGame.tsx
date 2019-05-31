@@ -38,6 +38,13 @@ interface CreateGameState {
         this.props.history.push(`/game/${id}`);
     }
 
+    handleKeyPressCreate = (event: any) => {
+        if(event.key == 'Enter'){
+            if (this.state.name && this.state.name !== "") {
+                stores.gamesStore.createGame(stores.authStore.user.uid, this.state.name, this.redirectGame);
+            }
+        }
+      }
 
     render() {
 
@@ -48,7 +55,7 @@ interface CreateGameState {
 
                     <h1 className="CreateGame-title">New Match</h1>
 
-                    <input onChange={(e: any) => this.setState({ name: e.target.value })} placeholder="Match Title" className="CreateGame-input" type="text" />
+                    <input onKeyPress={this.handleKeyPressCreate} maxLength={8} onChange={(e: any) => this.setState({ name: e.target.value })} placeholder="Match Title" className="CreateGame-input" type="text" />
                     <h3 onClick={(e: any) => {
                         e.preventDefault();
                         if (this.state.name && this.state.name !== "") {

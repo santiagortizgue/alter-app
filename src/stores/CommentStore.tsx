@@ -17,7 +17,7 @@ export default class CommentStore {
         .onSnapshot((doc: any) => {
             autor = doc.data();
             
-            this.db.collection("guilds").doc(autor.guild).get().then((guild: any) => {
+            this.db.collection("guilds").doc(autor.guild+"").get().then((guild: any) => {
                 if (guild.exists) {
                     autor.color = guild.data().color;
 

@@ -4,6 +4,8 @@ export default class GuildStore {
 
     db: any = null;
 
+    listenerGuild: any = null;
+
     constructor(db: any) {
         this.db = db;
     }
@@ -13,7 +15,7 @@ export default class GuildStore {
     @action readGuilds() {
         this.cleanGuilds();
 
-        this.db.collection("guilds")
+        this.listenerGuild = this.db.collection("guilds")
             .onSnapshot((querySnapshot: any) => {
                 this.guilds = [];
 
@@ -35,12 +37,9 @@ export default class GuildStore {
     @action stopGuilds() {
         this.cleanGuilds();
 
-        var unsubscribe = this.db.collection("guilds")
-            .onSnapshot( () => {
-                this.cleanGuilds(); });
-        // ...
-        // Stop listening to changes
-        unsubscribe();
+        if (this.listenerGuild) {
+            this.listenerGuild();
+        }
     }
 
     @action cleanGuilds() {

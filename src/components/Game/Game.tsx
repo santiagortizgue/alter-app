@@ -16,7 +16,6 @@ interface GameProps {
 }
 
 interface GameState {
-    game?: any,
     comments?: any[],
     listenerComments?: () => void
 }
@@ -26,7 +25,6 @@ interface GameState {
         super(props);
 
         this.state = {
-            game: null,
             comments: [],
             listenerComments: () => { }
         }
@@ -52,19 +50,14 @@ interface GameState {
 
         const defaultOptions = {
             loop: true,
-            autoplay: true, 
+            autoplay: true,
             animationData: animationData,
             rendererSettings: {
-              preserveAspectRatio: 'xMidYMid slice'
+                preserveAspectRatio: 'xMidYMid slice'
             }
-          };
+        };
 
-        if (!this.state.game) {
-            if (stores.gameStore.game) {
-                this.setState({
-                    game: stores.gameStore.game
-                });
-            }
+        if (!stores.gameStore.game) {
             return <div className="Loading"><p>Loading Game...</p></div>;
         }
 
