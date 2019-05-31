@@ -1,20 +1,19 @@
 import { observable, action, computed, extendObservable } from 'mobx';
 
-export default class DBStore {
+export default class MusicStore {
 
     db: any = null;
 
-    constructor(db: any){
+    constructor(db: any) {
         this.db = db;
     }
-   
+
     @observable musicArray: any = [];
     @observable musicArrayBackup: any = [];
 
     @observable filterGenre: any = null;
     @observable filterBand: any = null;
     @observable filterColor: any = null;
-
 
     /* This method read the data from realtime board of firebase, with the method on, read all the objects and update when anyone is edited */
 
@@ -23,7 +22,7 @@ export default class DBStore {
 
         //order by name
         this.db.collection("songs").orderBy("name", "asc").get().then((querySnapshot: any) => {
-            
+
             this.musicArray = [];
             this.musicArrayBackup = [];
 
@@ -44,7 +43,7 @@ export default class DBStore {
                 this.musicArrayBackup.push(song);
                 this.musicArray.push(song);
             });
-        }).catch(function(error: any) {
+        }).catch(function (error: any) {
             console.log("Error getting documents: ", error);
         });
     }
@@ -63,7 +62,7 @@ export default class DBStore {
 
                 this.filterGenre.push(genre);
             });
-        }).catch(function(error: any) {
+        }).catch(function (error: any) {
             console.log("Error getting documents: ", error);
         });
     }
@@ -81,7 +80,7 @@ export default class DBStore {
 
                 this.filterBand.push(band);
             });
-        }).catch(function(error: any) {
+        }).catch(function (error: any) {
             console.log("Error getting documents: ", error);
         });
     }
@@ -99,7 +98,7 @@ export default class DBStore {
 
                 this.filterColor.push(color);
             });
-        }).catch(function(error: any) {
+        }).catch(function (error: any) {
             console.log("Error getting documents: ", error);
         });
     }
@@ -117,9 +116,9 @@ export default class DBStore {
         this.musicArray = [];
 
         this.musicArrayBackup.forEach((song: any) => {
-            if(song.genre){
+            if (song.genre) {
                 song.genre.forEach((genreIdSong: any) => {
-                    if(genreIdSong === genreId){
+                    if (genreIdSong === genreId) {
                         this.musicArray.push(song);
                     }
                 });
@@ -133,9 +132,9 @@ export default class DBStore {
         this.musicArray = [];
 
         this.musicArrayBackup.forEach((song: any) => {
-            if(song.colors){
+            if (song.colors) {
                 song.colors.forEach((colorIdSong: any) => {
-                    if(colorIdSong === colorId){
+                    if (colorIdSong === colorId) {
                         this.musicArray.push(song);
                     }
                 });

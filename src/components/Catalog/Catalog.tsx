@@ -20,16 +20,16 @@ interface CatalogState {
   }
 
   componentDidMount() {
-    stores.dbStore.readMusic();
+    stores.musicStore.readMusic();
   }
 
   componentWillUnmount() {
-    stores.dbStore.cleanMusicArray();
+    stores.musicStore.cleanMusicArray();
   }
 
   render() {
 
-    if (stores.dbStore.musicArray.length == 0) {
+    if (stores.musicStore.musicArray.length == 0) {
       return <div className="Catalog"><div className="Loading"><p>Loading Music...</p></div></div>;
     }
 
@@ -37,7 +37,7 @@ interface CatalogState {
       <section className="Catalog">
 
         <div className="Catalog__music scroll">
-          {stores.dbStore.musicArray.map((song: any) => {
+          {stores.musicStore.musicArray.map((song: any) => {
             return (<SongCard key={song.id} song={song} />)
           })}
         </div>

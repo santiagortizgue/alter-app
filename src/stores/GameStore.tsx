@@ -73,28 +73,6 @@ export default class GameStore {
         });
     }
 
-    @action findAllGame(autor: string, setGames: (ourGames: any[], otherGames: any[]) => void) {
-
-        let oGames: any[] = [];
-        let otGames: any[] = [];
-
-        this.db.collection("games").onSnapshot((querySnapshot: any) => {
-
-            querySnapshot.forEach((doc: any) => {
-            
-            let g = doc.data();
-
-            if(g.autor === autor){
-                oGames.push(g);
-            }else{
-                otGames.push(g);
-            }
-
-            });
-            setGames(oGames, otGames);
-        });
-    }
-
     @action findGameCard(uid: string, setAutor: (autor: any) => void) {
 
         this.db.collection("users").doc(uid).onSnapshot((doc: any) => {
@@ -142,13 +120,6 @@ export default class GameStore {
         this.comments = [];
 
         let unsubscribe = this.db.collection("games").doc(idGame).collection("comments").orderBy("timestamp", "desc").onSnapshot(function (){});
-
-        unsubscribe();
-    }
-
-    @action cleanListenerGames(){
-
-        let unsubscribe = this.db.collection("games").onSnapshot(function () {});
 
         unsubscribe();
     }

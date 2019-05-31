@@ -1,23 +1,23 @@
 @import '../../../public/variables.scss';
 
 .Guilds {
-    
+
     height: 100%;
-    
+
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    
+
     justify-content: flex-start;
     align-content: center;
     align-items: center;
-    
+
     padding: 50px;
-    
-    &-score{
+
+    &-score {
         width: 100%;
         height: 78px;
-        
+
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -27,25 +27,25 @@
 
         margin-bottom: 40px;
     }
-    
-    &-each{
+
+    &-each {
         width: 100px;
         height: 100%;
-        
+
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: space-between;
         align-content: center;
         align-items: center;
-                
-        >h3{
-            
+
+        >h3 {
+
             width: 100%;
             height: 50px;
-            
+
             border: 7px solid;
-            
+
             font-family: $textFont;
             font-style: normal;
             font-weight: bold;
@@ -59,35 +59,35 @@
 
             transition: ease-in-out all .2s;
         }
-        
-        >h5{
+
+        >h5 {
             font-family: $textFont;
             font-style: normal;
             font-weight: bold;
             font-size: 15px;
             line-height: 19px;
             text-align: center;
-            
+
             color: $grayColor;
         }
     }
-    
-    &-own{
+
+    &-own {
         width: 100%;
         flex: 1 1 auto;
 
         display: flex;
         flex-direction: column;
     }
-    
-    &-others{
+
+    &-others {
         width: 100%;
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
     }
 
-    &-section{
+    &-section {
 
         width: 100%;
         height: 28px;
@@ -95,10 +95,11 @@
         display: flex;
         flex-direction: row;
 
-        >div{
+        >div {
 
-            height: 100%;;
-    
+            height: 100%;
+            ;
+
             margin-right: 20px;
 
             display: flex;
@@ -107,32 +108,32 @@
 
             justify-content: flex-end;
 
-            >h3{
+            >h3 {
 
                 line-height: 28px;
-    
+
                 font-family: $titleFont;
                 font-style: italic;
                 font-weight: 900;
                 font-size: 28px;
-                
+
                 color: $blackColor;
             }
-    
-            >h4{
+
+            >h4 {
 
                 cursor: pointer;
-    
+
                 font-family: $titleFont;
                 font-style: italic;
                 font-weight: 800;
                 font-size: 18px;
-                
+
                 color: $grayColor;
 
                 padding-bottom: 1px;
-    
-                &:before{
+
+                &:before {
                     background-color: $grayColor;
                     height: 3px;
                 }
@@ -142,7 +143,7 @@
         margin-bottom: 20px;
     }
 
-    &-cont{
+    &-cont {
         width: 100%;
 
         display: flex;
@@ -151,7 +152,7 @@
         flex-direction: row;
     }
 
-    &-matches{
+    &-matches {
 
         display: flex;
         flex: 1 1 auto;
@@ -162,14 +163,102 @@
         align-items: flex-start;
     }
 
-    &-options{
+    &-options {
         display: flex;
         width: 120px;
         height: 100%;
         flex-shrink: 0;
 
         background-color: $whiteColor;
+
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
     }
 
+    &-search {
+        display: flex;
+        width: 100%;
+
+        border: none;
+
+        font-family: $textFont;
+        font-style: italic;
+        font-weight: 600;
+        font-size: 12px;
+
+        height: 32px;
+        padding: 5px;
+
+        border-bottom: 4px solid $blackColor;
+
+        margin-bottom: 20px;
+    }
+
+    &-create{
+
+        width: 120px;
+        height: 120px;
+
+        border: 7px solid $blackColor;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
     
+        transition: ease-in-out all .1s;
+
+        margin-bottom: 20px;
+    
+        &:hover{
+            border: 5px solid $grayColor;
+        }
+
+        >h4{
+
+            width: 80%;
+            text-align: center;
+            color: $darkGrayColor;
+            font-family: $titleFont;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 13px;
+            text-align: center;
+        }
+    }
+
+    &-delete{
+
+        width: 120px;
+        height: 120px;
+
+        border: 7px solid $blackColor;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    
+        transition: ease-in-out all .1s;
+    
+        &:hover{
+            border: 5px solid $orangeColor;
+        }
+
+        >h4{
+            width: 80%;
+            text-align: center;
+            color: $darkGrayColor;
+            font-family: $titleFont;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 13px;
+            text-align: center;
+        }
+    }
+
+
 }

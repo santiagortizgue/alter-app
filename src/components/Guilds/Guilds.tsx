@@ -11,8 +11,6 @@ interface GuildProps {
 
 interface GuildState {
     context?: number,
-    ourGames?: any[],
-    otherGames?: any[]
 }
 
 @observer class Guilds extends Component<GuildProps, GuildState> {
@@ -22,28 +20,19 @@ interface GuildState {
 
         this.state = {
             context: 0,
-            ourGames: [],
-            otherGames: []
         }
 
-        this.setGames = this.setGames.bind(this);
     }
 
     componentDidMount() {
         stores.guildStore.readGuilds();
-        stores.gameStore.findAllGame(stores.authStore.user.uid, this.setGames);
+        stores.gamesStore.setListenerGames(stores.authStore.user.uid);
     }
 
     componentWillUnmount() {
-        stores.gameStore.cleanListenerGames();
+        stores.gamesStore.cleanListenerGames();
+        stores.gamesStore.cleanGames();
         stores.guildStore.stopGuilds();
-    }
-
-    setGames(ourGames: any[], otherGames: any[]) {
-        this.setState({
-            ourGames: ourGames,
-            otherGames: otherGames,
-        });
     }
 
     getGuildContext() {
@@ -65,13 +54,15 @@ interface GuildState {
 
                         <div className="Guilds-cont">
                             <div className="Guilds-matches">
-                                {this.state.ourGames && this.state.ourGames.map((game: any) => {
+                                {stores.gamesStore.ourGames && stores.gamesStore.ourGames.map((game: any) => {
                                     return <GameCard key={game.idGame} game={game} />;
                                 })}
                             </div>
 
                             <div className="Guilds-options">
-                                    <input  type="text"/>
+                                    <input className="Guilds-search" placeholder="Search by name" type="text"/>
+                                    <div className="Guilds-create"><h4>Create Match</h4></div>
+                                    <div className="Guilds-delete"><h4>Delete Match</h4></div>
                             </div>
                         </div>
                     </div>
@@ -92,13 +83,13 @@ interface GuildState {
 
                         <div className="Guilds-cont">
                             <div className="Guilds-matches">
-                                {this.state.otherGames && this.state.otherGames.map((game: any) => {
+                                {stores.gamesStore.otherGames && stores.gamesStore.otherGames.map((game: any) => {
                                     return <GameCard key={game.idGame} game={game} />;
                                 })}
                             </div>
 
                             <div className="Guilds-options">
-
+                                    <input className="Guilds-search" placeholder="Search by name" type="text"/>
                             </div>
                         </div>
 
