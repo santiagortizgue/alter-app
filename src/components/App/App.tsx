@@ -92,7 +92,7 @@ class App extends Component<AppProps, AppState> {
     return (
       <div className="App">
 
-        <HashRouter basename="/alter-app">
+        <HashRouter>
 
           <Dash />
 
