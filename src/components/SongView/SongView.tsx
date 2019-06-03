@@ -4,8 +4,9 @@ import './SongView.scss';
 import stores from '../../stores/Stores';
 import { observer } from 'mobx-react';
 
-import P5Visualizer from '../../utils/P5Wrapper/P5Visualizer';
+import Tooltip from 'react-tooltip-lite';
 
+import P5Visualizer from '../../utils/P5Wrapper/P5Visualizer';
 interface SongViewProps {
   match?: any
 }
@@ -108,29 +109,36 @@ interface SongViewState {
 
             <div className="SongView__Song-action__view">
 
-              {(this.state.color) ? <P5Visualizer vol={this.state.volume} color={this.state.color} link={this.state.songUrl}/> : ""}
+              {(this.state.color) ? <P5Visualizer vol={this.state.volume} color={this.state.color} link={this.state.songUrl} /> : ""}
 
               <div className="SongView__Song-action__title">{this.state.song.name}</div>
             </div>
 
             <div className="SongView__Song-action__buttons">
-              <div className="SongView__Song-action__btn" id="play">
-                <svg className="playPauseSvg" viewBox="0 0 50 50">
-                <polygon points="15.89 42.45 46.11 25 15.89 7.55 15.89 42.45"/>
-                <rect x="3.89" y="7.22" width="9.78" height="35.56"/>
-                </svg>
-              </div>
-              <div className="SongView__Song-action__btn" id="stop">
-                <svg className="stopSvg" viewBox="0 0 50 50">
-                  <rect x="5" y="5" width="40" height="40"/>
-                </svg>
-              </div>
+
+              <Tooltip hoverDelay={0} content="Play/Pause">
+                <div className="SongView__Song-action__btn" id="play">
+                  <svg className="playPauseSvg" viewBox="0 0 50 50">
+                    <polygon points="15.89 42.45 46.11 25 15.89 7.55 15.89 42.45" />
+                    <rect x="3.89" y="7.22" width="9.78" height="35.56" />
+                  </svg>
+                </div>
+              </Tooltip>
+              <Tooltip hoverDelay={0} content="Stop">
+                <div className="SongView__Song-action__btn" id="stop">
+                  <svg className="stopSvg" viewBox="0 0 50 50">
+                    <rect x="5" y="5" width="40" height="40" />
+                  </svg>
+                </div>
+              </Tooltip>
             </div>
 
-            <input type="range" defaultValue={this.state.volume} min="0" max="100" className="SongView__Song-action__input" onChange={(e:any) => {
-              e.preventDefault();
-              this.setState({volume: e.target.value});
-            }} />
+            <Tooltip hoverDelay={0} content="Volume">
+              <input type="range" defaultValue={this.state.volume} min="0" max="100" className="SongView__Song-action__input" onChange={(e: any) => {
+                e.preventDefault();
+                this.setState({ volume: e.target.value });
+              }} />
+            </Tooltip>
 
           </div>
 
@@ -164,7 +172,7 @@ interface SongViewState {
 
                 <div className="SongView__Song-data__add">
                   <svg className="addSvg" viewBox="0 0 50 50">
-                    <polygon points="32 18 32 5 18 5 18 18 5 18 5 32 18 32 18 45 32 45 32 32 45 32 45 18 32 18"/>
+                    <polygon points="32 18 32 5 18 5 18 18 5 18 5 32 18 32 18 45 32 45 32 32 45 32 45 18 32 18" />
                   </svg>
                 </div>
 
