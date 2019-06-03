@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, HashRouter } from 'react-router-dom';
 import './App.scss';
 
 import Home from '../Home/Home'
@@ -18,6 +18,8 @@ import stores from '../../stores/Stores';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { style, classes } from "typestyle";
 
 interface AppProps {
   history?: any
@@ -63,10 +65,25 @@ class App extends Component<AppProps, AppState> {
   }
 
   notifyUserState(data: string) {
+
+    let styleBar = style({
+      background: 'rgb(25, 25, 25)'
+    });
+
+    let styleFont = style({
+      color: 'rgb(100, 100, 100)',
+      fontFamily: 'Rajdhani',
+      fontSize: 14
+    });
+
+    let styleFoast = style({
+      background: 'rgb(252, 252, 252)'
+    });
+
     toast(data, {
-      className: 'toast',
-      bodyClassName: "grow-font-size",
-      progressClassName: 'toast-bar'
+      className: styleFoast,
+      bodyClassName: styleFont,
+      progressClassName: styleBar
     });
   }
 
@@ -75,7 +92,7 @@ class App extends Component<AppProps, AppState> {
     return (
       <div className="App">
 
-        <BrowserRouter basename="/alter-app">
+        <HashRouter basename="/alter-app">
 
           <Dash />
 
@@ -98,7 +115,7 @@ class App extends Component<AppProps, AppState> {
 
             : <Auth />}
 
-        </BrowserRouter>
+        </HashRouter>
         <ToastContainer />
       </div>
     );
